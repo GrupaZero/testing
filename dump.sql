@@ -1,4 +1,4 @@
--- MySQL dump 10.16  Distrib 10.1.18-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.16  Distrib 10.1.18-MariaDB, for debian-linux-gnu (x86_64) 
 --
 -- Host: localhost    Database: gzero-tests
 -- ------------------------------------------------------
