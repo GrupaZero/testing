@@ -1,0 +1,13 @@
+{
+    "name": "gzero/testing-db",
+    "description": "Testing DB dump used in our tests",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrian Skierniewski",
+            "email": "adrian.skierniewski@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
