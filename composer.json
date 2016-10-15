@@ -1,6 +1,6 @@
 {
     "name": "gzero/testing-db",
-    "description": "Testing DB dump used in our tests",
+    "description": "Package that helps testing DB across our packages",
     "license": "MIT",
     "authors": [
         {
