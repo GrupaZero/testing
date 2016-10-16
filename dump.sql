@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.18-MariaDB, for debian-linux-gnu (x86_64) 
+-- MySQL dump 10.13  Distrib 5.5.50, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: gzero-tests
+-- Host: dev_db    Database: gzero-cms
 -- ------------------------------------------------------
--- Server version	10.1.18-MariaDB-1~xenial
+-- Server version	5.5.5-10.1.14-MariaDB-1~jessie
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -66,7 +66,7 @@ CREATE TABLE `ACLRolePermissions` (
 
 LOCK TABLES `ACLRolePermissions` WRITE;
 /*!40000 ALTER TABLE `ACLRolePermissions` DISABLE KEYS */;
-INSERT INTO `ACLRolePermissions` VALUES (1,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(204,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(207,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(205,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(206,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(200,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(203,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(201,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(202,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(212,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(215,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(213,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(214,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(220,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(221,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(222,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(216,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(219,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(217,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(218,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(208,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(211,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(209,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(210,1,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(1,2,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(200,2,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(201,2,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(202,2,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(203,2,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(204,2,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(205,2,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(206,2,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(207,2,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(212,2,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(213,2,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(214,2,'2016-10-09 16:59:28','2016-10-09 16:59:28'),(215,2,'2016-10-09 16:59:28','2016-10-09 16:59:28');
+INSERT INTO `ACLRolePermissions` VALUES (1,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(204,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(207,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(205,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(206,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(200,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(203,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(201,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(202,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(212,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(215,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(213,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(214,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(220,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(221,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(222,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(216,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(219,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(217,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(218,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(208,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(211,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(209,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(210,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(1,2,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(200,2,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(201,2,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(202,2,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(203,2,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(204,2,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(205,2,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(206,2,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(207,2,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(212,2,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(213,2,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(214,2,'2016-10-16 11:28:01','2016-10-16 11:28:01'),(215,2,'2016-10-16 11:28:01','2016-10-16 11:28:01');
 /*!40000 ALTER TABLE `ACLRolePermissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +93,7 @@ CREATE TABLE `ACLRoles` (
 
 LOCK TABLES `ACLRoles` WRITE;
 /*!40000 ALTER TABLE `ACLRoles` DISABLE KEYS */;
-INSERT INTO `ACLRoles` VALUES (1,'Admin','2016-10-09 16:59:28','2016-10-09 16:59:28'),(2,'Moderator','2016-10-09 16:59:28','2016-10-09 16:59:28');
+INSERT INTO `ACLRoles` VALUES (1,'Admin','2016-10-16 11:28:01','2016-10-16 11:28:01'),(2,'Moderator','2016-10-16 11:28:01','2016-10-16 11:28:01');
 /*!40000 ALTER TABLE `ACLRoles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +122,7 @@ CREATE TABLE `ACLUserRoles` (
 
 LOCK TABLES `ACLUserRoles` WRITE;
 /*!40000 ALTER TABLE `ACLUserRoles` DISABLE KEYS */;
-INSERT INTO `ACLUserRoles` VALUES (1,1,'2016-10-09 16:59:28','2016-10-09 16:59:28');
+INSERT INTO `ACLUserRoles` VALUES (1,1,'2016-10-16 11:28:01','2016-10-16 11:28:01');
 /*!40000 ALTER TABLE `ACLUserRoles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,7 +182,7 @@ CREATE TABLE `BlockTypes` (
 
 LOCK TABLES `BlockTypes` WRITE;
 /*!40000 ALTER TABLE `BlockTypes` DISABLE KEYS */;
-INSERT INTO `BlockTypes` VALUES ('basic',1,'2016-10-09 16:59:27','2016-10-09 16:59:27'),('content',1,'2016-10-09 16:59:27','2016-10-09 16:59:27'),('menu',1,'2016-10-09 16:59:27','2016-10-09 16:59:27'),('slider',1,'2016-10-09 16:59:27','2016-10-09 16:59:27'),('widget',1,'2016-10-09 16:59:27','2016-10-09 16:59:27');
+INSERT INTO `BlockTypes` VALUES ('basic',1,'2016-10-16 11:28:00','2016-10-16 11:28:00'),('content',1,'2016-10-16 11:28:00','2016-10-16 11:28:00'),('menu',1,'2016-10-16 11:28:00','2016-10-16 11:28:00'),('slider',1,'2016-10-16 11:28:00','2016-10-16 11:28:00'),('widget',1,'2016-10-16 11:28:01','2016-10-16 11:28:01');
 /*!40000 ALTER TABLE `BlockTypes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,7 +285,7 @@ CREATE TABLE `ContentTypes` (
 
 LOCK TABLES `ContentTypes` WRITE;
 /*!40000 ALTER TABLE `ContentTypes` DISABLE KEYS */;
-INSERT INTO `ContentTypes` VALUES ('category',1,'2016-10-09 16:59:27','2016-10-09 16:59:27'),('content',1,'2016-10-09 16:59:27','2016-10-09 16:59:27');
+INSERT INTO `ContentTypes` VALUES ('category',1,'2016-10-16 11:28:00','2016-10-16 11:28:00'),('content',1,'2016-10-16 11:28:00','2016-10-16 11:28:00');
 /*!40000 ALTER TABLE `ContentTypes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -393,7 +393,7 @@ CREATE TABLE `FileTypes` (
 
 LOCK TABLES `FileTypes` WRITE;
 /*!40000 ALTER TABLE `FileTypes` DISABLE KEYS */;
-INSERT INTO `FileTypes` VALUES ('document',NULL,1,'2016-10-09 16:59:27','2016-10-09 16:59:27'),('image',NULL,1,'2016-10-09 16:59:27','2016-10-09 16:59:27'),('music',NULL,1,'2016-10-09 16:59:27','2016-10-09 16:59:27'),('video',NULL,1,'2016-10-09 16:59:27','2016-10-09 16:59:27');
+INSERT INTO `FileTypes` VALUES ('document',NULL,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),('image',NULL,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),('music',NULL,1,'2016-10-16 11:28:01','2016-10-16 11:28:01'),('video',NULL,1,'2016-10-16 11:28:01','2016-10-16 11:28:01');
 /*!40000 ALTER TABLE `FileTypes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -457,7 +457,7 @@ CREATE TABLE `Langs` (
 
 LOCK TABLES `Langs` WRITE;
 /*!40000 ALTER TABLE `Langs` DISABLE KEYS */;
-INSERT INTO `Langs` VALUES ('en','en_US',1,1,'2016-10-09 16:59:26','2016-10-09 16:59:26'),('pl','pl_PL',1,0,'2016-10-09 16:59:26','2016-10-09 16:59:26'),('de','de_DE',0,0,'2016-10-09 16:59:26','2016-10-09 16:59:26'),('fr','fr_FR',0,0,'2016-10-09 16:59:26','2016-10-09 16:59:26');
+INSERT INTO `Langs` VALUES ('en','en_US',1,1,'2016-10-16 11:27:59','2016-10-16 11:27:59'),('pl','pl_PL',1,0,'2016-10-16 11:27:59','2016-10-16 11:27:59'),('de','de_DE',0,0,'2016-10-16 11:27:59','2016-10-16 11:27:59'),('fr','fr_FR',0,0,'2016-10-16 11:27:59','2016-10-16 11:27:59');
 /*!40000 ALTER TABLE `Langs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -483,7 +483,7 @@ CREATE TABLE `OptionCategories` (
 
 LOCK TABLES `OptionCategories` WRITE;
 /*!40000 ALTER TABLE `OptionCategories` DISABLE KEYS */;
-INSERT INTO `OptionCategories` VALUES ('general','2016-10-09 16:59:27','2016-10-09 16:59:27'),('seo','2016-10-09 16:59:27','2016-10-09 16:59:27');
+INSERT INTO `OptionCategories` VALUES ('general','2016-10-16 11:28:00','2016-10-16 11:28:00'),('seo','2016-10-16 11:28:00','2016-10-16 11:28:00');
 /*!40000 ALTER TABLE `OptionCategories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -513,7 +513,7 @@ CREATE TABLE `Options` (
 
 LOCK TABLES `Options` WRITE;
 /*!40000 ALTER TABLE `Options` DISABLE KEYS */;
-INSERT INTO `Options` VALUES (1,'siteName','general','{\"en\":\"G-ZERO CMS\",\"pl\":\"G-ZERO CMS\",\"de\":\"G-ZERO CMS\",\"fr\":\"G-ZERO CMS\"}','2016-10-09 16:59:27','2016-10-09 16:59:27'),(2,'siteDesc','general','{\"en\":\"Content management system.\",\"pl\":\"Content management system.\",\"de\":\"Content management system.\",\"fr\":\"Content management system.\"}','2016-10-09 16:59:27','2016-10-09 16:59:27'),(3,'defaultPageSize','general','{\"en\":5,\"pl\":5,\"de\":5,\"fr\":5}','2016-10-09 16:59:27','2016-10-09 16:59:27'),(4,'cookiesPolicyUrl','general','{\"en\":null,\"pl\":null,\"de\":null,\"fr\":null}','2016-10-09 16:59:27','2016-10-09 16:59:27'),(5,'seoDescLength','seo','{\"en\":160,\"pl\":160,\"de\":160,\"fr\":160}','2016-10-09 16:59:27','2016-10-09 16:59:27'),(6,'googleAnalyticsId','seo','{\"en\":null,\"pl\":null,\"de\":null,\"fr\":null}','2016-10-09 16:59:27','2016-10-09 16:59:27');
+INSERT INTO `Options` VALUES (1,'siteName','general','{\"en\":\"G-ZERO CMS\",\"pl\":\"G-ZERO CMS\",\"de\":\"G-ZERO CMS\",\"fr\":\"G-ZERO CMS\"}','2016-10-16 11:28:00','2016-10-16 11:28:00'),(2,'siteDesc','general','{\"en\":\"Content management system.\",\"pl\":\"Content management system.\",\"de\":\"Content management system.\",\"fr\":\"Content management system.\"}','2016-10-16 11:28:00','2016-10-16 11:28:00'),(3,'defaultPageSize','general','{\"en\":5,\"pl\":5,\"de\":5,\"fr\":5}','2016-10-16 11:28:00','2016-10-16 11:28:00'),(4,'cookiesPolicyUrl','general','{\"en\":null,\"pl\":null,\"de\":null,\"fr\":null}','2016-10-16 11:28:00','2016-10-16 11:28:00'),(5,'seoDescLength','seo','{\"en\":160,\"pl\":160,\"de\":160,\"fr\":160}','2016-10-16 11:28:00','2016-10-16 11:28:00'),(6,'googleAnalyticsId','seo','{\"en\":null,\"pl\":null,\"de\":null,\"fr\":null}','2016-10-16 11:28:00','2016-10-16 11:28:00');
 /*!40000 ALTER TABLE `Options` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -661,7 +661,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (1,'admin@gzero.pl','$2y$10$A0ZtS2nZmutSeaxwvvHrG.Qua5DQCkMa5CAU4fRxqjE91pzUCP1G6','Admin','John','Doe',NULL,1,'2016-10-09 16:59:26','2016-10-09 16:59:26');
+INSERT INTO `Users` VALUES (1,'admin@gzero.pl','$2y$10$dM/BUpj7JgKHn01d.qDjx.5/vh3i3jLUyQNL4vIB/GZvBOMJHrVA2','Admin','John','Doe','K8JmM3QmsX3so5RSIYaCEOfQM60cHta49YNFwWRRR5pFnty14t0cKPsjJ1Nl',1,'2016-10-16 11:28:00','2016-10-16 11:28:18');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -718,6 +718,14 @@ LOCK TABLES `migrations` WRITE;
 INSERT INTO `migrations` VALUES (1,'2014_11_16_114110_create_lang',1),(2,'2014_11_16_114111_create_user',1),(3,'2014_11_16_114112_create_route',1),(4,'2014_11_16_114113_create_content',1),(5,'2015_09_07_100656_create_options',1),(6,'2015_11_26_115322_create_block',1),(7,'2016_05_08_111342_create_files_table',1),(8,'2016_05_08_140929_add_file_column_to_contents_table',1),(9,'2016_08_13_113755_create_roles_and_permissions_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'gzero-cms'
+--
+
+--
+-- Dumping routines for database 'gzero-cms'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -728,4 +736,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-09 21:01:07
+-- Dump completed on 2016-10-16 11:31:51
