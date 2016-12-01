@@ -1,6 +1,6 @@
 {
-    "name": "gzero/testing-db",
-    "description": "Package that helps testing DB across our packages",
+    "name": "gzero/testing",
+    "description": "Package that helps testing across our packages",
     "license": "MIT",
     "authors": [
         {
