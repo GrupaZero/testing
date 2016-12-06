@@ -16,682 +16,451 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `ACLPermissions`
+-- Table structure for table `acl_permission_role`
 --
 
-DROP TABLE IF EXISTS `ACLPermissions`;
+DROP TABLE IF EXISTS `acl_permission_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ACLPermissions` (
+CREATE TABLE `acl_permission_role` (
+  `permission_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  KEY `acl_permission_role_permission_id_index` (`permission_id`),
+  KEY `acl_permission_role_role_id_index` (`role_id`),
+  CONSTRAINT `acl_permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `acl_permissions` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `acl_permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `acl_roles` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `acl_permission_role`
+--
+
+LOCK TABLES `acl_permission_role` WRITE;
+/*!40000 ALTER TABLE `acl_permission_role` DISABLE KEYS */;
+INSERT INTO `acl_permission_role` VALUES (1,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(204,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(207,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(205,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(206,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(200,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(203,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(201,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(202,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(212,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(215,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(213,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(214,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(220,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(221,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(222,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(216,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(219,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(217,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(218,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(208,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(211,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(209,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(210,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(1,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(200,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(201,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(202,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(203,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(204,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(205,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(206,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(207,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(212,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(213,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(214,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(215,2,'2016-12-06 08:44:08','2016-12-06 08:44:08');
+/*!40000 ALTER TABLE `acl_permission_role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `acl_permissions`
+--
+
+DROP TABLE IF EXISTS `acl_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `acl_permissions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `category` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `aclpermissions_name_unique` (`name`)
+  UNIQUE KEY `acl_permissions_name_unique` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=223 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ACLPermissions`
+-- Dumping data for table `acl_permissions`
 --
 
-LOCK TABLES `ACLPermissions` WRITE;
-/*!40000 ALTER TABLE `ACLPermissions` DISABLE KEYS */;
-INSERT INTO `ACLPermissions` VALUES (1,'admin-api-access','general'),(200,'content-create','content'),(201,'content-read','content'),(202,'content-update','content'),(203,'content-delete','content'),(204,'block-create','block'),(205,'block-read','block'),(206,'block-update','block'),(207,'block-delete','block'),(208,'user-create','user'),(209,'user-read','user'),(210,'user-update','user'),(211,'user-delete','user'),(212,'file-create','file'),(213,'file-read','file'),(214,'file-update','file'),(215,'file-delete','file'),(216,'role-create','role'),(217,'role-read','role'),(218,'role-update','role'),(219,'role-delete','role'),(220,'options-read','options'),(221,'options-update-general','options'),(222,'options-update-seo','options');
-/*!40000 ALTER TABLE `ACLPermissions` ENABLE KEYS */;
+LOCK TABLES `acl_permissions` WRITE;
+/*!40000 ALTER TABLE `acl_permissions` DISABLE KEYS */;
+INSERT INTO `acl_permissions` VALUES (1,'admin-api-access','general',NULL,NULL),(200,'content-create','content',NULL,NULL),(201,'content-read','content',NULL,NULL),(202,'content-update','content',NULL,NULL),(203,'content-delete','content',NULL,NULL),(204,'block-create','block',NULL,NULL),(205,'block-read','block',NULL,NULL),(206,'block-update','block',NULL,NULL),(207,'block-delete','block',NULL,NULL),(208,'user-create','user',NULL,NULL),(209,'user-read','user',NULL,NULL),(210,'user-update','user',NULL,NULL),(211,'user-delete','user',NULL,NULL),(212,'file-create','file',NULL,NULL),(213,'file-read','file',NULL,NULL),(214,'file-update','file',NULL,NULL),(215,'file-delete','file',NULL,NULL),(216,'role-create','role',NULL,NULL),(217,'role-read','role',NULL,NULL),(218,'role-update','role',NULL,NULL),(219,'role-delete','role',NULL,NULL),(220,'options-read','options',NULL,NULL),(221,'options-update-general','options',NULL,NULL),(222,'options-update-seo','options',NULL,NULL);
+/*!40000 ALTER TABLE `acl_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `ACLRolePermissions`
+-- Table structure for table `acl_roles`
 --
 
-DROP TABLE IF EXISTS `ACLRolePermissions`;
+DROP TABLE IF EXISTS `acl_roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ACLRolePermissions` (
-  `permissionId` int(10) unsigned NOT NULL,
-  `roleId` int(10) unsigned NOT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  KEY `aclrolepermissions_permissionid_index` (`permissionId`),
-  KEY `aclrolepermissions_roleid_index` (`roleId`),
-  CONSTRAINT `aclrolepermissions_permissionid_foreign` FOREIGN KEY (`permissionId`) REFERENCES `ACLPermissions` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `aclrolepermissions_roleid_foreign` FOREIGN KEY (`roleId`) REFERENCES `ACLRoles` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ACLRolePermissions`
---
-
-LOCK TABLES `ACLRolePermissions` WRITE;
-/*!40000 ALTER TABLE `ACLRolePermissions` DISABLE KEYS */;
-INSERT INTO `ACLRolePermissions` VALUES (1,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(204,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(207,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(205,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(206,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(200,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(203,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(201,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(202,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(212,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(215,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(213,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(214,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(220,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(221,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(222,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(216,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(219,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(217,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(218,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(208,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(211,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(209,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(210,1,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(1,2,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(200,2,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(201,2,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(202,2,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(203,2,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(204,2,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(205,2,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(206,2,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(207,2,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(212,2,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(213,2,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(214,2,'2016-12-01 15:11:59','2016-12-01 15:11:59'),(215,2,'2016-12-01 15:11:59','2016-12-01 15:11:59');
-/*!40000 ALTER TABLE `ACLRolePermissions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `ACLRoles`
---
-
-DROP TABLE IF EXISTS `ACLRoles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ACLRoles` (
+CREATE TABLE `acl_roles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `aclroles_name_unique` (`name`)
+  UNIQUE KEY `acl_roles_name_unique` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ACLRoles`
+-- Dumping data for table `acl_roles`
 --
 
-LOCK TABLES `ACLRoles` WRITE;
-/*!40000 ALTER TABLE `ACLRoles` DISABLE KEYS */;
-INSERT INTO `ACLRoles` VALUES (1,'Admin','2016-12-01 15:11:59','2016-12-01 15:11:59'),(2,'Moderator','2016-12-01 15:11:59','2016-12-01 15:11:59');
-/*!40000 ALTER TABLE `ACLRoles` ENABLE KEYS */;
+LOCK TABLES `acl_roles` WRITE;
+/*!40000 ALTER TABLE `acl_roles` DISABLE KEYS */;
+INSERT INTO `acl_roles` VALUES (1,'Admin','2016-12-06 08:44:08','2016-12-06 08:44:08'),(2,'Moderator','2016-12-06 08:44:08','2016-12-06 08:44:08');
+/*!40000 ALTER TABLE `acl_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `ACLUserRoles`
+-- Table structure for table `acl_user_role`
 --
 
-DROP TABLE IF EXISTS `ACLUserRoles`;
+DROP TABLE IF EXISTS `acl_user_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ACLUserRoles` (
-  `userId` int(10) unsigned NOT NULL,
-  `roleId` int(10) unsigned NOT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  KEY `acluserroles_userid_index` (`userId`),
-  KEY `acluserroles_roleid_index` (`roleId`),
-  CONSTRAINT `acluserroles_roleid_foreign` FOREIGN KEY (`roleId`) REFERENCES `ACLRoles` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `acluserroles_userid_foreign` FOREIGN KEY (`userId`) REFERENCES `Users` (`id`) ON DELETE CASCADE
+CREATE TABLE `acl_user_role` (
+  `user_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  KEY `acl_user_role_user_id_index` (`user_id`),
+  KEY `acl_user_role_role_id_index` (`role_id`),
+  CONSTRAINT `acl_user_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `acl_roles` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `acl_user_role_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ACLUserRoles`
+-- Dumping data for table `acl_user_role`
 --
 
-LOCK TABLES `ACLUserRoles` WRITE;
-/*!40000 ALTER TABLE `ACLUserRoles` DISABLE KEYS */;
-INSERT INTO `ACLUserRoles` VALUES (1,1,'2016-12-01 15:11:59','2016-12-01 15:11:59');
-/*!40000 ALTER TABLE `ACLUserRoles` ENABLE KEYS */;
+LOCK TABLES `acl_user_role` WRITE;
+/*!40000 ALTER TABLE `acl_user_role` DISABLE KEYS */;
+INSERT INTO `acl_user_role` VALUES (1,1,'2016-12-06 08:44:08','2016-12-06 08:44:08');
+/*!40000 ALTER TABLE `acl_user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `BlockTranslations`
+-- Table structure for table `block_translations`
 --
 
-DROP TABLE IF EXISTS `BlockTranslations`;
+DROP TABLE IF EXISTS `block_translations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `BlockTranslations` (
+CREATE TABLE `block_translations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `langCode` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
-  `blockId` int(10) unsigned NOT NULL,
+  `lang_code` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `block_id` int(10) unsigned NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `body` text COLLATE utf8_unicode_ci,
-  `customFields` text COLLATE utf8_unicode_ci,
-  `isActive` tinyint(1) NOT NULL DEFAULT '0',
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `custom_fields` text COLLATE utf8_unicode_ci,
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `blocktranslations_blockid_foreign` (`blockId`),
-  KEY `blocktranslations_langcode_foreign` (`langCode`),
-  CONSTRAINT `blocktranslations_blockid_foreign` FOREIGN KEY (`blockId`) REFERENCES `Blocks` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `blocktranslations_langcode_foreign` FOREIGN KEY (`langCode`) REFERENCES `Langs` (`code`) ON DELETE CASCADE
+  KEY `block_translations_block_id_foreign` (`block_id`),
+  KEY `block_translations_lang_code_foreign` (`lang_code`),
+  CONSTRAINT `block_translations_block_id_foreign` FOREIGN KEY (`block_id`) REFERENCES `blocks` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `block_translations_lang_code_foreign` FOREIGN KEY (`lang_code`) REFERENCES `langs` (`code`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `BlockTranslations`
+-- Dumping data for table `block_translations`
 --
 
-LOCK TABLES `BlockTranslations` WRITE;
-/*!40000 ALTER TABLE `BlockTranslations` DISABLE KEYS */;
-/*!40000 ALTER TABLE `BlockTranslations` ENABLE KEYS */;
+LOCK TABLES `block_translations` WRITE;
+/*!40000 ALTER TABLE `block_translations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `block_translations` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `BlockTypes`
+-- Table structure for table `block_types`
 --
 
-DROP TABLE IF EXISTS `BlockTypes`;
+DROP TABLE IF EXISTS `block_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `BlockTypes` (
+CREATE TABLE `block_types` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `isActive` tinyint(1) NOT NULL DEFAULT '0',
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY `blocktypes_name_unique` (`name`)
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  UNIQUE KEY `block_types_name_unique` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `BlockTypes`
+-- Dumping data for table `block_types`
 --
 
-LOCK TABLES `BlockTypes` WRITE;
-/*!40000 ALTER TABLE `BlockTypes` DISABLE KEYS */;
-INSERT INTO `BlockTypes` VALUES ('basic',1,'2016-12-01 15:11:58','2016-12-01 15:11:58'),('content',1,'2016-12-01 15:11:58','2016-12-01 15:11:58'),('menu',1,'2016-12-01 15:11:58','2016-12-01 15:11:58'),('slider',1,'2016-12-01 15:11:58','2016-12-01 15:11:58'),('widget',1,'2016-12-01 15:11:58','2016-12-01 15:11:58');
-/*!40000 ALTER TABLE `BlockTypes` ENABLE KEYS */;
+LOCK TABLES `block_types` WRITE;
+/*!40000 ALTER TABLE `block_types` DISABLE KEYS */;
+INSERT INTO `block_types` VALUES ('basic',1,'2016-12-06 08:44:07','2016-12-06 08:44:07'),('content',1,'2016-12-06 08:44:07','2016-12-06 08:44:07'),('menu',1,'2016-12-06 08:44:07','2016-12-06 08:44:07'),('slider',1,'2016-12-06 08:44:07','2016-12-06 08:44:07'),('widget',1,'2016-12-06 08:44:07','2016-12-06 08:44:07');
+/*!40000 ALTER TABLE `block_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Blocks`
+-- Table structure for table `blocks`
 --
 
-DROP TABLE IF EXISTS `Blocks`;
+DROP TABLE IF EXISTS `blocks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Blocks` (
+CREATE TABLE `blocks` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `region` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `theme` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `blockableId` int(10) unsigned DEFAULT NULL,
-  `blockableType` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `authorId` int(10) unsigned DEFAULT NULL,
+  `blockable_id` int(10) unsigned DEFAULT NULL,
+  `blockable_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `author_id` int(10) unsigned DEFAULT NULL,
   `filter` text COLLATE utf8_unicode_ci,
   `options` text COLLATE utf8_unicode_ci,
   `weight` int(11) NOT NULL DEFAULT '0',
-  `isActive` tinyint(1) NOT NULL DEFAULT '0',
-  `isCacheable` tinyint(1) NOT NULL DEFAULT '0',
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `deletedAt` timestamp NULL DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
+  `is_cacheable` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `blocks_blockableid_blockabletype_index` (`blockableId`,`blockableType`),
-  KEY `blocks_authorid_foreign` (`authorId`),
+  KEY `blocks_blockable_id_blockable_type_index` (`blockable_id`,`blockable_type`),
+  KEY `blocks_author_id_foreign` (`author_id`),
   KEY `blocks_type_foreign` (`type`),
-  CONSTRAINT `blocks_authorid_foreign` FOREIGN KEY (`authorId`) REFERENCES `Users` (`id`) ON DELETE SET NULL,
-  CONSTRAINT `blocks_type_foreign` FOREIGN KEY (`type`) REFERENCES `BlockTypes` (`name`) ON DELETE CASCADE
+  CONSTRAINT `blocks_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `blocks_type_foreign` FOREIGN KEY (`type`) REFERENCES `block_types` (`name`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Blocks`
+-- Dumping data for table `blocks`
 --
 
-LOCK TABLES `Blocks` WRITE;
-/*!40000 ALTER TABLE `Blocks` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Blocks` ENABLE KEYS */;
+LOCK TABLES `blocks` WRITE;
+/*!40000 ALTER TABLE `blocks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `blocks` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `ContentTranslations`
+-- Table structure for table `content_translations`
 --
 
-DROP TABLE IF EXISTS `ContentTranslations`;
+DROP TABLE IF EXISTS `content_translations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ContentTranslations` (
+CREATE TABLE `content_translations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `langCode` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
-  `contentId` int(10) unsigned NOT NULL,
+  `lang_code` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `content_id` int(10) unsigned NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `teaser` text COLLATE utf8_unicode_ci,
   `body` text COLLATE utf8_unicode_ci,
-  `seoTitle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `seoDescription` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `isActive` tinyint(1) NOT NULL DEFAULT '0',
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `seo_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `seo_description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `contenttranslations_contentid_foreign` (`contentId`),
-  KEY `contenttranslations_langcode_foreign` (`langCode`),
-  CONSTRAINT `contenttranslations_contentid_foreign` FOREIGN KEY (`contentId`) REFERENCES `Contents` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `contenttranslations_langcode_foreign` FOREIGN KEY (`langCode`) REFERENCES `Langs` (`code`) ON DELETE CASCADE
+  KEY `content_translations_content_id_foreign` (`content_id`),
+  KEY `content_translations_lang_code_foreign` (`lang_code`),
+  CONSTRAINT `content_translations_content_id_foreign` FOREIGN KEY (`content_id`) REFERENCES `contents` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `content_translations_lang_code_foreign` FOREIGN KEY (`lang_code`) REFERENCES `langs` (`code`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ContentTranslations`
+-- Dumping data for table `content_translations`
 --
 
-LOCK TABLES `ContentTranslations` WRITE;
-/*!40000 ALTER TABLE `ContentTranslations` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ContentTranslations` ENABLE KEYS */;
+LOCK TABLES `content_translations` WRITE;
+/*!40000 ALTER TABLE `content_translations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `content_translations` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `ContentTypes`
+-- Table structure for table `content_types`
 --
 
-DROP TABLE IF EXISTS `ContentTypes`;
+DROP TABLE IF EXISTS `content_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ContentTypes` (
+CREATE TABLE `content_types` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `isActive` tinyint(1) NOT NULL DEFAULT '0',
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY `contenttypes_name_unique` (`name`)
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  UNIQUE KEY `content_types_name_unique` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ContentTypes`
+-- Dumping data for table `content_types`
 --
 
-LOCK TABLES `ContentTypes` WRITE;
-/*!40000 ALTER TABLE `ContentTypes` DISABLE KEYS */;
-INSERT INTO `ContentTypes` VALUES ('category',1,'2016-12-01 15:11:57','2016-12-01 15:11:57'),('content',1,'2016-12-01 15:11:57','2016-12-01 15:11:57');
-/*!40000 ALTER TABLE `ContentTypes` ENABLE KEYS */;
+LOCK TABLES `content_types` WRITE;
+/*!40000 ALTER TABLE `content_types` DISABLE KEYS */;
+INSERT INTO `content_types` VALUES ('category',1,'2016-12-06 08:44:07','2016-12-06 08:44:07'),('content',1,'2016-12-06 08:44:07','2016-12-06 08:44:07');
+/*!40000 ALTER TABLE `content_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Contents`
+-- Table structure for table `contents`
 --
 
-DROP TABLE IF EXISTS `Contents`;
+DROP TABLE IF EXISTS `contents`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Contents` (
+CREATE TABLE `contents` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `theme` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `authorId` int(10) unsigned DEFAULT NULL,
+  `author_id` int(10) unsigned DEFAULT NULL,
   `path` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `parentId` int(10) unsigned DEFAULT NULL,
-  `fileId` int(10) unsigned DEFAULT NULL,
+  `parent_id` int(10) unsigned DEFAULT NULL,
+  `file_id` int(10) unsigned DEFAULT NULL,
   `level` int(11) NOT NULL DEFAULT '0',
   `weight` int(11) NOT NULL DEFAULT '0',
   `rating` int(11) NOT NULL DEFAULT '0',
   `visits` int(11) NOT NULL DEFAULT '0',
-  `isOnHome` tinyint(1) NOT NULL DEFAULT '0',
-  `isCommentAllowed` tinyint(1) NOT NULL DEFAULT '0',
-  `isPromoted` tinyint(1) NOT NULL DEFAULT '0',
-  `isSticky` tinyint(1) NOT NULL DEFAULT '0',
-  `isActive` tinyint(1) NOT NULL DEFAULT '0',
-  `publishedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `deletedAt` timestamp NULL DEFAULT NULL,
+  `is_on_home` tinyint(1) NOT NULL DEFAULT '0',
+  `is_comment_allowed` tinyint(1) NOT NULL DEFAULT '0',
+  `is_promoted` tinyint(1) NOT NULL DEFAULT '0',
+  `is_sticky` tinyint(1) NOT NULL DEFAULT '0',
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
+  `published_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `contents_type_path_parentid_level_index` (`type`,`path`,`parentId`,`level`),
-  KEY `contents_authorid_foreign` (`authorId`),
-  KEY `contents_parentid_foreign` (`parentId`),
-  KEY `contents_fileid_foreign` (`fileId`),
-  CONSTRAINT `contents_authorid_foreign` FOREIGN KEY (`authorId`) REFERENCES `Users` (`id`) ON DELETE SET NULL,
-  CONSTRAINT `contents_fileid_foreign` FOREIGN KEY (`fileId`) REFERENCES `Files` (`id`) ON DELETE SET NULL,
-  CONSTRAINT `contents_parentid_foreign` FOREIGN KEY (`parentId`) REFERENCES `Contents` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `contents_type_foreign` FOREIGN KEY (`type`) REFERENCES `ContentTypes` (`name`) ON DELETE CASCADE
+  KEY `contents_type_path_parent_id_level_index` (`type`,`path`,`parent_id`,`level`),
+  KEY `contents_author_id_foreign` (`author_id`),
+  KEY `contents_parent_id_foreign` (`parent_id`),
+  KEY `contents_file_id_foreign` (`file_id`),
+  CONSTRAINT `contents_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `contents_file_id_foreign` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `contents_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `contents` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `contents_type_foreign` FOREIGN KEY (`type`) REFERENCES `content_types` (`name`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Contents`
+-- Dumping data for table `contents`
 --
 
-LOCK TABLES `Contents` WRITE;
-/*!40000 ALTER TABLE `Contents` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Contents` ENABLE KEYS */;
+LOCK TABLES `contents` WRITE;
+/*!40000 ALTER TABLE `contents` DISABLE KEYS */;
+/*!40000 ALTER TABLE `contents` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `FileTranslations`
+-- Table structure for table `file_translations`
 --
 
-DROP TABLE IF EXISTS `FileTranslations`;
+DROP TABLE IF EXISTS `file_translations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `FileTranslations` (
+CREATE TABLE `file_translations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `langCode` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
-  `fileId` int(10) unsigned NOT NULL,
+  `lang_code` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `file_id` int(10) unsigned NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `filetranslations_fileid_langcode_unique` (`fileId`,`langCode`),
-  KEY `filetranslations_langcode_foreign` (`langCode`),
-  CONSTRAINT `filetranslations_fileid_foreign` FOREIGN KEY (`fileId`) REFERENCES `Files` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `filetranslations_langcode_foreign` FOREIGN KEY (`langCode`) REFERENCES `Langs` (`code`) ON DELETE CASCADE
+  UNIQUE KEY `file_translations_file_id_lang_code_unique` (`file_id`,`lang_code`),
+  KEY `file_translations_lang_code_foreign` (`lang_code`),
+  CONSTRAINT `file_translations_file_id_foreign` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `file_translations_lang_code_foreign` FOREIGN KEY (`lang_code`) REFERENCES `langs` (`code`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `FileTranslations`
+-- Dumping data for table `file_translations`
 --
 
-LOCK TABLES `FileTranslations` WRITE;
-/*!40000 ALTER TABLE `FileTranslations` DISABLE KEYS */;
-/*!40000 ALTER TABLE `FileTranslations` ENABLE KEYS */;
+LOCK TABLES `file_translations` WRITE;
+/*!40000 ALTER TABLE `file_translations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `file_translations` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `FileTypes`
+-- Table structure for table `file_types`
 --
 
-DROP TABLE IF EXISTS `FileTypes`;
+DROP TABLE IF EXISTS `file_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `FileTypes` (
+CREATE TABLE `file_types` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `extensions` text COLLATE utf8_unicode_ci,
-  `isActive` tinyint(1) NOT NULL DEFAULT '0',
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY `filetypes_name_unique` (`name`)
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  UNIQUE KEY `file_types_name_unique` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `FileTypes`
+-- Dumping data for table `file_types`
 --
 
-LOCK TABLES `FileTypes` WRITE;
-/*!40000 ALTER TABLE `FileTypes` DISABLE KEYS */;
-INSERT INTO `FileTypes` VALUES ('document',NULL,1,'2016-12-01 15:11:58','2016-12-01 15:11:58'),('image',NULL,1,'2016-12-01 15:11:58','2016-12-01 15:11:58'),('music',NULL,1,'2016-12-01 15:11:58','2016-12-01 15:11:58'),('video',NULL,1,'2016-12-01 15:11:58','2016-12-01 15:11:58');
-/*!40000 ALTER TABLE `FileTypes` ENABLE KEYS */;
+LOCK TABLES `file_types` WRITE;
+/*!40000 ALTER TABLE `file_types` DISABLE KEYS */;
+INSERT INTO `file_types` VALUES ('document',NULL,1,'2016-12-06 08:44:07','2016-12-06 08:44:07'),('image',NULL,1,'2016-12-06 08:44:07','2016-12-06 08:44:07'),('music',NULL,1,'2016-12-06 08:44:07','2016-12-06 08:44:07'),('video',NULL,1,'2016-12-06 08:44:07','2016-12-06 08:44:07');
+/*!40000 ALTER TABLE `file_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Files`
+-- Table structure for table `files`
 --
 
-DROP TABLE IF EXISTS `Files`;
+DROP TABLE IF EXISTS `files`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Files` (
+CREATE TABLE `files` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `extension` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `size` int(11) DEFAULT NULL,
-  `mimeType` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `mime_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `info` text COLLATE utf8_unicode_ci,
-  `createdBy` int(10) unsigned DEFAULT NULL,
-  `isActive` tinyint(1) NOT NULL DEFAULT '0',
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(10) unsigned DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `files_createdby_foreign` (`createdBy`),
+  KEY `files_created_by_foreign` (`created_by`),
   KEY `files_type_foreign` (`type`),
-  CONSTRAINT `files_createdby_foreign` FOREIGN KEY (`createdBy`) REFERENCES `Users` (`id`) ON DELETE SET NULL,
-  CONSTRAINT `files_type_foreign` FOREIGN KEY (`type`) REFERENCES `FileTypes` (`name`) ON DELETE CASCADE
+  CONSTRAINT `files_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `files_type_foreign` FOREIGN KEY (`type`) REFERENCES `file_types` (`name`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Files`
+-- Dumping data for table `files`
 --
 
-LOCK TABLES `Files` WRITE;
-/*!40000 ALTER TABLE `Files` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Files` ENABLE KEYS */;
+LOCK TABLES `files` WRITE;
+/*!40000 ALTER TABLE `files` DISABLE KEYS */;
+/*!40000 ALTER TABLE `files` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Langs`
+-- Table structure for table `langs`
 --
 
-DROP TABLE IF EXISTS `Langs`;
+DROP TABLE IF EXISTS `langs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Langs` (
+CREATE TABLE `langs` (
   `code` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
   `i18n` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `isEnabled` tinyint(1) NOT NULL DEFAULT '0',
-  `isDefault` tinyint(1) NOT NULL DEFAULT '0',
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `is_enabled` tinyint(1) NOT NULL DEFAULT '0',
+  `is_default` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   KEY `langs_code_index` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Langs`
+-- Dumping data for table `langs`
 --
 
-LOCK TABLES `Langs` WRITE;
-/*!40000 ALTER TABLE `Langs` DISABLE KEYS */;
-INSERT INTO `Langs` VALUES ('en','en_US',1,1,'2016-12-01 15:11:57','2016-12-01 15:11:57'),('pl','pl_PL',1,0,'2016-12-01 15:11:57','2016-12-01 15:11:57'),('de','de_DE',0,0,'2016-12-01 15:11:57','2016-12-01 15:11:57'),('fr','fr_FR',0,0,'2016-12-01 15:11:57','2016-12-01 15:11:57');
-/*!40000 ALTER TABLE `Langs` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `OptionCategories`
---
-
-DROP TABLE IF EXISTS `OptionCategories`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `OptionCategories` (
-  `key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`key`),
-  KEY `optioncategories_key_index` (`key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `OptionCategories`
---
-
-LOCK TABLES `OptionCategories` WRITE;
-/*!40000 ALTER TABLE `OptionCategories` DISABLE KEYS */;
-INSERT INTO `OptionCategories` VALUES ('general','2016-12-01 15:11:57','2016-12-01 15:11:57'),('seo','2016-12-01 15:11:58','2016-12-01 15:11:58');
-/*!40000 ALTER TABLE `OptionCategories` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Options`
---
-
-DROP TABLE IF EXISTS `Options`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Options` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `categoryKey` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `value` text COLLATE utf8_unicode_ci NOT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `options_categorykey_key_index` (`categoryKey`,`key`),
-  CONSTRAINT `options_categorykey_foreign` FOREIGN KEY (`categoryKey`) REFERENCES `OptionCategories` (`key`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Options`
---
-
-LOCK TABLES `Options` WRITE;
-/*!40000 ALTER TABLE `Options` DISABLE KEYS */;
-INSERT INTO `Options` VALUES (1,'siteName','general','{\"en\":\"G-ZERO CMS\",\"pl\":\"G-ZERO CMS\",\"de\":\"G-ZERO CMS\",\"fr\":\"G-ZERO CMS\"}','2016-12-01 15:11:57','2016-12-01 15:11:57'),(2,'siteDesc','general','{\"en\":\"Content management system.\",\"pl\":\"Content management system.\",\"de\":\"Content management system.\",\"fr\":\"Content management system.\"}','2016-12-01 15:11:57','2016-12-01 15:11:57'),(3,'defaultPageSize','general','{\"en\":5,\"pl\":5,\"de\":5,\"fr\":5}','2016-12-01 15:11:57','2016-12-01 15:11:57'),(4,'cookiesPolicyUrl','general','{\"en\":null,\"pl\":null,\"de\":null,\"fr\":null}','2016-12-01 15:11:57','2016-12-01 15:11:57'),(5,'seoDescLength','seo','{\"en\":160,\"pl\":160,\"de\":160,\"fr\":160}','2016-12-01 15:11:58','2016-12-01 15:11:58'),(6,'googleAnalyticsId','seo','{\"en\":null,\"pl\":null,\"de\":null,\"fr\":null}','2016-12-01 15:11:58','2016-12-01 15:11:58');
-/*!40000 ALTER TABLE `Options` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `PasswordReminders`
---
-
-DROP TABLE IF EXISTS `PasswordReminders`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `PasswordReminders` (
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  KEY `passwordreminders_email_index` (`email`),
-  KEY `passwordreminders_token_index` (`token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `PasswordReminders`
---
-
-LOCK TABLES `PasswordReminders` WRITE;
-/*!40000 ALTER TABLE `PasswordReminders` DISABLE KEYS */;
-/*!40000 ALTER TABLE `PasswordReminders` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `RouteTranslations`
---
-
-DROP TABLE IF EXISTS `RouteTranslations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `RouteTranslations` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `langCode` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
-  `routeId` int(10) unsigned NOT NULL,
-  `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `isActive` tinyint(1) NOT NULL DEFAULT '0',
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `routetranslations_langcode_routeid_unique` (`langCode`,`routeId`),
-  UNIQUE KEY `routetranslations_langcode_url_unique` (`langCode`,`url`),
-  KEY `routetranslations_routeid_foreign` (`routeId`),
-  KEY `routetranslations_url_index` (`url`),
-  CONSTRAINT `routetranslations_langcode_foreign` FOREIGN KEY (`langCode`) REFERENCES `Langs` (`code`) ON DELETE CASCADE,
-  CONSTRAINT `routetranslations_routeid_foreign` FOREIGN KEY (`routeId`) REFERENCES `Routes` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `RouteTranslations`
---
-
-LOCK TABLES `RouteTranslations` WRITE;
-/*!40000 ALTER TABLE `RouteTranslations` DISABLE KEYS */;
-/*!40000 ALTER TABLE `RouteTranslations` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Routes`
---
-
-DROP TABLE IF EXISTS `Routes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Routes` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `routableId` int(10) unsigned DEFAULT NULL,
-  `routableType` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `isActive` tinyint(1) NOT NULL DEFAULT '0',
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Routes`
---
-
-LOCK TABLES `Routes` WRITE;
-/*!40000 ALTER TABLE `Routes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Routes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Uploadables`
---
-
-DROP TABLE IF EXISTS `Uploadables`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Uploadables` (
-  `fileId` int(10) unsigned NOT NULL,
-  `uploadableId` int(10) unsigned DEFAULT NULL,
-  `uploadableType` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `weight` int(11) NOT NULL DEFAULT '0',
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  KEY `uploadables_fileid_index` (`fileId`),
-  CONSTRAINT `uploadables_fileid_foreign` FOREIGN KEY (`fileId`) REFERENCES `Files` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Uploadables`
---
-
-LOCK TABLES `Uploadables` WRITE;
-/*!40000 ALTER TABLE `Uploadables` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Uploadables` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Users`
---
-
-DROP TABLE IF EXISTS `Users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Users` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `nickName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `firstName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `lastName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `rememberToken` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `isAdmin` tinyint(1) NOT NULL DEFAULT '0',
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`),
-  UNIQUE KEY `users_nickname_unique` (`nickName`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Users`
---
-
-LOCK TABLES `Users` WRITE;
-/*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (1,'admin@gzero.pl','$2y$10$B9X5dQvde9NYS4kpkSYnl.4iektd2ndJwZOYLuS62VcKGqNJHXlze','Admin','John','Doe',NULL,1,'2016-12-01 15:11:57','2016-12-01 15:11:57');
-/*!40000 ALTER TABLE `Users` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Widgets`
---
-
-DROP TABLE IF EXISTS `Widgets`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Widgets` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `args` text COLLATE utf8_unicode_ci,
-  `isActive` tinyint(1) NOT NULL DEFAULT '0',
-  `isCacheable` tinyint(1) NOT NULL DEFAULT '0',
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `widgets_name_unique` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Widgets`
---
-
-LOCK TABLES `Widgets` WRITE;
-/*!40000 ALTER TABLE `Widgets` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Widgets` ENABLE KEYS */;
+LOCK TABLES `langs` WRITE;
+/*!40000 ALTER TABLE `langs` DISABLE KEYS */;
+INSERT INTO `langs` VALUES ('en','en_US',1,1,'2016-12-06 08:44:06','2016-12-06 08:44:06'),('pl','pl_PL',1,0,'2016-12-06 08:44:06','2016-12-06 08:44:06'),('de','de_DE',0,0,'2016-12-06 08:44:06','2016-12-06 08:44:06'),('fr','fr_FR',0,0,'2016-12-06 08:44:06','2016-12-06 08:44:06');
+/*!40000 ALTER TABLE `langs` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -706,7 +475,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -715,7 +484,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2014_11_16_114110_create_lang',1),(4,'2014_11_16_114111_create_user',1),(5,'2014_11_16_114112_create_route',1),(6,'2014_11_16_114113_create_content',1),(7,'2015_09_07_100656_create_options',1),(8,'2015_11_26_115322_create_block',1),(9,'2016_05_08_111342_create_files_table',1),(10,'2016_05_08_140929_add_file_column_to_contents_table',1),(11,'2016_06_01_000001_create_oauth_auth_codes_table',1),(12,'2016_06_01_000002_create_oauth_access_tokens_table',1),(13,'2016_06_01_000003_create_oauth_refresh_tokens_table',1),(14,'2016_06_01_000004_create_oauth_clients_table',1),(15,'2016_06_01_000005_create_oauth_personal_access_clients_table',1),(16,'2016_08_13_113755_create_roles_and_permissions_table',1);
+INSERT INTO `migrations` VALUES (1,'2014_10_12_100000_create_password_resets_table',1),(2,'2014_11_16_114110_create_lang',1),(3,'2014_11_16_114111_create_user',1),(4,'2014_11_16_114112_create_route',1),(5,'2014_11_16_114113_create_content',1),(6,'2015_09_07_100656_create_options',1),(7,'2015_11_26_115322_create_block',1),(8,'2016_05_08_111342_create_files_table',1),(9,'2016_05_08_140929_add_file_column_to_contents_table',1),(10,'2016_06_01_000001_create_oauth_auth_codes_table',1),(11,'2016_06_01_000002_create_oauth_access_tokens_table',1),(12,'2016_06_01_000003_create_oauth_refresh_tokens_table',1),(13,'2016_06_01_000004_create_oauth_clients_table',1),(14,'2016_06_01_000005_create_oauth_personal_access_clients_table',1),(15,'2016_08_13_113755_create_roles_and_permissions_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -806,7 +575,7 @@ CREATE TABLE `oauth_clients` (
 
 LOCK TABLES `oauth_clients` WRITE;
 /*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
-INSERT INTO `oauth_clients` VALUES (1,NULL,'GZERO-CMS Personal Access Client','UWhlPzbpaIkPUMYhTFMgQa8P9ze2opzT0Lwtkn1y','http://localhost',1,0,0,'2016-12-01 15:13:11','2016-12-01 15:13:11'),(2,NULL,'GZERO-CMS Password Grant Client','ZmPfgt0J12hBGTKkOPclWh7q0nKgCnUqrMNqUn1D','http://localhost',0,1,0,'2016-12-01 15:13:11','2016-12-01 15:13:11');
+INSERT INTO `oauth_clients` VALUES (1,NULL,'GZERO-CMS Personal Access Client','eRUJHQvzNg4e9cpILul0bU9XcjiVvetULPJ8a78v','http://localhost',1,0,0,'2016-12-06 08:44:20','2016-12-06 08:44:20'),(2,NULL,'GZERO-CMS Password Grant Client','masWJDkc36dI2D7Zvq5eB2qwmOdeIgiFCYoc5C5s','http://localhost',0,1,0,'2016-12-06 08:44:20','2016-12-06 08:44:20');
 /*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -833,7 +602,7 @@ CREATE TABLE `oauth_personal_access_clients` (
 
 LOCK TABLES `oauth_personal_access_clients` WRITE;
 /*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
-INSERT INTO `oauth_personal_access_clients` VALUES (1,1,'2016-12-01 15:13:11','2016-12-01 15:13:11');
+INSERT INTO `oauth_personal_access_clients` VALUES (1,1,'2016-12-06 08:44:20','2016-12-06 08:44:20');
 /*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -864,6 +633,62 @@ LOCK TABLES `oauth_refresh_tokens` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `option_categories`
+--
+
+DROP TABLE IF EXISTS `option_categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `option_categories` (
+  `key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`key`),
+  KEY `option_categories_key_index` (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `option_categories`
+--
+
+LOCK TABLES `option_categories` WRITE;
+/*!40000 ALTER TABLE `option_categories` DISABLE KEYS */;
+INSERT INTO `option_categories` VALUES ('general','2016-12-06 08:44:07','2016-12-06 08:44:07'),('seo','2016-12-06 08:44:07','2016-12-06 08:44:07');
+/*!40000 ALTER TABLE `option_categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `options`
+--
+
+DROP TABLE IF EXISTS `options`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `options` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `category_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `value` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `options_category_key_key_index` (`category_key`,`key`),
+  CONSTRAINT `options_category_key_foreign` FOREIGN KEY (`category_key`) REFERENCES `option_categories` (`key`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `options`
+--
+
+LOCK TABLES `options` WRITE;
+/*!40000 ALTER TABLE `options` DISABLE KEYS */;
+INSERT INTO `options` VALUES (1,'site_name','general','{\"en\":\"G-ZERO CMS\",\"pl\":\"G-ZERO CMS\",\"de\":\"G-ZERO CMS\",\"fr\":\"G-ZERO CMS\"}','2016-12-06 08:44:07','2016-12-06 08:44:07'),(2,'site_desc','general','{\"en\":\"Content management system.\",\"pl\":\"Content management system.\",\"de\":\"Content management system.\",\"fr\":\"Content management system.\"}','2016-12-06 08:44:07','2016-12-06 08:44:07'),(3,'default_page_size','general','{\"en\":5,\"pl\":5,\"de\":5,\"fr\":5}','2016-12-06 08:44:07','2016-12-06 08:44:07'),(4,'cookies_policy_url','general','{\"en\":null,\"pl\":null,\"de\":null,\"fr\":null}','2016-12-06 08:44:07','2016-12-06 08:44:07'),(5,'desc_length','seo','{\"en\":null,\"pl\":null,\"de\":null,\"fr\":null}','2016-12-06 08:44:07','2016-12-06 08:44:07'),(6,'google_analytics_id','seo','{\"en\":null,\"pl\":null,\"de\":null,\"fr\":null}','2016-12-06 08:44:07','2016-12-06 08:44:07');
+/*!40000 ALTER TABLE `options` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `password_resets`
 --
 
@@ -889,6 +714,95 @@ LOCK TABLES `password_resets` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `route_translations`
+--
+
+DROP TABLE IF EXISTS `route_translations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `route_translations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `lang_code` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `route_id` int(10) unsigned NOT NULL,
+  `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `route_translations_lang_code_route_id_unique` (`lang_code`,`route_id`),
+  UNIQUE KEY `route_translations_lang_code_url_unique` (`lang_code`,`url`),
+  KEY `route_translations_route_id_foreign` (`route_id`),
+  KEY `route_translations_url_index` (`url`),
+  CONSTRAINT `route_translations_lang_code_foreign` FOREIGN KEY (`lang_code`) REFERENCES `langs` (`code`) ON DELETE CASCADE,
+  CONSTRAINT `route_translations_route_id_foreign` FOREIGN KEY (`route_id`) REFERENCES `routes` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `route_translations`
+--
+
+LOCK TABLES `route_translations` WRITE;
+/*!40000 ALTER TABLE `route_translations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `route_translations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `routes`
+--
+
+DROP TABLE IF EXISTS `routes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `routes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `routable_id` int(10) unsigned DEFAULT NULL,
+  `routable_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `routes`
+--
+
+LOCK TABLES `routes` WRITE;
+/*!40000 ALTER TABLE `routes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `routes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `uploadables`
+--
+
+DROP TABLE IF EXISTS `uploadables`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `uploadables` (
+  `file_id` int(10) unsigned NOT NULL,
+  `uploadable_id` int(10) unsigned DEFAULT NULL,
+  `uploadable_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `weight` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  KEY `uploadables_file_id_index` (`file_id`),
+  CONSTRAINT `uploadables_file_id_foreign` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `uploadables`
+--
+
+LOCK TABLES `uploadables` WRITE;
+/*!40000 ALTER TABLE `uploadables` DISABLE KEYS */;
+/*!40000 ALTER TABLE `uploadables` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -897,15 +811,19 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `nick` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `first_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_admin` tinyint(1) NOT NULL DEFAULT '0',
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  UNIQUE KEY `users_email_unique` (`email`),
+  UNIQUE KEY `users_nick_unique` (`nick`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -914,7 +832,37 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'admin@gzero.pl','$2y$10$xvbB/Ow.3OdhgaAavtZOy.e4svWCIswqDxspKe.vFJFhqT.QNRPKS','Admin','John','Doe',1,NULL,'2016-12-06 08:44:06','2016-12-06 08:44:06');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `widgets`
+--
+
+DROP TABLE IF EXISTS `widgets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `widgets` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `args` text COLLATE utf8_unicode_ci,
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
+  `is_cacheable` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `widgets_name_unique` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `widgets`
+--
+
+LOCK TABLES `widgets` WRITE;
+/*!40000 ALTER TABLE `widgets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `widgets` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -934,4 +882,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-01 15:13:20
+-- Dump completed on 2016-12-06  8:44:33
