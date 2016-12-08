@@ -40,7 +40,7 @@ CREATE TABLE `acl_permission_role` (
 
 LOCK TABLES `acl_permission_role` WRITE;
 /*!40000 ALTER TABLE `acl_permission_role` DISABLE KEYS */;
-INSERT INTO `acl_permission_role` VALUES (1,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(204,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(207,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(205,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(206,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(200,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(203,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(201,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(202,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(212,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(215,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(213,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(214,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(220,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(221,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(222,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(216,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(219,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(217,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(218,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(208,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(211,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(209,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(210,1,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(1,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(200,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(201,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(202,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(203,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(204,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(205,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(206,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(207,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(212,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(213,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(214,2,'2016-12-06 08:44:08','2016-12-06 08:44:08'),(215,2,'2016-12-06 08:44:08','2016-12-06 08:44:08');
+INSERT INTO `acl_permission_role` VALUES (1,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(204,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(207,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(205,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(206,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(200,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(203,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(201,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(202,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(212,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(215,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(213,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(214,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(220,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(221,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(222,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(216,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(219,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(217,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(218,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(208,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(211,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(209,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(210,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(1,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(200,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(201,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(202,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(203,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(204,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(205,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(206,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(207,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(212,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(213,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(214,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(215,2,'2016-12-08 19:55:41','2016-12-08 19:55:41');
 /*!40000 ALTER TABLE `acl_permission_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,7 +95,7 @@ CREATE TABLE `acl_roles` (
 
 LOCK TABLES `acl_roles` WRITE;
 /*!40000 ALTER TABLE `acl_roles` DISABLE KEYS */;
-INSERT INTO `acl_roles` VALUES (1,'Admin','2016-12-06 08:44:08','2016-12-06 08:44:08'),(2,'Moderator','2016-12-06 08:44:08','2016-12-06 08:44:08');
+INSERT INTO `acl_roles` VALUES (1,'Admin','2016-12-08 19:55:41','2016-12-08 19:55:41'),(2,'Moderator','2016-12-08 19:55:41','2016-12-08 19:55:41');
 /*!40000 ALTER TABLE `acl_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,7 +124,7 @@ CREATE TABLE `acl_user_role` (
 
 LOCK TABLES `acl_user_role` WRITE;
 /*!40000 ALTER TABLE `acl_user_role` DISABLE KEYS */;
-INSERT INTO `acl_user_role` VALUES (1,1,'2016-12-06 08:44:08','2016-12-06 08:44:08');
+INSERT INTO `acl_user_role` VALUES (1,1,'2016-12-08 19:55:41','2016-12-08 19:55:41');
 /*!40000 ALTER TABLE `acl_user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,7 +184,7 @@ CREATE TABLE `block_types` (
 
 LOCK TABLES `block_types` WRITE;
 /*!40000 ALTER TABLE `block_types` DISABLE KEYS */;
-INSERT INTO `block_types` VALUES ('basic',1,'2016-12-06 08:44:07','2016-12-06 08:44:07'),('content',1,'2016-12-06 08:44:07','2016-12-06 08:44:07'),('menu',1,'2016-12-06 08:44:07','2016-12-06 08:44:07'),('slider',1,'2016-12-06 08:44:07','2016-12-06 08:44:07'),('widget',1,'2016-12-06 08:44:07','2016-12-06 08:44:07');
+INSERT INTO `block_types` VALUES ('basic',1,'2016-12-08 19:55:40','2016-12-08 19:55:40'),('content',1,'2016-12-08 19:55:40','2016-12-08 19:55:40'),('menu',1,'2016-12-08 19:55:40','2016-12-08 19:55:40'),('slider',1,'2016-12-08 19:55:40','2016-12-08 19:55:40'),('widget',1,'2016-12-08 19:55:40','2016-12-08 19:55:40');
 /*!40000 ALTER TABLE `block_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,7 +287,7 @@ CREATE TABLE `content_types` (
 
 LOCK TABLES `content_types` WRITE;
 /*!40000 ALTER TABLE `content_types` DISABLE KEYS */;
-INSERT INTO `content_types` VALUES ('category',1,'2016-12-06 08:44:07','2016-12-06 08:44:07'),('content',1,'2016-12-06 08:44:07','2016-12-06 08:44:07');
+INSERT INTO `content_types` VALUES ('category',1,'2016-12-08 19:55:39','2016-12-08 19:55:39'),('content',1,'2016-12-08 19:55:39','2016-12-08 19:55:39');
 /*!40000 ALTER TABLE `content_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -395,7 +395,7 @@ CREATE TABLE `file_types` (
 
 LOCK TABLES `file_types` WRITE;
 /*!40000 ALTER TABLE `file_types` DISABLE KEYS */;
-INSERT INTO `file_types` VALUES ('document',NULL,1,'2016-12-06 08:44:07','2016-12-06 08:44:07'),('image',NULL,1,'2016-12-06 08:44:07','2016-12-06 08:44:07'),('music',NULL,1,'2016-12-06 08:44:07','2016-12-06 08:44:07'),('video',NULL,1,'2016-12-06 08:44:07','2016-12-06 08:44:07');
+INSERT INTO `file_types` VALUES ('document',NULL,1,'2016-12-08 19:55:40','2016-12-08 19:55:40'),('image',NULL,1,'2016-12-08 19:55:40','2016-12-08 19:55:40'),('music',NULL,1,'2016-12-08 19:55:40','2016-12-08 19:55:40'),('video',NULL,1,'2016-12-08 19:55:40','2016-12-08 19:55:40');
 /*!40000 ALTER TABLE `file_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -459,7 +459,7 @@ CREATE TABLE `langs` (
 
 LOCK TABLES `langs` WRITE;
 /*!40000 ALTER TABLE `langs` DISABLE KEYS */;
-INSERT INTO `langs` VALUES ('en','en_US',1,1,'2016-12-06 08:44:06','2016-12-06 08:44:06'),('pl','pl_PL',1,0,'2016-12-06 08:44:06','2016-12-06 08:44:06'),('de','de_DE',0,0,'2016-12-06 08:44:06','2016-12-06 08:44:06'),('fr','fr_FR',0,0,'2016-12-06 08:44:06','2016-12-06 08:44:06');
+INSERT INTO `langs` VALUES ('en','en_US',1,1,'2016-12-08 19:55:39','2016-12-08 19:55:39'),('pl','pl_PL',1,0,'2016-12-08 19:55:39','2016-12-08 19:55:39'),('de','de_DE',0,0,'2016-12-08 19:55:39','2016-12-08 19:55:39'),('fr','fr_FR',0,0,'2016-12-08 19:55:39','2016-12-08 19:55:39');
 /*!40000 ALTER TABLE `langs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -575,7 +575,7 @@ CREATE TABLE `oauth_clients` (
 
 LOCK TABLES `oauth_clients` WRITE;
 /*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
-INSERT INTO `oauth_clients` VALUES (1,NULL,'GZERO-CMS Personal Access Client','eRUJHQvzNg4e9cpILul0bU9XcjiVvetULPJ8a78v','http://localhost',1,0,0,'2016-12-06 08:44:20','2016-12-06 08:44:20'),(2,NULL,'GZERO-CMS Password Grant Client','masWJDkc36dI2D7Zvq5eB2qwmOdeIgiFCYoc5C5s','http://localhost',0,1,0,'2016-12-06 08:44:20','2016-12-06 08:44:20');
+INSERT INTO `oauth_clients` VALUES (1,NULL,'GZERO-CMS Personal Access Client','YX0vA7mdSeGBHIYUzrdedUfdRtkWyEHpJHuCOErw','http://localhost',1,0,0,'2016-12-08 19:56:10','2016-12-08 19:56:10'),(2,NULL,'GZERO-CMS Password Grant Client','tDVrxmGJdWNpKH37EK7olcr4ZeHqsYLI9SyvYto5','http://localhost',0,1,0,'2016-12-08 19:56:10','2016-12-08 19:56:10');
 /*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -602,7 +602,7 @@ CREATE TABLE `oauth_personal_access_clients` (
 
 LOCK TABLES `oauth_personal_access_clients` WRITE;
 /*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
-INSERT INTO `oauth_personal_access_clients` VALUES (1,1,'2016-12-06 08:44:20','2016-12-06 08:44:20');
+INSERT INTO `oauth_personal_access_clients` VALUES (1,1,'2016-12-08 19:56:10','2016-12-08 19:56:10');
 /*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -654,7 +654,7 @@ CREATE TABLE `option_categories` (
 
 LOCK TABLES `option_categories` WRITE;
 /*!40000 ALTER TABLE `option_categories` DISABLE KEYS */;
-INSERT INTO `option_categories` VALUES ('general','2016-12-06 08:44:07','2016-12-06 08:44:07'),('seo','2016-12-06 08:44:07','2016-12-06 08:44:07');
+INSERT INTO `option_categories` VALUES ('general','2016-12-08 19:55:40','2016-12-08 19:55:40'),('seo','2016-12-08 19:55:40','2016-12-08 19:55:40');
 /*!40000 ALTER TABLE `option_categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -684,7 +684,7 @@ CREATE TABLE `options` (
 
 LOCK TABLES `options` WRITE;
 /*!40000 ALTER TABLE `options` DISABLE KEYS */;
-INSERT INTO `options` VALUES (1,'site_name','general','{\"en\":\"G-ZERO CMS\",\"pl\":\"G-ZERO CMS\",\"de\":\"G-ZERO CMS\",\"fr\":\"G-ZERO CMS\"}','2016-12-06 08:44:07','2016-12-06 08:44:07'),(2,'site_desc','general','{\"en\":\"Content management system.\",\"pl\":\"Content management system.\",\"de\":\"Content management system.\",\"fr\":\"Content management system.\"}','2016-12-06 08:44:07','2016-12-06 08:44:07'),(3,'default_page_size','general','{\"en\":5,\"pl\":5,\"de\":5,\"fr\":5}','2016-12-06 08:44:07','2016-12-06 08:44:07'),(4,'cookies_policy_url','general','{\"en\":null,\"pl\":null,\"de\":null,\"fr\":null}','2016-12-06 08:44:07','2016-12-06 08:44:07'),(5,'desc_length','seo','{\"en\":null,\"pl\":null,\"de\":null,\"fr\":null}','2016-12-06 08:44:07','2016-12-06 08:44:07'),(6,'google_analytics_id','seo','{\"en\":null,\"pl\":null,\"de\":null,\"fr\":null}','2016-12-06 08:44:07','2016-12-06 08:44:07');
+INSERT INTO `options` VALUES (1,'site_name','general','{\"en\":\"G-ZERO CMS\",\"pl\":\"G-ZERO CMS\",\"de\":\"G-ZERO CMS\",\"fr\":\"G-ZERO CMS\"}','2016-12-08 19:55:40','2016-12-08 19:55:40'),(2,'site_desc','general','{\"en\":\"Content management system.\",\"pl\":\"Content management system.\",\"de\":\"Content management system.\",\"fr\":\"Content management system.\"}','2016-12-08 19:55:40','2016-12-08 19:55:40'),(3,'default_page_size','general','{\"en\":5,\"pl\":5,\"de\":5,\"fr\":5}','2016-12-08 19:55:40','2016-12-08 19:55:40'),(4,'cookies_policy_url','general','{\"en\":null,\"pl\":null,\"de\":null,\"fr\":null}','2016-12-08 19:55:40','2016-12-08 19:55:40'),(5,'desc_length','seo','{\"en\":160,\"pl\":160,\"de\":160,\"fr\":160}','2016-12-08 19:55:40','2016-12-08 19:55:40'),(6,'google_analytics_id','seo','{\"en\":null,\"pl\":null,\"de\":null,\"fr\":null}','2016-12-08 19:55:40','2016-12-08 19:55:40');
 /*!40000 ALTER TABLE `options` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -832,7 +832,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin@gzero.pl','$2y$10$xvbB/Ow.3OdhgaAavtZOy.e4svWCIswqDxspKe.vFJFhqT.QNRPKS','Admin','John','Doe',1,NULL,'2016-12-06 08:44:06','2016-12-06 08:44:06');
+INSERT INTO `users` VALUES (1,'admin@gzero.pl','$2y$10$8M6RUjmGV2.CK2GRG7GOiOzNw6Bj0v8mII.FrehzR7WzucgqdE0YW','Admin','John','Doe',1,NULL,'2016-12-08 19:55:39','2016-12-08 19:55:39');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -882,4 +882,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-06  8:44:33
+-- Dump completed on 2016-12-08 19:56:18
