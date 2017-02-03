@@ -147,30 +147,28 @@ DROP TABLE IF EXISTS public.acl_permission_role;
 DROP EXTENSION IF EXISTS plpgsql;
 DROP SCHEMA IF EXISTS public;
 --
--- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
+-- Name: public; Type: SCHEMA; Schema: -; Owner: -
 --
 
 CREATE SCHEMA public;
 
 
-ALTER SCHEMA public OWNER TO postgres;
-
 --
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
 --
 
 COMMENT ON SCHEMA public IS 'standard public schema';
 
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -183,7 +181,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: acl_permission_role; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: acl_permission_role; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE acl_permission_role (
@@ -194,10 +192,8 @@ CREATE TABLE acl_permission_role (
 );
 
 
-ALTER TABLE acl_permission_role OWNER TO "gzero-cms";
-
 --
--- Name: acl_permissions; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: acl_permissions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE acl_permissions (
@@ -209,10 +205,8 @@ CREATE TABLE acl_permissions (
 );
 
 
-ALTER TABLE acl_permissions OWNER TO "gzero-cms";
-
 --
--- Name: acl_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+-- Name: acl_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE acl_permissions_id_seq
@@ -223,17 +217,15 @@ CREATE SEQUENCE acl_permissions_id_seq
     CACHE 1;
 
 
-ALTER TABLE acl_permissions_id_seq OWNER TO "gzero-cms";
-
 --
--- Name: acl_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+-- Name: acl_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE acl_permissions_id_seq OWNED BY acl_permissions.id;
 
 
 --
--- Name: acl_roles; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: acl_roles; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE acl_roles (
@@ -244,10 +236,8 @@ CREATE TABLE acl_roles (
 );
 
 
-ALTER TABLE acl_roles OWNER TO "gzero-cms";
-
 --
--- Name: acl_roles_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+-- Name: acl_roles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE acl_roles_id_seq
@@ -258,17 +248,15 @@ CREATE SEQUENCE acl_roles_id_seq
     CACHE 1;
 
 
-ALTER TABLE acl_roles_id_seq OWNER TO "gzero-cms";
-
 --
--- Name: acl_roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+-- Name: acl_roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE acl_roles_id_seq OWNED BY acl_roles.id;
 
 
 --
--- Name: acl_user_role; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: acl_user_role; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE acl_user_role (
@@ -279,10 +267,8 @@ CREATE TABLE acl_user_role (
 );
 
 
-ALTER TABLE acl_user_role OWNER TO "gzero-cms";
-
 --
--- Name: block_translations; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: block_translations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE block_translations (
@@ -298,10 +284,8 @@ CREATE TABLE block_translations (
 );
 
 
-ALTER TABLE block_translations OWNER TO "gzero-cms";
-
 --
--- Name: block_translations_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+-- Name: block_translations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE block_translations_id_seq
@@ -312,17 +296,15 @@ CREATE SEQUENCE block_translations_id_seq
     CACHE 1;
 
 
-ALTER TABLE block_translations_id_seq OWNER TO "gzero-cms";
-
 --
--- Name: block_translations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+-- Name: block_translations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE block_translations_id_seq OWNED BY block_translations.id;
 
 
 --
--- Name: block_types; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: block_types; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE block_types (
@@ -333,10 +315,8 @@ CREATE TABLE block_types (
 );
 
 
-ALTER TABLE block_types OWNER TO "gzero-cms";
-
 --
--- Name: blocks; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: blocks; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE blocks (
@@ -358,10 +338,8 @@ CREATE TABLE blocks (
 );
 
 
-ALTER TABLE blocks OWNER TO "gzero-cms";
-
 --
--- Name: blocks_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+-- Name: blocks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE blocks_id_seq
@@ -372,17 +350,15 @@ CREATE SEQUENCE blocks_id_seq
     CACHE 1;
 
 
-ALTER TABLE blocks_id_seq OWNER TO "gzero-cms";
-
 --
--- Name: blocks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+-- Name: blocks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE blocks_id_seq OWNED BY blocks.id;
 
 
 --
--- Name: content_translations; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: content_translations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE content_translations (
@@ -400,10 +376,8 @@ CREATE TABLE content_translations (
 );
 
 
-ALTER TABLE content_translations OWNER TO "gzero-cms";
-
 --
--- Name: content_translations_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+-- Name: content_translations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE content_translations_id_seq
@@ -414,17 +388,15 @@ CREATE SEQUENCE content_translations_id_seq
     CACHE 1;
 
 
-ALTER TABLE content_translations_id_seq OWNER TO "gzero-cms";
-
 --
--- Name: content_translations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+-- Name: content_translations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE content_translations_id_seq OWNED BY content_translations.id;
 
 
 --
--- Name: content_types; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: content_types; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE content_types (
@@ -435,10 +407,8 @@ CREATE TABLE content_types (
 );
 
 
-ALTER TABLE content_types OWNER TO "gzero-cms";
-
 --
--- Name: contents; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: contents; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE contents (
@@ -465,10 +435,8 @@ CREATE TABLE contents (
 );
 
 
-ALTER TABLE contents OWNER TO "gzero-cms";
-
 --
--- Name: contents_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+-- Name: contents_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE contents_id_seq
@@ -479,17 +447,15 @@ CREATE SEQUENCE contents_id_seq
     CACHE 1;
 
 
-ALTER TABLE contents_id_seq OWNER TO "gzero-cms";
-
 --
--- Name: contents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+-- Name: contents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE contents_id_seq OWNED BY contents.id;
 
 
 --
--- Name: file_translations; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: file_translations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE file_translations (
@@ -503,10 +469,8 @@ CREATE TABLE file_translations (
 );
 
 
-ALTER TABLE file_translations OWNER TO "gzero-cms";
-
 --
--- Name: file_translations_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+-- Name: file_translations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE file_translations_id_seq
@@ -517,17 +481,15 @@ CREATE SEQUENCE file_translations_id_seq
     CACHE 1;
 
 
-ALTER TABLE file_translations_id_seq OWNER TO "gzero-cms";
-
 --
--- Name: file_translations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+-- Name: file_translations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE file_translations_id_seq OWNED BY file_translations.id;
 
 
 --
--- Name: file_types; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: file_types; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE file_types (
@@ -539,10 +501,8 @@ CREATE TABLE file_types (
 );
 
 
-ALTER TABLE file_types OWNER TO "gzero-cms";
-
 --
--- Name: files; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: files; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE files (
@@ -560,10 +520,8 @@ CREATE TABLE files (
 );
 
 
-ALTER TABLE files OWNER TO "gzero-cms";
-
 --
--- Name: files_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+-- Name: files_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE files_id_seq
@@ -574,17 +532,15 @@ CREATE SEQUENCE files_id_seq
     CACHE 1;
 
 
-ALTER TABLE files_id_seq OWNER TO "gzero-cms";
-
 --
--- Name: files_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+-- Name: files_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE files_id_seq OWNED BY files.id;
 
 
 --
--- Name: langs; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: langs; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE langs (
@@ -597,10 +553,8 @@ CREATE TABLE langs (
 );
 
 
-ALTER TABLE langs OWNER TO "gzero-cms";
-
 --
--- Name: migrations; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: migrations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE migrations (
@@ -610,10 +564,8 @@ CREATE TABLE migrations (
 );
 
 
-ALTER TABLE migrations OWNER TO "gzero-cms";
-
 --
--- Name: migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+-- Name: migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE migrations_id_seq
@@ -624,17 +576,15 @@ CREATE SEQUENCE migrations_id_seq
     CACHE 1;
 
 
-ALTER TABLE migrations_id_seq OWNER TO "gzero-cms";
-
 --
--- Name: migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+-- Name: migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE migrations_id_seq OWNED BY migrations.id;
 
 
 --
--- Name: oauth_access_tokens; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: oauth_access_tokens; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE oauth_access_tokens (
@@ -650,10 +600,8 @@ CREATE TABLE oauth_access_tokens (
 );
 
 
-ALTER TABLE oauth_access_tokens OWNER TO "gzero-cms";
-
 --
--- Name: oauth_auth_codes; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: oauth_auth_codes; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE oauth_auth_codes (
@@ -666,10 +614,8 @@ CREATE TABLE oauth_auth_codes (
 );
 
 
-ALTER TABLE oauth_auth_codes OWNER TO "gzero-cms";
-
 --
--- Name: oauth_clients; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: oauth_clients; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE oauth_clients (
@@ -686,10 +632,8 @@ CREATE TABLE oauth_clients (
 );
 
 
-ALTER TABLE oauth_clients OWNER TO "gzero-cms";
-
 --
--- Name: oauth_clients_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+-- Name: oauth_clients_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE oauth_clients_id_seq
@@ -700,17 +644,15 @@ CREATE SEQUENCE oauth_clients_id_seq
     CACHE 1;
 
 
-ALTER TABLE oauth_clients_id_seq OWNER TO "gzero-cms";
-
 --
--- Name: oauth_clients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+-- Name: oauth_clients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE oauth_clients_id_seq OWNED BY oauth_clients.id;
 
 
 --
--- Name: oauth_personal_access_clients; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: oauth_personal_access_clients; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE oauth_personal_access_clients (
@@ -721,10 +663,8 @@ CREATE TABLE oauth_personal_access_clients (
 );
 
 
-ALTER TABLE oauth_personal_access_clients OWNER TO "gzero-cms";
-
 --
--- Name: oauth_personal_access_clients_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+-- Name: oauth_personal_access_clients_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE oauth_personal_access_clients_id_seq
@@ -735,17 +675,15 @@ CREATE SEQUENCE oauth_personal_access_clients_id_seq
     CACHE 1;
 
 
-ALTER TABLE oauth_personal_access_clients_id_seq OWNER TO "gzero-cms";
-
 --
--- Name: oauth_personal_access_clients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+-- Name: oauth_personal_access_clients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE oauth_personal_access_clients_id_seq OWNED BY oauth_personal_access_clients.id;
 
 
 --
--- Name: oauth_refresh_tokens; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: oauth_refresh_tokens; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE oauth_refresh_tokens (
@@ -756,10 +694,8 @@ CREATE TABLE oauth_refresh_tokens (
 );
 
 
-ALTER TABLE oauth_refresh_tokens OWNER TO "gzero-cms";
-
 --
--- Name: option_categories; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: option_categories; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE option_categories (
@@ -769,10 +705,8 @@ CREATE TABLE option_categories (
 );
 
 
-ALTER TABLE option_categories OWNER TO "gzero-cms";
-
 --
--- Name: options; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: options; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE options (
@@ -785,10 +719,8 @@ CREATE TABLE options (
 );
 
 
-ALTER TABLE options OWNER TO "gzero-cms";
-
 --
--- Name: options_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+-- Name: options_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE options_id_seq
@@ -799,17 +731,15 @@ CREATE SEQUENCE options_id_seq
     CACHE 1;
 
 
-ALTER TABLE options_id_seq OWNER TO "gzero-cms";
-
 --
--- Name: options_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+-- Name: options_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE options_id_seq OWNED BY options.id;
 
 
 --
--- Name: password_resets; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: password_resets; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE password_resets (
@@ -819,10 +749,8 @@ CREATE TABLE password_resets (
 );
 
 
-ALTER TABLE password_resets OWNER TO "gzero-cms";
-
 --
--- Name: route_translations; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: route_translations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE route_translations (
@@ -836,10 +764,8 @@ CREATE TABLE route_translations (
 );
 
 
-ALTER TABLE route_translations OWNER TO "gzero-cms";
-
 --
--- Name: route_translations_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+-- Name: route_translations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE route_translations_id_seq
@@ -850,17 +776,15 @@ CREATE SEQUENCE route_translations_id_seq
     CACHE 1;
 
 
-ALTER TABLE route_translations_id_seq OWNER TO "gzero-cms";
-
 --
--- Name: route_translations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+-- Name: route_translations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE route_translations_id_seq OWNED BY route_translations.id;
 
 
 --
--- Name: routes; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: routes; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE routes (
@@ -873,10 +797,8 @@ CREATE TABLE routes (
 );
 
 
-ALTER TABLE routes OWNER TO "gzero-cms";
-
 --
--- Name: routes_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+-- Name: routes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE routes_id_seq
@@ -887,17 +809,15 @@ CREATE SEQUENCE routes_id_seq
     CACHE 1;
 
 
-ALTER TABLE routes_id_seq OWNER TO "gzero-cms";
-
 --
--- Name: routes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+-- Name: routes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE routes_id_seq OWNED BY routes.id;
 
 
 --
--- Name: uploadables; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: uploadables; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE uploadables (
@@ -910,10 +830,8 @@ CREATE TABLE uploadables (
 );
 
 
-ALTER TABLE uploadables OWNER TO "gzero-cms";
-
 --
--- Name: users; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE users (
@@ -930,10 +848,8 @@ CREATE TABLE users (
 );
 
 
-ALTER TABLE users OWNER TO "gzero-cms";
-
 --
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE users_id_seq
@@ -944,17 +860,15 @@ CREATE SEQUENCE users_id_seq
     CACHE 1;
 
 
-ALTER TABLE users_id_seq OWNER TO "gzero-cms";
-
 --
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- Name: widgets; Type: TABLE; Schema: public; Owner: gzero-cms
+-- Name: widgets; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE widgets (
@@ -968,10 +882,8 @@ CREATE TABLE widgets (
 );
 
 
-ALTER TABLE widgets OWNER TO "gzero-cms";
-
 --
--- Name: widgets_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+-- Name: widgets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE widgets_id_seq
@@ -982,129 +894,127 @@ CREATE SEQUENCE widgets_id_seq
     CACHE 1;
 
 
-ALTER TABLE widgets_id_seq OWNER TO "gzero-cms";
-
 --
--- Name: widgets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+-- Name: widgets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE widgets_id_seq OWNED BY widgets.id;
 
 
 --
--- Name: acl_permissions id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+-- Name: acl_permissions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY acl_permissions ALTER COLUMN id SET DEFAULT nextval('acl_permissions_id_seq'::regclass);
 
 
 --
--- Name: acl_roles id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+-- Name: acl_roles id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY acl_roles ALTER COLUMN id SET DEFAULT nextval('acl_roles_id_seq'::regclass);
 
 
 --
--- Name: block_translations id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+-- Name: block_translations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY block_translations ALTER COLUMN id SET DEFAULT nextval('block_translations_id_seq'::regclass);
 
 
 --
--- Name: blocks id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+-- Name: blocks id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY blocks ALTER COLUMN id SET DEFAULT nextval('blocks_id_seq'::regclass);
 
 
 --
--- Name: content_translations id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+-- Name: content_translations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY content_translations ALTER COLUMN id SET DEFAULT nextval('content_translations_id_seq'::regclass);
 
 
 --
--- Name: contents id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+-- Name: contents id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contents ALTER COLUMN id SET DEFAULT nextval('contents_id_seq'::regclass);
 
 
 --
--- Name: file_translations id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+-- Name: file_translations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY file_translations ALTER COLUMN id SET DEFAULT nextval('file_translations_id_seq'::regclass);
 
 
 --
--- Name: files id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+-- Name: files id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY files ALTER COLUMN id SET DEFAULT nextval('files_id_seq'::regclass);
 
 
 --
--- Name: migrations id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+-- Name: migrations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY migrations ALTER COLUMN id SET DEFAULT nextval('migrations_id_seq'::regclass);
 
 
 --
--- Name: oauth_clients id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+-- Name: oauth_clients id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY oauth_clients ALTER COLUMN id SET DEFAULT nextval('oauth_clients_id_seq'::regclass);
 
 
 --
--- Name: oauth_personal_access_clients id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+-- Name: oauth_personal_access_clients id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY oauth_personal_access_clients ALTER COLUMN id SET DEFAULT nextval('oauth_personal_access_clients_id_seq'::regclass);
 
 
 --
--- Name: options id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+-- Name: options id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY options ALTER COLUMN id SET DEFAULT nextval('options_id_seq'::regclass);
 
 
 --
--- Name: route_translations id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+-- Name: route_translations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY route_translations ALTER COLUMN id SET DEFAULT nextval('route_translations_id_seq'::regclass);
 
 
 --
--- Name: routes id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+-- Name: routes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY routes ALTER COLUMN id SET DEFAULT nextval('routes_id_seq'::regclass);
 
 
 --
--- Name: users id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
--- Name: widgets id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+-- Name: widgets id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY widgets ALTER COLUMN id SET DEFAULT nextval('widgets_id_seq'::regclass);
 
 
 --
--- Data for Name: acl_permission_role; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: acl_permission_role; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY acl_permission_role (permission_id, role_id, created_at, updated_at) FROM stdin;
@@ -1149,7 +1059,7 @@ COPY acl_permission_role (permission_id, role_id, created_at, updated_at) FROM s
 
 
 --
--- Data for Name: acl_permissions; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: acl_permissions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY acl_permissions (id, name, category, created_at, updated_at) FROM stdin;
@@ -1181,14 +1091,14 @@ COPY acl_permissions (id, name, category, created_at, updated_at) FROM stdin;
 
 
 --
--- Name: acl_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+-- Name: acl_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('acl_permissions_id_seq', 1, false);
 
 
 --
--- Data for Name: acl_roles; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: acl_roles; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY acl_roles (id, name, created_at, updated_at) FROM stdin;
@@ -1198,14 +1108,14 @@ COPY acl_roles (id, name, created_at, updated_at) FROM stdin;
 
 
 --
--- Name: acl_roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+-- Name: acl_roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('acl_roles_id_seq', 2, true);
 
 
 --
--- Data for Name: acl_user_role; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: acl_user_role; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY acl_user_role (user_id, role_id, created_at, updated_at) FROM stdin;
@@ -1214,7 +1124,7 @@ COPY acl_user_role (user_id, role_id, created_at, updated_at) FROM stdin;
 
 
 --
--- Data for Name: block_translations; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: block_translations; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY block_translations (id, lang_code, block_id, title, body, custom_fields, is_active, created_at, updated_at) FROM stdin;
@@ -1222,14 +1132,14 @@ COPY block_translations (id, lang_code, block_id, title, body, custom_fields, is
 
 
 --
--- Name: block_translations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+-- Name: block_translations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('block_translations_id_seq', 1, false);
 
 
 --
--- Data for Name: block_types; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: block_types; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY block_types (name, is_active, created_at, updated_at) FROM stdin;
@@ -1242,7 +1152,7 @@ widget	t	2017-02-03 16:17:20	2017-02-03 16:17:20
 
 
 --
--- Data for Name: blocks; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: blocks; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY blocks (id, type, region, theme, blockable_id, blockable_type, author_id, filter, options, weight, is_active, is_cacheable, created_at, updated_at, deleted_at) FROM stdin;
@@ -1250,14 +1160,14 @@ COPY blocks (id, type, region, theme, blockable_id, blockable_type, author_id, f
 
 
 --
--- Name: blocks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+-- Name: blocks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('blocks_id_seq', 1, false);
 
 
 --
--- Data for Name: content_translations; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: content_translations; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY content_translations (id, lang_code, content_id, title, teaser, body, seo_title, seo_description, is_active, created_at, updated_at) FROM stdin;
@@ -1265,14 +1175,14 @@ COPY content_translations (id, lang_code, content_id, title, teaser, body, seo_t
 
 
 --
--- Name: content_translations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+-- Name: content_translations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('content_translations_id_seq', 1, false);
 
 
 --
--- Data for Name: content_types; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: content_types; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY content_types (name, is_active, created_at, updated_at) FROM stdin;
@@ -1282,7 +1192,7 @@ category	t	2017-02-03 16:17:20	2017-02-03 16:17:20
 
 
 --
--- Data for Name: contents; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: contents; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY contents (id, type, theme, author_id, path, parent_id, level, weight, rating, visits, is_on_home, is_comment_allowed, is_promoted, is_sticky, is_active, published_at, deleted_at, created_at, updated_at, file_id) FROM stdin;
@@ -1290,14 +1200,14 @@ COPY contents (id, type, theme, author_id, path, parent_id, level, weight, ratin
 
 
 --
--- Name: contents_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+-- Name: contents_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('contents_id_seq', 1, false);
 
 
 --
--- Data for Name: file_translations; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: file_translations; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY file_translations (id, lang_code, file_id, title, description, created_at, updated_at) FROM stdin;
@@ -1305,14 +1215,14 @@ COPY file_translations (id, lang_code, file_id, title, description, created_at, 
 
 
 --
--- Name: file_translations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+-- Name: file_translations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('file_translations_id_seq', 1, false);
 
 
 --
--- Data for Name: file_types; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: file_types; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY file_types (name, extensions, is_active, created_at, updated_at) FROM stdin;
@@ -1324,7 +1234,7 @@ music	\N	t	2017-02-03 16:17:20	2017-02-03 16:17:20
 
 
 --
--- Data for Name: files; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: files; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY files (id, type, name, extension, size, mime_type, info, created_by, is_active, created_at, updated_at) FROM stdin;
@@ -1332,14 +1242,14 @@ COPY files (id, type, name, extension, size, mime_type, info, created_by, is_act
 
 
 --
--- Name: files_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+-- Name: files_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('files_id_seq', 1, false);
 
 
 --
--- Data for Name: langs; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: langs; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY langs (code, i18n, is_enabled, is_default, created_at, updated_at) FROM stdin;
@@ -1351,7 +1261,7 @@ fr	fr_FR	f	f	2017-02-03 16:17:20	2017-02-03 16:17:20
 
 
 --
--- Data for Name: migrations; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: migrations; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY migrations (id, migration, batch) FROM stdin;
@@ -1374,14 +1284,14 @@ COPY migrations (id, migration, batch) FROM stdin;
 
 
 --
--- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+-- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('migrations_id_seq', 30, true);
 
 
 --
--- Data for Name: oauth_access_tokens; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: oauth_access_tokens; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY oauth_access_tokens (id, user_id, client_id, name, scopes, revoked, created_at, updated_at, expires_at) FROM stdin;
@@ -1389,7 +1299,7 @@ COPY oauth_access_tokens (id, user_id, client_id, name, scopes, revoked, created
 
 
 --
--- Data for Name: oauth_auth_codes; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: oauth_auth_codes; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY oauth_auth_codes (id, user_id, client_id, scopes, revoked, expires_at) FROM stdin;
@@ -1397,7 +1307,7 @@ COPY oauth_auth_codes (id, user_id, client_id, scopes, revoked, expires_at) FROM
 
 
 --
--- Data for Name: oauth_clients; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: oauth_clients; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY oauth_clients (id, user_id, name, secret, redirect, personal_access_client, password_client, revoked, created_at, updated_at) FROM stdin;
@@ -1407,14 +1317,14 @@ COPY oauth_clients (id, user_id, name, secret, redirect, personal_access_client,
 
 
 --
--- Name: oauth_clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+-- Name: oauth_clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('oauth_clients_id_seq', 2, true);
 
 
 --
--- Data for Name: oauth_personal_access_clients; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: oauth_personal_access_clients; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY oauth_personal_access_clients (id, client_id, created_at, updated_at) FROM stdin;
@@ -1423,14 +1333,14 @@ COPY oauth_personal_access_clients (id, client_id, created_at, updated_at) FROM 
 
 
 --
--- Name: oauth_personal_access_clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+-- Name: oauth_personal_access_clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('oauth_personal_access_clients_id_seq', 1, true);
 
 
 --
--- Data for Name: oauth_refresh_tokens; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: oauth_refresh_tokens; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY oauth_refresh_tokens (id, access_token_id, revoked, expires_at) FROM stdin;
@@ -1438,7 +1348,7 @@ COPY oauth_refresh_tokens (id, access_token_id, revoked, expires_at) FROM stdin;
 
 
 --
--- Data for Name: option_categories; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: option_categories; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY option_categories (key, created_at, updated_at) FROM stdin;
@@ -1448,7 +1358,7 @@ seo	2017-02-03 16:17:20	2017-02-03 16:17:20
 
 
 --
--- Data for Name: options; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: options; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY options (id, key, category_key, value, created_at, updated_at) FROM stdin;
@@ -1462,14 +1372,14 @@ COPY options (id, key, category_key, value, created_at, updated_at) FROM stdin;
 
 
 --
--- Name: options_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+-- Name: options_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('options_id_seq', 6, true);
 
 
 --
--- Data for Name: password_resets; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: password_resets; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY password_resets (email, token, created_at) FROM stdin;
@@ -1477,7 +1387,7 @@ COPY password_resets (email, token, created_at) FROM stdin;
 
 
 --
--- Data for Name: route_translations; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: route_translations; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY route_translations (id, lang_code, route_id, url, is_active, created_at, updated_at) FROM stdin;
@@ -1485,14 +1395,14 @@ COPY route_translations (id, lang_code, route_id, url, is_active, created_at, up
 
 
 --
--- Name: route_translations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+-- Name: route_translations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('route_translations_id_seq', 1, false);
 
 
 --
--- Data for Name: routes; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: routes; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY routes (id, routable_id, routable_type, is_active, created_at, updated_at) FROM stdin;
@@ -1500,14 +1410,14 @@ COPY routes (id, routable_id, routable_type, is_active, created_at, updated_at) 
 
 
 --
--- Name: routes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+-- Name: routes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('routes_id_seq', 1, false);
 
 
 --
--- Data for Name: uploadables; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: uploadables; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY uploadables (file_id, uploadable_id, uploadable_type, weight, created_at, updated_at) FROM stdin;
@@ -1515,7 +1425,7 @@ COPY uploadables (file_id, uploadable_id, uploadable_type, weight, created_at, u
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY users (id, email, password, nick, first_name, last_name, is_admin, remember_token, created_at, updated_at) FROM stdin;
@@ -1524,14 +1434,14 @@ COPY users (id, email, password, nick, first_name, last_name, is_admin, remember
 
 
 --
--- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('users_id_seq', 1, true);
 
 
 --
--- Data for Name: widgets; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+-- Data for Name: widgets; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY widgets (id, name, args, is_active, is_cacheable, created_at, updated_at) FROM stdin;
@@ -1539,14 +1449,14 @@ COPY widgets (id, name, args, is_active, is_cacheable, created_at, updated_at) F
 
 
 --
--- Name: widgets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+-- Name: widgets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('widgets_id_seq', 1, false);
 
 
 --
--- Name: acl_permissions acl_permissions_name_unique; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: acl_permissions acl_permissions_name_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY acl_permissions
@@ -1554,7 +1464,7 @@ ALTER TABLE ONLY acl_permissions
 
 
 --
--- Name: acl_permissions acl_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: acl_permissions acl_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY acl_permissions
@@ -1562,7 +1472,7 @@ ALTER TABLE ONLY acl_permissions
 
 
 --
--- Name: acl_roles acl_roles_name_unique; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: acl_roles acl_roles_name_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY acl_roles
@@ -1570,7 +1480,7 @@ ALTER TABLE ONLY acl_roles
 
 
 --
--- Name: acl_roles acl_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: acl_roles acl_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY acl_roles
@@ -1578,7 +1488,7 @@ ALTER TABLE ONLY acl_roles
 
 
 --
--- Name: block_translations block_translations_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: block_translations block_translations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY block_translations
@@ -1586,7 +1496,7 @@ ALTER TABLE ONLY block_translations
 
 
 --
--- Name: block_types block_types_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: block_types block_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY block_types
@@ -1594,7 +1504,7 @@ ALTER TABLE ONLY block_types
 
 
 --
--- Name: blocks blocks_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: blocks blocks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY blocks
@@ -1602,7 +1512,7 @@ ALTER TABLE ONLY blocks
 
 
 --
--- Name: content_translations content_translations_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: content_translations content_translations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY content_translations
@@ -1610,7 +1520,7 @@ ALTER TABLE ONLY content_translations
 
 
 --
--- Name: content_types content_types_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: content_types content_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY content_types
@@ -1618,7 +1528,7 @@ ALTER TABLE ONLY content_types
 
 
 --
--- Name: contents contents_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: contents contents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contents
@@ -1626,7 +1536,7 @@ ALTER TABLE ONLY contents
 
 
 --
--- Name: file_translations file_translations_file_id_lang_code_unique; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: file_translations file_translations_file_id_lang_code_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY file_translations
@@ -1634,7 +1544,7 @@ ALTER TABLE ONLY file_translations
 
 
 --
--- Name: file_translations file_translations_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: file_translations file_translations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY file_translations
@@ -1642,7 +1552,7 @@ ALTER TABLE ONLY file_translations
 
 
 --
--- Name: file_types file_types_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: file_types file_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY file_types
@@ -1650,7 +1560,7 @@ ALTER TABLE ONLY file_types
 
 
 --
--- Name: files files_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: files files_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY files
@@ -1658,7 +1568,7 @@ ALTER TABLE ONLY files
 
 
 --
--- Name: langs langs_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: langs langs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY langs
@@ -1666,7 +1576,7 @@ ALTER TABLE ONLY langs
 
 
 --
--- Name: migrations migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: migrations migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY migrations
@@ -1674,7 +1584,7 @@ ALTER TABLE ONLY migrations
 
 
 --
--- Name: oauth_access_tokens oauth_access_tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: oauth_access_tokens oauth_access_tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY oauth_access_tokens
@@ -1682,7 +1592,7 @@ ALTER TABLE ONLY oauth_access_tokens
 
 
 --
--- Name: oauth_auth_codes oauth_auth_codes_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: oauth_auth_codes oauth_auth_codes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY oauth_auth_codes
@@ -1690,7 +1600,7 @@ ALTER TABLE ONLY oauth_auth_codes
 
 
 --
--- Name: oauth_clients oauth_clients_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: oauth_clients oauth_clients_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY oauth_clients
@@ -1698,7 +1608,7 @@ ALTER TABLE ONLY oauth_clients
 
 
 --
--- Name: oauth_personal_access_clients oauth_personal_access_clients_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: oauth_personal_access_clients oauth_personal_access_clients_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY oauth_personal_access_clients
@@ -1706,7 +1616,7 @@ ALTER TABLE ONLY oauth_personal_access_clients
 
 
 --
--- Name: oauth_refresh_tokens oauth_refresh_tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: oauth_refresh_tokens oauth_refresh_tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY oauth_refresh_tokens
@@ -1714,7 +1624,7 @@ ALTER TABLE ONLY oauth_refresh_tokens
 
 
 --
--- Name: option_categories option_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: option_categories option_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY option_categories
@@ -1722,7 +1632,7 @@ ALTER TABLE ONLY option_categories
 
 
 --
--- Name: options options_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: options options_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY options
@@ -1730,7 +1640,7 @@ ALTER TABLE ONLY options
 
 
 --
--- Name: route_translations route_translations_lang_code_route_id_unique; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: route_translations route_translations_lang_code_route_id_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY route_translations
@@ -1738,7 +1648,7 @@ ALTER TABLE ONLY route_translations
 
 
 --
--- Name: route_translations route_translations_lang_code_url_unique; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: route_translations route_translations_lang_code_url_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY route_translations
@@ -1746,7 +1656,7 @@ ALTER TABLE ONLY route_translations
 
 
 --
--- Name: route_translations route_translations_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: route_translations route_translations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY route_translations
@@ -1754,7 +1664,7 @@ ALTER TABLE ONLY route_translations
 
 
 --
--- Name: routes routes_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: routes routes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY routes
@@ -1762,7 +1672,7 @@ ALTER TABLE ONLY routes
 
 
 --
--- Name: users users_email_unique; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: users users_email_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -1770,7 +1680,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: users users_nick_unique; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: users users_nick_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -1778,7 +1688,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -1786,7 +1696,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: widgets widgets_name_unique; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: widgets widgets_name_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY widgets
@@ -1794,7 +1704,7 @@ ALTER TABLE ONLY widgets
 
 
 --
--- Name: widgets widgets_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: widgets widgets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY widgets
@@ -1802,112 +1712,112 @@ ALTER TABLE ONLY widgets
 
 
 --
--- Name: acl_permission_role_permission_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
+-- Name: acl_permission_role_permission_id_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX acl_permission_role_permission_id_index ON acl_permission_role USING btree (permission_id);
 
 
 --
--- Name: acl_permission_role_role_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
+-- Name: acl_permission_role_role_id_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX acl_permission_role_role_id_index ON acl_permission_role USING btree (role_id);
 
 
 --
--- Name: acl_user_role_role_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
+-- Name: acl_user_role_role_id_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX acl_user_role_role_id_index ON acl_user_role USING btree (role_id);
 
 
 --
--- Name: acl_user_role_user_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
+-- Name: acl_user_role_user_id_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX acl_user_role_user_id_index ON acl_user_role USING btree (user_id);
 
 
 --
--- Name: blocks_blockable_id_blockable_type_index; Type: INDEX; Schema: public; Owner: gzero-cms
+-- Name: blocks_blockable_id_blockable_type_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX blocks_blockable_id_blockable_type_index ON blocks USING btree (blockable_id, blockable_type);
 
 
 --
--- Name: contents_type_path_parent_id_level_index; Type: INDEX; Schema: public; Owner: gzero-cms
+-- Name: contents_type_path_parent_id_level_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX contents_type_path_parent_id_level_index ON contents USING btree (type, path, parent_id, level);
 
 
 --
--- Name: oauth_access_tokens_user_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
+-- Name: oauth_access_tokens_user_id_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX oauth_access_tokens_user_id_index ON oauth_access_tokens USING btree (user_id);
 
 
 --
--- Name: oauth_clients_user_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
+-- Name: oauth_clients_user_id_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX oauth_clients_user_id_index ON oauth_clients USING btree (user_id);
 
 
 --
--- Name: oauth_personal_access_clients_client_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
+-- Name: oauth_personal_access_clients_client_id_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX oauth_personal_access_clients_client_id_index ON oauth_personal_access_clients USING btree (client_id);
 
 
 --
--- Name: oauth_refresh_tokens_access_token_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
+-- Name: oauth_refresh_tokens_access_token_id_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX oauth_refresh_tokens_access_token_id_index ON oauth_refresh_tokens USING btree (access_token_id);
 
 
 --
--- Name: options_category_key_key_index; Type: INDEX; Schema: public; Owner: gzero-cms
+-- Name: options_category_key_key_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX options_category_key_key_index ON options USING btree (category_key, key);
 
 
 --
--- Name: password_resets_email_index; Type: INDEX; Schema: public; Owner: gzero-cms
+-- Name: password_resets_email_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX password_resets_email_index ON password_resets USING btree (email);
 
 
 --
--- Name: password_resets_token_index; Type: INDEX; Schema: public; Owner: gzero-cms
+-- Name: password_resets_token_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX password_resets_token_index ON password_resets USING btree (token);
 
 
 --
--- Name: route_translations_url_index; Type: INDEX; Schema: public; Owner: gzero-cms
+-- Name: route_translations_url_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX route_translations_url_index ON route_translations USING btree (url);
 
 
 --
--- Name: uploadables_file_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
+-- Name: uploadables_file_id_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX uploadables_file_id_index ON uploadables USING btree (file_id);
 
 
 --
--- Name: acl_permission_role acl_permission_role_permission_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: acl_permission_role acl_permission_role_permission_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY acl_permission_role
@@ -1915,7 +1825,7 @@ ALTER TABLE ONLY acl_permission_role
 
 
 --
--- Name: acl_permission_role acl_permission_role_role_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: acl_permission_role acl_permission_role_role_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY acl_permission_role
@@ -1923,7 +1833,7 @@ ALTER TABLE ONLY acl_permission_role
 
 
 --
--- Name: acl_user_role acl_user_role_role_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: acl_user_role acl_user_role_role_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY acl_user_role
@@ -1931,7 +1841,7 @@ ALTER TABLE ONLY acl_user_role
 
 
 --
--- Name: acl_user_role acl_user_role_user_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: acl_user_role acl_user_role_user_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY acl_user_role
@@ -1939,7 +1849,7 @@ ALTER TABLE ONLY acl_user_role
 
 
 --
--- Name: block_translations block_translations_block_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: block_translations block_translations_block_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY block_translations
@@ -1947,7 +1857,7 @@ ALTER TABLE ONLY block_translations
 
 
 --
--- Name: block_translations block_translations_lang_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: block_translations block_translations_lang_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY block_translations
@@ -1955,7 +1865,7 @@ ALTER TABLE ONLY block_translations
 
 
 --
--- Name: blocks blocks_author_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: blocks blocks_author_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY blocks
@@ -1963,7 +1873,7 @@ ALTER TABLE ONLY blocks
 
 
 --
--- Name: blocks blocks_type_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: blocks blocks_type_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY blocks
@@ -1971,7 +1881,7 @@ ALTER TABLE ONLY blocks
 
 
 --
--- Name: content_translations content_translations_content_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: content_translations content_translations_content_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY content_translations
@@ -1979,7 +1889,7 @@ ALTER TABLE ONLY content_translations
 
 
 --
--- Name: content_translations content_translations_lang_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: content_translations content_translations_lang_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY content_translations
@@ -1987,7 +1897,7 @@ ALTER TABLE ONLY content_translations
 
 
 --
--- Name: contents contents_author_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: contents contents_author_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contents
@@ -1995,7 +1905,7 @@ ALTER TABLE ONLY contents
 
 
 --
--- Name: contents contents_file_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: contents contents_file_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contents
@@ -2003,7 +1913,7 @@ ALTER TABLE ONLY contents
 
 
 --
--- Name: contents contents_parent_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: contents contents_parent_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contents
@@ -2011,7 +1921,7 @@ ALTER TABLE ONLY contents
 
 
 --
--- Name: contents contents_type_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: contents contents_type_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contents
@@ -2019,7 +1929,7 @@ ALTER TABLE ONLY contents
 
 
 --
--- Name: file_translations file_translations_file_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: file_translations file_translations_file_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY file_translations
@@ -2027,7 +1937,7 @@ ALTER TABLE ONLY file_translations
 
 
 --
--- Name: file_translations file_translations_lang_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: file_translations file_translations_lang_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY file_translations
@@ -2035,7 +1945,7 @@ ALTER TABLE ONLY file_translations
 
 
 --
--- Name: files files_created_by_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: files files_created_by_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY files
@@ -2043,7 +1953,7 @@ ALTER TABLE ONLY files
 
 
 --
--- Name: files files_type_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: files files_type_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY files
@@ -2051,7 +1961,7 @@ ALTER TABLE ONLY files
 
 
 --
--- Name: options options_category_key_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: options options_category_key_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY options
@@ -2059,7 +1969,7 @@ ALTER TABLE ONLY options
 
 
 --
--- Name: route_translations route_translations_lang_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: route_translations route_translations_lang_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY route_translations
@@ -2067,7 +1977,7 @@ ALTER TABLE ONLY route_translations
 
 
 --
--- Name: route_translations route_translations_route_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: route_translations route_translations_route_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY route_translations
@@ -2075,7 +1985,7 @@ ALTER TABLE ONLY route_translations
 
 
 --
--- Name: uploadables uploadables_file_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
+-- Name: uploadables uploadables_file_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY uploadables
