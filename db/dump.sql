@@ -1,885 +1,2089 @@
--- MySQL dump 10.13  Distrib 5.5.50, for debian-linux-gnu (x86_64)
 --
--- Host: dev_db    Database: gzero-cms
--- ------------------------------------------------------
--- Server version	5.5.5-10.1.14-MariaDB-1~jessie
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.6.1
+-- Dumped by pg_dump version 9.6.1
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET search_path = public, pg_catalog;
+
+ALTER TABLE IF EXISTS ONLY public.uploadables DROP CONSTRAINT IF EXISTS uploadables_file_id_foreign;
+ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_route_id_foreign;
+ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_lang_code_foreign;
+ALTER TABLE IF EXISTS ONLY public.options DROP CONSTRAINT IF EXISTS options_category_key_foreign;
+ALTER TABLE IF EXISTS ONLY public.files DROP CONSTRAINT IF EXISTS files_type_foreign;
+ALTER TABLE IF EXISTS ONLY public.files DROP CONSTRAINT IF EXISTS files_created_by_foreign;
+ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_lang_code_foreign;
+ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_file_id_foreign;
+ALTER TABLE IF EXISTS ONLY public.contents DROP CONSTRAINT IF EXISTS contents_type_foreign;
+ALTER TABLE IF EXISTS ONLY public.contents DROP CONSTRAINT IF EXISTS contents_parent_id_foreign;
+ALTER TABLE IF EXISTS ONLY public.contents DROP CONSTRAINT IF EXISTS contents_file_id_foreign;
+ALTER TABLE IF EXISTS ONLY public.contents DROP CONSTRAINT IF EXISTS contents_author_id_foreign;
+ALTER TABLE IF EXISTS ONLY public.content_translations DROP CONSTRAINT IF EXISTS content_translations_lang_code_foreign;
+ALTER TABLE IF EXISTS ONLY public.content_translations DROP CONSTRAINT IF EXISTS content_translations_content_id_foreign;
+ALTER TABLE IF EXISTS ONLY public.blocks DROP CONSTRAINT IF EXISTS blocks_type_foreign;
+ALTER TABLE IF EXISTS ONLY public.blocks DROP CONSTRAINT IF EXISTS blocks_author_id_foreign;
+ALTER TABLE IF EXISTS ONLY public.block_translations DROP CONSTRAINT IF EXISTS block_translations_lang_code_foreign;
+ALTER TABLE IF EXISTS ONLY public.block_translations DROP CONSTRAINT IF EXISTS block_translations_block_id_foreign;
+ALTER TABLE IF EXISTS ONLY public.acl_user_role DROP CONSTRAINT IF EXISTS acl_user_role_user_id_foreign;
+ALTER TABLE IF EXISTS ONLY public.acl_user_role DROP CONSTRAINT IF EXISTS acl_user_role_role_id_foreign;
+ALTER TABLE IF EXISTS ONLY public.acl_permission_role DROP CONSTRAINT IF EXISTS acl_permission_role_role_id_foreign;
+ALTER TABLE IF EXISTS ONLY public.acl_permission_role DROP CONSTRAINT IF EXISTS acl_permission_role_permission_id_foreign;
+DROP INDEX IF EXISTS public.uploadables_file_id_index;
+DROP INDEX IF EXISTS public.route_translations_url_index;
+DROP INDEX IF EXISTS public.password_resets_token_index;
+DROP INDEX IF EXISTS public.password_resets_email_index;
+DROP INDEX IF EXISTS public.options_category_key_key_index;
+DROP INDEX IF EXISTS public.oauth_refresh_tokens_access_token_id_index;
+DROP INDEX IF EXISTS public.oauth_personal_access_clients_client_id_index;
+DROP INDEX IF EXISTS public.oauth_clients_user_id_index;
+DROP INDEX IF EXISTS public.oauth_access_tokens_user_id_index;
+DROP INDEX IF EXISTS public.contents_type_path_parent_id_level_index;
+DROP INDEX IF EXISTS public.blocks_blockable_id_blockable_type_index;
+DROP INDEX IF EXISTS public.acl_user_role_user_id_index;
+DROP INDEX IF EXISTS public.acl_user_role_role_id_index;
+DROP INDEX IF EXISTS public.acl_permission_role_role_id_index;
+DROP INDEX IF EXISTS public.acl_permission_role_permission_id_index;
+ALTER TABLE IF EXISTS ONLY public.widgets DROP CONSTRAINT IF EXISTS widgets_pkey;
+ALTER TABLE IF EXISTS ONLY public.widgets DROP CONSTRAINT IF EXISTS widgets_name_unique;
+ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pkey;
+ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_nick_unique;
+ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_email_unique;
+ALTER TABLE IF EXISTS ONLY public.routes DROP CONSTRAINT IF EXISTS routes_pkey;
+ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_pkey;
+ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_lang_code_url_unique;
+ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_lang_code_route_id_unique;
+ALTER TABLE IF EXISTS ONLY public.options DROP CONSTRAINT IF EXISTS options_pkey;
+ALTER TABLE IF EXISTS ONLY public.option_categories DROP CONSTRAINT IF EXISTS option_categories_pkey;
+ALTER TABLE IF EXISTS ONLY public.oauth_refresh_tokens DROP CONSTRAINT IF EXISTS oauth_refresh_tokens_pkey;
+ALTER TABLE IF EXISTS ONLY public.oauth_personal_access_clients DROP CONSTRAINT IF EXISTS oauth_personal_access_clients_pkey;
+ALTER TABLE IF EXISTS ONLY public.oauth_clients DROP CONSTRAINT IF EXISTS oauth_clients_pkey;
+ALTER TABLE IF EXISTS ONLY public.oauth_auth_codes DROP CONSTRAINT IF EXISTS oauth_auth_codes_pkey;
+ALTER TABLE IF EXISTS ONLY public.oauth_access_tokens DROP CONSTRAINT IF EXISTS oauth_access_tokens_pkey;
+ALTER TABLE IF EXISTS ONLY public.migrations DROP CONSTRAINT IF EXISTS migrations_pkey;
+ALTER TABLE IF EXISTS ONLY public.langs DROP CONSTRAINT IF EXISTS langs_pkey;
+ALTER TABLE IF EXISTS ONLY public.files DROP CONSTRAINT IF EXISTS files_pkey;
+ALTER TABLE IF EXISTS ONLY public.file_types DROP CONSTRAINT IF EXISTS file_types_pkey;
+ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_pkey;
+ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_file_id_lang_code_unique;
+ALTER TABLE IF EXISTS ONLY public.contents DROP CONSTRAINT IF EXISTS contents_pkey;
+ALTER TABLE IF EXISTS ONLY public.content_types DROP CONSTRAINT IF EXISTS content_types_pkey;
+ALTER TABLE IF EXISTS ONLY public.content_translations DROP CONSTRAINT IF EXISTS content_translations_pkey;
+ALTER TABLE IF EXISTS ONLY public.blocks DROP CONSTRAINT IF EXISTS blocks_pkey;
+ALTER TABLE IF EXISTS ONLY public.block_types DROP CONSTRAINT IF EXISTS block_types_pkey;
+ALTER TABLE IF EXISTS ONLY public.block_translations DROP CONSTRAINT IF EXISTS block_translations_pkey;
+ALTER TABLE IF EXISTS ONLY public.acl_roles DROP CONSTRAINT IF EXISTS acl_roles_pkey;
+ALTER TABLE IF EXISTS ONLY public.acl_roles DROP CONSTRAINT IF EXISTS acl_roles_name_unique;
+ALTER TABLE IF EXISTS ONLY public.acl_permissions DROP CONSTRAINT IF EXISTS acl_permissions_pkey;
+ALTER TABLE IF EXISTS ONLY public.acl_permissions DROP CONSTRAINT IF EXISTS acl_permissions_name_unique;
+ALTER TABLE IF EXISTS public.widgets ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.users ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.routes ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.route_translations ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.options ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.oauth_personal_access_clients ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.oauth_clients ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.migrations ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.files ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.file_translations ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.contents ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.content_translations ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.blocks ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.block_translations ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.acl_roles ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.acl_permissions ALTER COLUMN id DROP DEFAULT;
+DROP SEQUENCE IF EXISTS public.widgets_id_seq;
+DROP TABLE IF EXISTS public.widgets;
+DROP SEQUENCE IF EXISTS public.users_id_seq;
+DROP TABLE IF EXISTS public.users;
+DROP TABLE IF EXISTS public.uploadables;
+DROP SEQUENCE IF EXISTS public.routes_id_seq;
+DROP TABLE IF EXISTS public.routes;
+DROP SEQUENCE IF EXISTS public.route_translations_id_seq;
+DROP TABLE IF EXISTS public.route_translations;
+DROP TABLE IF EXISTS public.password_resets;
+DROP SEQUENCE IF EXISTS public.options_id_seq;
+DROP TABLE IF EXISTS public.options;
+DROP TABLE IF EXISTS public.option_categories;
+DROP TABLE IF EXISTS public.oauth_refresh_tokens;
+DROP SEQUENCE IF EXISTS public.oauth_personal_access_clients_id_seq;
+DROP TABLE IF EXISTS public.oauth_personal_access_clients;
+DROP SEQUENCE IF EXISTS public.oauth_clients_id_seq;
+DROP TABLE IF EXISTS public.oauth_clients;
+DROP TABLE IF EXISTS public.oauth_auth_codes;
+DROP TABLE IF EXISTS public.oauth_access_tokens;
+DROP SEQUENCE IF EXISTS public.migrations_id_seq;
+DROP TABLE IF EXISTS public.migrations;
+DROP TABLE IF EXISTS public.langs;
+DROP SEQUENCE IF EXISTS public.files_id_seq;
+DROP TABLE IF EXISTS public.files;
+DROP TABLE IF EXISTS public.file_types;
+DROP SEQUENCE IF EXISTS public.file_translations_id_seq;
+DROP TABLE IF EXISTS public.file_translations;
+DROP SEQUENCE IF EXISTS public.contents_id_seq;
+DROP TABLE IF EXISTS public.contents;
+DROP TABLE IF EXISTS public.content_types;
+DROP SEQUENCE IF EXISTS public.content_translations_id_seq;
+DROP TABLE IF EXISTS public.content_translations;
+DROP SEQUENCE IF EXISTS public.blocks_id_seq;
+DROP TABLE IF EXISTS public.blocks;
+DROP TABLE IF EXISTS public.block_types;
+DROP SEQUENCE IF EXISTS public.block_translations_id_seq;
+DROP TABLE IF EXISTS public.block_translations;
+DROP TABLE IF EXISTS public.acl_user_role;
+DROP SEQUENCE IF EXISTS public.acl_roles_id_seq;
+DROP TABLE IF EXISTS public.acl_roles;
+DROP SEQUENCE IF EXISTS public.acl_permissions_id_seq;
+DROP TABLE IF EXISTS public.acl_permissions;
+DROP TABLE IF EXISTS public.acl_permission_role;
+DROP EXTENSION IF EXISTS plpgsql;
+DROP SCHEMA IF EXISTS public;
+--
+-- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA public;
+
+
+ALTER SCHEMA public OWNER TO postgres;
+
+--
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: acl_permission_role; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE acl_permission_role (
+    permission_id integer NOT NULL,
+    role_id integer NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE acl_permission_role OWNER TO "gzero-cms";
+
+--
+-- Name: acl_permissions; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE acl_permissions (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    category character varying(255) NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE acl_permissions OWNER TO "gzero-cms";
+
+--
+-- Name: acl_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+--
+
+CREATE SEQUENCE acl_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE acl_permissions_id_seq OWNER TO "gzero-cms";
+
+--
+-- Name: acl_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+--
+
+ALTER SEQUENCE acl_permissions_id_seq OWNED BY acl_permissions.id;
+
+
+--
+-- Name: acl_roles; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE acl_roles (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE acl_roles OWNER TO "gzero-cms";
+
+--
+-- Name: acl_roles_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+--
+
+CREATE SEQUENCE acl_roles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE acl_roles_id_seq OWNER TO "gzero-cms";
+
+--
+-- Name: acl_roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+--
+
+ALTER SEQUENCE acl_roles_id_seq OWNED BY acl_roles.id;
+
+
+--
+-- Name: acl_user_role; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE acl_user_role (
+    user_id integer NOT NULL,
+    role_id integer NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE acl_user_role OWNER TO "gzero-cms";
+
+--
+-- Name: block_translations; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE block_translations (
+    id integer NOT NULL,
+    lang_code character varying(2) NOT NULL,
+    block_id integer NOT NULL,
+    title character varying(255) NOT NULL,
+    body text,
+    custom_fields text,
+    is_active boolean DEFAULT false NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE block_translations OWNER TO "gzero-cms";
+
+--
+-- Name: block_translations_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+--
+
+CREATE SEQUENCE block_translations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE block_translations_id_seq OWNER TO "gzero-cms";
+
+--
+-- Name: block_translations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+--
+
+ALTER SEQUENCE block_translations_id_seq OWNED BY block_translations.id;
+
+
+--
+-- Name: block_types; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE block_types (
+    name character varying(255) NOT NULL,
+    is_active boolean DEFAULT false NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE block_types OWNER TO "gzero-cms";
+
+--
+-- Name: blocks; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE blocks (
+    id integer NOT NULL,
+    type character varying(255) NOT NULL,
+    region character varying(255),
+    theme character varying(255),
+    blockable_id integer,
+    blockable_type character varying(255),
+    author_id integer,
+    filter text,
+    options text,
+    weight integer DEFAULT 0 NOT NULL,
+    is_active boolean DEFAULT false NOT NULL,
+    is_cacheable boolean DEFAULT false NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    deleted_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE blocks OWNER TO "gzero-cms";
+
+--
+-- Name: blocks_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+--
+
+CREATE SEQUENCE blocks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE blocks_id_seq OWNER TO "gzero-cms";
+
+--
+-- Name: blocks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+--
+
+ALTER SEQUENCE blocks_id_seq OWNED BY blocks.id;
+
+
+--
+-- Name: content_translations; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE content_translations (
+    id integer NOT NULL,
+    lang_code character varying(2) NOT NULL,
+    content_id integer NOT NULL,
+    title character varying(255),
+    teaser text,
+    body text,
+    seo_title character varying(255),
+    seo_description character varying(255),
+    is_active boolean DEFAULT false NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE content_translations OWNER TO "gzero-cms";
+
+--
+-- Name: content_translations_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+--
+
+CREATE SEQUENCE content_translations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE content_translations_id_seq OWNER TO "gzero-cms";
+
+--
+-- Name: content_translations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+--
+
+ALTER SEQUENCE content_translations_id_seq OWNED BY content_translations.id;
+
+
+--
+-- Name: content_types; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE content_types (
+    name character varying(255) NOT NULL,
+    is_active boolean DEFAULT false NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE content_types OWNER TO "gzero-cms";
+
+--
+-- Name: contents; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE contents (
+    id integer NOT NULL,
+    type character varying(255) NOT NULL,
+    theme character varying(255),
+    author_id integer,
+    path character varying(255),
+    parent_id integer,
+    level integer DEFAULT 0 NOT NULL,
+    weight integer DEFAULT 0 NOT NULL,
+    rating integer DEFAULT 0 NOT NULL,
+    visits integer DEFAULT 0 NOT NULL,
+    is_on_home boolean DEFAULT false NOT NULL,
+    is_comment_allowed boolean DEFAULT false NOT NULL,
+    is_promoted boolean DEFAULT false NOT NULL,
+    is_sticky boolean DEFAULT false NOT NULL,
+    is_active boolean DEFAULT false NOT NULL,
+    published_at timestamp(0) without time zone,
+    deleted_at timestamp(0) without time zone,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    file_id integer
+);
+
+
+ALTER TABLE contents OWNER TO "gzero-cms";
+
+--
+-- Name: contents_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+--
+
+CREATE SEQUENCE contents_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE contents_id_seq OWNER TO "gzero-cms";
+
+--
+-- Name: contents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+--
+
+ALTER SEQUENCE contents_id_seq OWNED BY contents.id;
+
+
+--
+-- Name: file_translations; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE file_translations (
+    id integer NOT NULL,
+    lang_code character varying(2) NOT NULL,
+    file_id integer NOT NULL,
+    title character varying(255),
+    description text,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE file_translations OWNER TO "gzero-cms";
+
+--
+-- Name: file_translations_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+--
+
+CREATE SEQUENCE file_translations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE file_translations_id_seq OWNER TO "gzero-cms";
+
+--
+-- Name: file_translations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+--
+
+ALTER SEQUENCE file_translations_id_seq OWNED BY file_translations.id;
+
+
+--
+-- Name: file_types; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE file_types (
+    name character varying(255) NOT NULL,
+    extensions text,
+    is_active boolean DEFAULT false NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE file_types OWNER TO "gzero-cms";
+
+--
+-- Name: files; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE files (
+    id integer NOT NULL,
+    type character varying(255) NOT NULL,
+    name character varying(255),
+    extension character varying(255),
+    size integer,
+    mime_type character varying(255),
+    info text,
+    created_by integer,
+    is_active boolean DEFAULT false NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE files OWNER TO "gzero-cms";
+
+--
+-- Name: files_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+--
+
+CREATE SEQUENCE files_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE files_id_seq OWNER TO "gzero-cms";
+
+--
+-- Name: files_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+--
+
+ALTER SEQUENCE files_id_seq OWNED BY files.id;
+
+
+--
+-- Name: langs; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE langs (
+    code character varying(2) NOT NULL,
+    i18n character varying(5) NOT NULL,
+    is_enabled boolean DEFAULT false NOT NULL,
+    is_default boolean DEFAULT false NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE langs OWNER TO "gzero-cms";
+
+--
+-- Name: migrations; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE migrations (
+    id integer NOT NULL,
+    migration character varying(255) NOT NULL,
+    batch integer NOT NULL
+);
+
+
+ALTER TABLE migrations OWNER TO "gzero-cms";
+
+--
+-- Name: migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+--
+
+CREATE SEQUENCE migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE migrations_id_seq OWNER TO "gzero-cms";
+
+--
+-- Name: migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+--
+
+ALTER SEQUENCE migrations_id_seq OWNED BY migrations.id;
+
+
+--
+-- Name: oauth_access_tokens; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE oauth_access_tokens (
+    id character varying(100) NOT NULL,
+    user_id integer,
+    client_id integer NOT NULL,
+    name character varying(255),
+    scopes text,
+    revoked boolean NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    expires_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE oauth_access_tokens OWNER TO "gzero-cms";
+
+--
+-- Name: oauth_auth_codes; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE oauth_auth_codes (
+    id character varying(100) NOT NULL,
+    user_id integer NOT NULL,
+    client_id integer NOT NULL,
+    scopes text,
+    revoked boolean NOT NULL,
+    expires_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE oauth_auth_codes OWNER TO "gzero-cms";
+
+--
+-- Name: oauth_clients; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE oauth_clients (
+    id integer NOT NULL,
+    user_id integer,
+    name character varying(255) NOT NULL,
+    secret character varying(100) NOT NULL,
+    redirect text NOT NULL,
+    personal_access_client boolean NOT NULL,
+    password_client boolean NOT NULL,
+    revoked boolean NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE oauth_clients OWNER TO "gzero-cms";
+
+--
+-- Name: oauth_clients_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+--
+
+CREATE SEQUENCE oauth_clients_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE oauth_clients_id_seq OWNER TO "gzero-cms";
+
+--
+-- Name: oauth_clients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+--
+
+ALTER SEQUENCE oauth_clients_id_seq OWNED BY oauth_clients.id;
+
+
+--
+-- Name: oauth_personal_access_clients; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE oauth_personal_access_clients (
+    id integer NOT NULL,
+    client_id integer NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE oauth_personal_access_clients OWNER TO "gzero-cms";
+
+--
+-- Name: oauth_personal_access_clients_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+--
+
+CREATE SEQUENCE oauth_personal_access_clients_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE oauth_personal_access_clients_id_seq OWNER TO "gzero-cms";
+
+--
+-- Name: oauth_personal_access_clients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+--
+
+ALTER SEQUENCE oauth_personal_access_clients_id_seq OWNED BY oauth_personal_access_clients.id;
+
+
+--
+-- Name: oauth_refresh_tokens; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE oauth_refresh_tokens (
+    id character varying(100) NOT NULL,
+    access_token_id character varying(100) NOT NULL,
+    revoked boolean NOT NULL,
+    expires_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE oauth_refresh_tokens OWNER TO "gzero-cms";
+
+--
+-- Name: option_categories; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE option_categories (
+    key character varying(255) NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE option_categories OWNER TO "gzero-cms";
+
+--
+-- Name: options; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE options (
+    id integer NOT NULL,
+    key character varying(255) NOT NULL,
+    category_key character varying(255) NOT NULL,
+    value text NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE options OWNER TO "gzero-cms";
+
+--
+-- Name: options_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+--
+
+CREATE SEQUENCE options_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE options_id_seq OWNER TO "gzero-cms";
+
+--
+-- Name: options_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+--
+
+ALTER SEQUENCE options_id_seq OWNED BY options.id;
+
+
+--
+-- Name: password_resets; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE password_resets (
+    email character varying(255) NOT NULL,
+    token character varying(255) NOT NULL,
+    created_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE password_resets OWNER TO "gzero-cms";
+
+--
+-- Name: route_translations; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE route_translations (
+    id integer NOT NULL,
+    lang_code character varying(2) NOT NULL,
+    route_id integer NOT NULL,
+    url character varying(255) NOT NULL,
+    is_active boolean DEFAULT false NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE route_translations OWNER TO "gzero-cms";
+
+--
+-- Name: route_translations_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+--
+
+CREATE SEQUENCE route_translations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE route_translations_id_seq OWNER TO "gzero-cms";
+
+--
+-- Name: route_translations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+--
+
+ALTER SEQUENCE route_translations_id_seq OWNED BY route_translations.id;
+
+
+--
+-- Name: routes; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE routes (
+    id integer NOT NULL,
+    routable_id integer,
+    routable_type character varying(255),
+    is_active boolean DEFAULT false NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE routes OWNER TO "gzero-cms";
+
+--
+-- Name: routes_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+--
+
+CREATE SEQUENCE routes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE routes_id_seq OWNER TO "gzero-cms";
+
+--
+-- Name: routes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+--
+
+ALTER SEQUENCE routes_id_seq OWNED BY routes.id;
+
+
+--
+-- Name: uploadables; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE uploadables (
+    file_id integer NOT NULL,
+    uploadable_id integer,
+    uploadable_type character varying(255),
+    weight integer DEFAULT 0 NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE uploadables OWNER TO "gzero-cms";
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    email character varying(255) NOT NULL,
+    password character varying(255) NOT NULL,
+    nick character varying(255),
+    first_name character varying(255),
+    last_name character varying(255),
+    is_admin boolean DEFAULT false NOT NULL,
+    remember_token character varying(100),
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE users OWNER TO "gzero-cms";
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE users_id_seq OWNER TO "gzero-cms";
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: widgets; Type: TABLE; Schema: public; Owner: gzero-cms
+--
+
+CREATE TABLE widgets (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    args text,
+    is_active boolean DEFAULT false NOT NULL,
+    is_cacheable boolean DEFAULT false NOT NULL,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE widgets OWNER TO "gzero-cms";
+
+--
+-- Name: widgets_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero-cms
+--
+
+CREATE SEQUENCE widgets_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE widgets_id_seq OWNER TO "gzero-cms";
+
+--
+-- Name: widgets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero-cms
+--
+
+ALTER SEQUENCE widgets_id_seq OWNED BY widgets.id;
+
+
+--
+-- Name: acl_permissions id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY acl_permissions ALTER COLUMN id SET DEFAULT nextval('acl_permissions_id_seq'::regclass);
+
+
+--
+-- Name: acl_roles id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY acl_roles ALTER COLUMN id SET DEFAULT nextval('acl_roles_id_seq'::regclass);
+
+
+--
+-- Name: block_translations id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY block_translations ALTER COLUMN id SET DEFAULT nextval('block_translations_id_seq'::regclass);
+
+
+--
+-- Name: blocks id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY blocks ALTER COLUMN id SET DEFAULT nextval('blocks_id_seq'::regclass);
+
+
+--
+-- Name: content_translations id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY content_translations ALTER COLUMN id SET DEFAULT nextval('content_translations_id_seq'::regclass);
+
+
+--
+-- Name: contents id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY contents ALTER COLUMN id SET DEFAULT nextval('contents_id_seq'::regclass);
+
+
+--
+-- Name: file_translations id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY file_translations ALTER COLUMN id SET DEFAULT nextval('file_translations_id_seq'::regclass);
+
+
+--
+-- Name: files id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY files ALTER COLUMN id SET DEFAULT nextval('files_id_seq'::regclass);
+
+
+--
+-- Name: migrations id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY migrations ALTER COLUMN id SET DEFAULT nextval('migrations_id_seq'::regclass);
+
+
+--
+-- Name: oauth_clients id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY oauth_clients ALTER COLUMN id SET DEFAULT nextval('oauth_clients_id_seq'::regclass);
+
+
+--
+-- Name: oauth_personal_access_clients id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY oauth_personal_access_clients ALTER COLUMN id SET DEFAULT nextval('oauth_personal_access_clients_id_seq'::regclass);
+
+
+--
+-- Name: options id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY options ALTER COLUMN id SET DEFAULT nextval('options_id_seq'::regclass);
+
+
+--
+-- Name: route_translations id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY route_translations ALTER COLUMN id SET DEFAULT nextval('route_translations_id_seq'::regclass);
+
+
+--
+-- Name: routes id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY routes ALTER COLUMN id SET DEFAULT nextval('routes_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: widgets id; Type: DEFAULT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY widgets ALTER COLUMN id SET DEFAULT nextval('widgets_id_seq'::regclass);
+
+
+--
+-- Data for Name: acl_permission_role; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY acl_permission_role (permission_id, role_id, created_at, updated_at) FROM stdin;
+1	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+200	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+201	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+202	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+203	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+204	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+205	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+206	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+207	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+208	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+209	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+210	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+211	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+212	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+213	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+214	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+215	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+216	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+217	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+218	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+219	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+220	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+221	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+222	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+1	2	2017-02-03 16:17:20	2017-02-03 16:17:20
+200	2	2017-02-03 16:17:20	2017-02-03 16:17:20
+201	2	2017-02-03 16:17:20	2017-02-03 16:17:20
+202	2	2017-02-03 16:17:20	2017-02-03 16:17:20
+203	2	2017-02-03 16:17:20	2017-02-03 16:17:20
+204	2	2017-02-03 16:17:20	2017-02-03 16:17:20
+205	2	2017-02-03 16:17:20	2017-02-03 16:17:20
+206	2	2017-02-03 16:17:20	2017-02-03 16:17:20
+207	2	2017-02-03 16:17:20	2017-02-03 16:17:20
+212	2	2017-02-03 16:17:20	2017-02-03 16:17:20
+213	2	2017-02-03 16:17:20	2017-02-03 16:17:20
+214	2	2017-02-03 16:17:20	2017-02-03 16:17:20
+215	2	2017-02-03 16:17:20	2017-02-03 16:17:20
+\.
+
+
+--
+-- Data for Name: acl_permissions; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY acl_permissions (id, name, category, created_at, updated_at) FROM stdin;
+1	admin-api-access	general	\N	\N
+200	content-create	content	\N	\N
+201	content-read	content	\N	\N
+202	content-update	content	\N	\N
+203	content-delete	content	\N	\N
+204	block-create	block	\N	\N
+205	block-read	block	\N	\N
+206	block-update	block	\N	\N
+207	block-delete	block	\N	\N
+208	user-create	user	\N	\N
+209	user-read	user	\N	\N
+210	user-update	user	\N	\N
+211	user-delete	user	\N	\N
+212	file-create	file	\N	\N
+213	file-read	file	\N	\N
+214	file-update	file	\N	\N
+215	file-delete	file	\N	\N
+216	role-create	role	\N	\N
+217	role-read	role	\N	\N
+218	role-update	role	\N	\N
+219	role-delete	role	\N	\N
+220	options-read	options	\N	\N
+221	options-update-general	options	\N	\N
+222	options-update-seo	options	\N	\N
+\.
+
+
+--
+-- Name: acl_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+--
+
+SELECT pg_catalog.setval('acl_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: acl_roles; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY acl_roles (id, name, created_at, updated_at) FROM stdin;
+1	Admin	2017-02-03 16:17:20	2017-02-03 16:17:20
+2	Moderator	2017-02-03 16:17:20	2017-02-03 16:17:20
+\.
+
+
+--
+-- Name: acl_roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+--
+
+SELECT pg_catalog.setval('acl_roles_id_seq', 2, true);
+
+
+--
+-- Data for Name: acl_user_role; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY acl_user_role (user_id, role_id, created_at, updated_at) FROM stdin;
+1	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+\.
+
+
+--
+-- Data for Name: block_translations; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY block_translations (id, lang_code, block_id, title, body, custom_fields, is_active, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: block_translations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+--
+
+SELECT pg_catalog.setval('block_translations_id_seq', 1, false);
+
+
+--
+-- Data for Name: block_types; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY block_types (name, is_active, created_at, updated_at) FROM stdin;
+basic	t	2017-02-03 16:17:20	2017-02-03 16:17:20
+menu	t	2017-02-03 16:17:20	2017-02-03 16:17:20
+slider	t	2017-02-03 16:17:20	2017-02-03 16:17:20
+content	t	2017-02-03 16:17:20	2017-02-03 16:17:20
+widget	t	2017-02-03 16:17:20	2017-02-03 16:17:20
+\.
+
+
+--
+-- Data for Name: blocks; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY blocks (id, type, region, theme, blockable_id, blockable_type, author_id, filter, options, weight, is_active, is_cacheable, created_at, updated_at, deleted_at) FROM stdin;
+\.
+
+
+--
+-- Name: blocks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+--
+
+SELECT pg_catalog.setval('blocks_id_seq', 1, false);
+
+
+--
+-- Data for Name: content_translations; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY content_translations (id, lang_code, content_id, title, teaser, body, seo_title, seo_description, is_active, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: content_translations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+--
+
+SELECT pg_catalog.setval('content_translations_id_seq', 1, false);
+
+
+--
+-- Data for Name: content_types; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY content_types (name, is_active, created_at, updated_at) FROM stdin;
+content	t	2017-02-03 16:17:20	2017-02-03 16:17:20
+category	t	2017-02-03 16:17:20	2017-02-03 16:17:20
+\.
+
+
+--
+-- Data for Name: contents; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY contents (id, type, theme, author_id, path, parent_id, level, weight, rating, visits, is_on_home, is_comment_allowed, is_promoted, is_sticky, is_active, published_at, deleted_at, created_at, updated_at, file_id) FROM stdin;
+\.
+
+
+--
+-- Name: contents_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+--
+
+SELECT pg_catalog.setval('contents_id_seq', 1, false);
+
+
+--
+-- Data for Name: file_translations; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY file_translations (id, lang_code, file_id, title, description, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: file_translations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+--
+
+SELECT pg_catalog.setval('file_translations_id_seq', 1, false);
+
+
+--
+-- Data for Name: file_types; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY file_types (name, extensions, is_active, created_at, updated_at) FROM stdin;
+image	\N	t	2017-02-03 16:17:20	2017-02-03 16:17:20
+document	\N	t	2017-02-03 16:17:20	2017-02-03 16:17:20
+video	\N	t	2017-02-03 16:17:20	2017-02-03 16:17:20
+music	\N	t	2017-02-03 16:17:20	2017-02-03 16:17:20
+\.
+
+
+--
+-- Data for Name: files; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY files (id, type, name, extension, size, mime_type, info, created_by, is_active, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: files_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+--
+
+SELECT pg_catalog.setval('files_id_seq', 1, false);
+
+
+--
+-- Data for Name: langs; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY langs (code, i18n, is_enabled, is_default, created_at, updated_at) FROM stdin;
+en	en_US	t	t	2017-02-03 16:17:20	2017-02-03 16:17:20
+pl	pl_PL	t	f	2017-02-03 16:17:20	2017-02-03 16:17:20
+de	de_DE	f	f	2017-02-03 16:17:20	2017-02-03 16:17:20
+fr	fr_FR	f	f	2017-02-03 16:17:20	2017-02-03 16:17:20
+\.
+
+
+--
+-- Data for Name: migrations; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY migrations (id, migration, batch) FROM stdin;
+16	2014_10_12_100000_create_password_resets_table	1
+17	2014_11_16_114110_create_lang	1
+18	2014_11_16_114111_create_user	1
+19	2014_11_16_114112_create_route	1
+20	2014_11_16_114113_create_content	1
+21	2015_09_07_100656_create_options	1
+22	2015_11_26_115322_create_block	1
+23	2016_05_08_111342_create_files_table	1
+24	2016_05_08_140929_add_file_column_to_contents_table	1
+25	2016_06_01_000001_create_oauth_auth_codes_table	1
+26	2016_06_01_000002_create_oauth_access_tokens_table	1
+27	2016_06_01_000003_create_oauth_refresh_tokens_table	1
+28	2016_06_01_000004_create_oauth_clients_table	1
+29	2016_06_01_000005_create_oauth_personal_access_clients_table	1
+30	2016_08_13_113755_create_roles_and_permissions_table	1
+\.
+
+
+--
+-- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+--
+
+SELECT pg_catalog.setval('migrations_id_seq', 30, true);
+
+
+--
+-- Data for Name: oauth_access_tokens; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY oauth_access_tokens (id, user_id, client_id, name, scopes, revoked, created_at, updated_at, expires_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth_auth_codes; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY oauth_auth_codes (id, user_id, client_id, scopes, revoked, expires_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth_clients; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY oauth_clients (id, user_id, name, secret, redirect, personal_access_client, password_client, revoked, created_at, updated_at) FROM stdin;
+1	\N	GZERO-CMS Personal Access Client	udJ2IunB0w18AHmWfCqWC4kXEHjGcXQCHmcWs5eI	http://localhost	t	f	f	2017-02-03 16:17:31	2017-02-03 16:17:31
+2	\N	GZERO-CMS Password Grant Client	8Hcbayyk7DTQRBhzo5Vd0k4qSUFne8g8IDB6mpbc	http://localhost	f	t	f	2017-02-03 16:17:34	2017-02-03 16:17:34
+\.
+
+
+--
+-- Name: oauth_clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+--
+
+SELECT pg_catalog.setval('oauth_clients_id_seq', 2, true);
+
+
+--
+-- Data for Name: oauth_personal_access_clients; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY oauth_personal_access_clients (id, client_id, created_at, updated_at) FROM stdin;
+1	1	2017-02-03 16:17:31	2017-02-03 16:17:31
+\.
+
+
+--
+-- Name: oauth_personal_access_clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+--
+
+SELECT pg_catalog.setval('oauth_personal_access_clients_id_seq', 1, true);
+
+
+--
+-- Data for Name: oauth_refresh_tokens; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY oauth_refresh_tokens (id, access_token_id, revoked, expires_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: option_categories; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY option_categories (key, created_at, updated_at) FROM stdin;
+general	2017-02-03 16:17:20	2017-02-03 16:17:20
+seo	2017-02-03 16:17:20	2017-02-03 16:17:20
+\.
+
+
+--
+-- Data for Name: options; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY options (id, key, category_key, value, created_at, updated_at) FROM stdin;
+1	site_name	general	{"en":"G-ZERO CMS","pl":"G-ZERO CMS","de":"G-ZERO CMS","fr":"G-ZERO CMS"}	2017-02-03 16:17:20	2017-02-03 16:17:20
+2	site_desc	general	{"en":"Content management system.","pl":"Content management system.","de":"Content management system.","fr":"Content management system."}	2017-02-03 16:17:20	2017-02-03 16:17:20
+3	default_page_size	general	{"en":5,"pl":5,"de":5,"fr":5}	2017-02-03 16:17:20	2017-02-03 16:17:20
+4	cookies_policy_url	general	{"en":null,"pl":null,"de":null,"fr":null}	2017-02-03 16:17:20	2017-02-03 16:17:20
+5	desc_length	seo	{"en":160,"pl":160,"de":160,"fr":160}	2017-02-03 16:17:20	2017-02-03 16:17:20
+6	google_analytics_id	seo	{"en":null,"pl":null,"de":null,"fr":null}	2017-02-03 16:17:20	2017-02-03 16:17:20
+\.
+
+
+--
+-- Name: options_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+--
+
+SELECT pg_catalog.setval('options_id_seq', 6, true);
+
+
+--
+-- Data for Name: password_resets; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY password_resets (email, token, created_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: route_translations; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY route_translations (id, lang_code, route_id, url, is_active, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: route_translations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+--
+
+SELECT pg_catalog.setval('route_translations_id_seq', 1, false);
+
+
+--
+-- Data for Name: routes; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY routes (id, routable_id, routable_type, is_active, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: routes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+--
+
+SELECT pg_catalog.setval('routes_id_seq', 1, false);
+
+
+--
+-- Data for Name: uploadables; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY uploadables (file_id, uploadable_id, uploadable_type, weight, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY users (id, email, password, nick, first_name, last_name, is_admin, remember_token, created_at, updated_at) FROM stdin;
+1	admin@gzero.pl	$2y$10$wmHxoYG4LFgx7RRpJFd1FuMcZy/I0hH0q4eui2NRDRxERWQwuQSfi	Admin	John	Doe	t	\N	2017-02-03 16:17:20	2017-02-03 16:17:20
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+--
+
+SELECT pg_catalog.setval('users_id_seq', 1, true);
+
+
+--
+-- Data for Name: widgets; Type: TABLE DATA; Schema: public; Owner: gzero-cms
+--
+
+COPY widgets (id, name, args, is_active, is_cacheable, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: widgets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero-cms
+--
+
+SELECT pg_catalog.setval('widgets_id_seq', 1, false);
+
+
+--
+-- Name: acl_permissions acl_permissions_name_unique; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY acl_permissions
+    ADD CONSTRAINT acl_permissions_name_unique UNIQUE (name);
+
+
+--
+-- Name: acl_permissions acl_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY acl_permissions
+    ADD CONSTRAINT acl_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: acl_roles acl_roles_name_unique; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY acl_roles
+    ADD CONSTRAINT acl_roles_name_unique UNIQUE (name);
+
+
+--
+-- Name: acl_roles acl_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY acl_roles
+    ADD CONSTRAINT acl_roles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: block_translations block_translations_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY block_translations
+    ADD CONSTRAINT block_translations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: block_types block_types_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY block_types
+    ADD CONSTRAINT block_types_pkey PRIMARY KEY (name);
+
+
+--
+-- Name: blocks blocks_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY blocks
+    ADD CONSTRAINT blocks_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: content_translations content_translations_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY content_translations
+    ADD CONSTRAINT content_translations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: content_types content_types_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY content_types
+    ADD CONSTRAINT content_types_pkey PRIMARY KEY (name);
+
+
+--
+-- Name: contents contents_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY contents
+    ADD CONSTRAINT contents_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: file_translations file_translations_file_id_lang_code_unique; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY file_translations
+    ADD CONSTRAINT file_translations_file_id_lang_code_unique UNIQUE (file_id, lang_code);
+
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+--
+-- Name: file_translations file_translations_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY file_translations
+    ADD CONSTRAINT file_translations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: file_types file_types_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY file_types
+    ADD CONSTRAINT file_types_pkey PRIMARY KEY (name);
+
+
+--
+-- Name: files files_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY files
+    ADD CONSTRAINT files_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: langs langs_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY langs
+    ADD CONSTRAINT langs_pkey PRIMARY KEY (code);
+
+
+--
+-- Name: migrations migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY migrations
+    ADD CONSTRAINT migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth_access_tokens oauth_access_tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY oauth_access_tokens
+    ADD CONSTRAINT oauth_access_tokens_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth_auth_codes oauth_auth_codes_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY oauth_auth_codes
+    ADD CONSTRAINT oauth_auth_codes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth_clients oauth_clients_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY oauth_clients
+    ADD CONSTRAINT oauth_clients_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth_personal_access_clients oauth_personal_access_clients_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY oauth_personal_access_clients
+    ADD CONSTRAINT oauth_personal_access_clients_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth_refresh_tokens oauth_refresh_tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY oauth_refresh_tokens
+    ADD CONSTRAINT oauth_refresh_tokens_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: option_categories option_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY option_categories
+    ADD CONSTRAINT option_categories_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: options options_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY options
+    ADD CONSTRAINT options_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: route_translations route_translations_lang_code_route_id_unique; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY route_translations
+    ADD CONSTRAINT route_translations_lang_code_route_id_unique UNIQUE (lang_code, route_id);
+
 
 --
--- Table structure for table `acl_permission_role`
+-- Name: route_translations route_translations_lang_code_url_unique; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
 --
 
-DROP TABLE IF EXISTS `acl_permission_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `acl_permission_role` (
-  `permission_id` int(10) unsigned NOT NULL,
-  `role_id` int(10) unsigned NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  KEY `acl_permission_role_permission_id_index` (`permission_id`),
-  KEY `acl_permission_role_role_id_index` (`role_id`),
-  CONSTRAINT `acl_permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `acl_permissions` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `acl_permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `acl_roles` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+ALTER TABLE ONLY route_translations
+    ADD CONSTRAINT route_translations_lang_code_url_unique UNIQUE (lang_code, url);
 
+
+--
+-- Name: route_translations route_translations_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY route_translations
+    ADD CONSTRAINT route_translations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: routes routes_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY routes
+    ADD CONSTRAINT routes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_email_unique; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_email_unique UNIQUE (email);
+
+
 --
--- Dumping data for table `acl_permission_role`
+-- Name: users users_nick_unique; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `acl_permission_role` WRITE;
-/*!40000 ALTER TABLE `acl_permission_role` DISABLE KEYS */;
-INSERT INTO `acl_permission_role` VALUES (1,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(204,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(207,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(205,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(206,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(200,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(203,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(201,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(202,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(212,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(215,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(213,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(214,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(220,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(221,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(222,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(216,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(219,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(217,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(218,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(208,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(211,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(209,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(210,1,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(1,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(200,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(201,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(202,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(203,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(204,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(205,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(206,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(207,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(212,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(213,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(214,2,'2016-12-08 19:55:41','2016-12-08 19:55:41'),(215,2,'2016-12-08 19:55:41','2016-12-08 19:55:41');
-/*!40000 ALTER TABLE `acl_permission_role` ENABLE KEYS */;
-UNLOCK TABLES;
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_nick_unique UNIQUE (nick);
 
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
 --
--- Table structure for table `acl_permissions`
+-- Name: widgets widgets_name_unique; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
 --
 
-DROP TABLE IF EXISTS `acl_permissions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `acl_permissions` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `category` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `acl_permissions_name_unique` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=223 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+ALTER TABLE ONLY widgets
+    ADD CONSTRAINT widgets_name_unique UNIQUE (name);
 
+
 --
--- Dumping data for table `acl_permissions`
+-- Name: widgets widgets_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero-cms
 --
+
+ALTER TABLE ONLY widgets
+    ADD CONSTRAINT widgets_pkey PRIMARY KEY (id);
 
-LOCK TABLES `acl_permissions` WRITE;
-/*!40000 ALTER TABLE `acl_permissions` DISABLE KEYS */;
-INSERT INTO `acl_permissions` VALUES (1,'admin-api-access','general',NULL,NULL),(200,'content-create','content',NULL,NULL),(201,'content-read','content',NULL,NULL),(202,'content-update','content',NULL,NULL),(203,'content-delete','content',NULL,NULL),(204,'block-create','block',NULL,NULL),(205,'block-read','block',NULL,NULL),(206,'block-update','block',NULL,NULL),(207,'block-delete','block',NULL,NULL),(208,'user-create','user',NULL,NULL),(209,'user-read','user',NULL,NULL),(210,'user-update','user',NULL,NULL),(211,'user-delete','user',NULL,NULL),(212,'file-create','file',NULL,NULL),(213,'file-read','file',NULL,NULL),(214,'file-update','file',NULL,NULL),(215,'file-delete','file',NULL,NULL),(216,'role-create','role',NULL,NULL),(217,'role-read','role',NULL,NULL),(218,'role-update','role',NULL,NULL),(219,'role-delete','role',NULL,NULL),(220,'options-read','options',NULL,NULL),(221,'options-update-general','options',NULL,NULL),(222,'options-update-seo','options',NULL,NULL);
-/*!40000 ALTER TABLE `acl_permissions` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
--- Table structure for table `acl_roles`
+-- Name: acl_permission_role_permission_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
 --
 
-DROP TABLE IF EXISTS `acl_roles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `acl_roles` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `acl_roles_name_unique` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE INDEX acl_permission_role_permission_id_index ON acl_permission_role USING btree (permission_id);
 
+
 --
--- Dumping data for table `acl_roles`
+-- Name: acl_permission_role_role_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
 --
+
+CREATE INDEX acl_permission_role_role_id_index ON acl_permission_role USING btree (role_id);
 
-LOCK TABLES `acl_roles` WRITE;
-/*!40000 ALTER TABLE `acl_roles` DISABLE KEYS */;
-INSERT INTO `acl_roles` VALUES (1,'Admin','2016-12-08 19:55:41','2016-12-08 19:55:41'),(2,'Moderator','2016-12-08 19:55:41','2016-12-08 19:55:41');
-/*!40000 ALTER TABLE `acl_roles` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
--- Table structure for table `acl_user_role`
+-- Name: acl_user_role_role_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
 --
+
+CREATE INDEX acl_user_role_role_id_index ON acl_user_role USING btree (role_id);
+
 
-DROP TABLE IF EXISTS `acl_user_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `acl_user_role` (
-  `user_id` int(10) unsigned NOT NULL,
-  `role_id` int(10) unsigned NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  KEY `acl_user_role_user_id_index` (`user_id`),
-  KEY `acl_user_role_role_id_index` (`role_id`),
-  CONSTRAINT `acl_user_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `acl_roles` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `acl_user_role_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `acl_user_role`
---
-
-LOCK TABLES `acl_user_role` WRITE;
-/*!40000 ALTER TABLE `acl_user_role` DISABLE KEYS */;
-INSERT INTO `acl_user_role` VALUES (1,1,'2016-12-08 19:55:41','2016-12-08 19:55:41');
-/*!40000 ALTER TABLE `acl_user_role` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `block_translations`
 --
+-- Name: acl_user_role_user_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
+--
+
+CREATE INDEX acl_user_role_user_id_index ON acl_user_role USING btree (user_id);
 
-DROP TABLE IF EXISTS `block_translations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `block_translations` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `lang_code` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
-  `block_id` int(10) unsigned NOT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `body` text COLLATE utf8_unicode_ci,
-  `custom_fields` text COLLATE utf8_unicode_ci,
-  `is_active` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `block_translations_block_id_foreign` (`block_id`),
-  KEY `block_translations_lang_code_foreign` (`lang_code`),
-  CONSTRAINT `block_translations_block_id_foreign` FOREIGN KEY (`block_id`) REFERENCES `blocks` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `block_translations_lang_code_foreign` FOREIGN KEY (`lang_code`) REFERENCES `langs` (`code`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `block_translations`
---
-
-LOCK TABLES `block_translations` WRITE;
-/*!40000 ALTER TABLE `block_translations` DISABLE KEYS */;
-/*!40000 ALTER TABLE `block_translations` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `block_types`
---
-
-DROP TABLE IF EXISTS `block_types`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `block_types` (
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  UNIQUE KEY `block_types_name_unique` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `block_types`
---
-
-LOCK TABLES `block_types` WRITE;
-/*!40000 ALTER TABLE `block_types` DISABLE KEYS */;
-INSERT INTO `block_types` VALUES ('basic',1,'2016-12-08 19:55:40','2016-12-08 19:55:40'),('content',1,'2016-12-08 19:55:40','2016-12-08 19:55:40'),('menu',1,'2016-12-08 19:55:40','2016-12-08 19:55:40'),('slider',1,'2016-12-08 19:55:40','2016-12-08 19:55:40'),('widget',1,'2016-12-08 19:55:40','2016-12-08 19:55:40');
-/*!40000 ALTER TABLE `block_types` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
--- Table structure for table `blocks`
+-- Name: blocks_blockable_id_blockable_type_index; Type: INDEX; Schema: public; Owner: gzero-cms
 --
+
+CREATE INDEX blocks_blockable_id_blockable_type_index ON blocks USING btree (blockable_id, blockable_type);
+
 
-DROP TABLE IF EXISTS `blocks`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `blocks` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `region` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `theme` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `blockable_id` int(10) unsigned DEFAULT NULL,
-  `blockable_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `author_id` int(10) unsigned DEFAULT NULL,
-  `filter` text COLLATE utf8_unicode_ci,
-  `options` text COLLATE utf8_unicode_ci,
-  `weight` int(11) NOT NULL DEFAULT '0',
-  `is_active` tinyint(1) NOT NULL DEFAULT '0',
-  `is_cacheable` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `blocks_blockable_id_blockable_type_index` (`blockable_id`,`blockable_type`),
-  KEY `blocks_author_id_foreign` (`author_id`),
-  KEY `blocks_type_foreign` (`type`),
-  CONSTRAINT `blocks_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE SET NULL,
-  CONSTRAINT `blocks_type_foreign` FOREIGN KEY (`type`) REFERENCES `block_types` (`name`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `blocks`
---
-
-LOCK TABLES `blocks` WRITE;
-/*!40000 ALTER TABLE `blocks` DISABLE KEYS */;
-/*!40000 ALTER TABLE `blocks` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `content_translations`
---
-
-DROP TABLE IF EXISTS `content_translations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `content_translations` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `lang_code` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
-  `content_id` int(10) unsigned NOT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `teaser` text COLLATE utf8_unicode_ci,
-  `body` text COLLATE utf8_unicode_ci,
-  `seo_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `seo_description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `content_translations_content_id_foreign` (`content_id`),
-  KEY `content_translations_lang_code_foreign` (`lang_code`),
-  CONSTRAINT `content_translations_content_id_foreign` FOREIGN KEY (`content_id`) REFERENCES `contents` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `content_translations_lang_code_foreign` FOREIGN KEY (`lang_code`) REFERENCES `langs` (`code`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `content_translations`
---
-
-LOCK TABLES `content_translations` WRITE;
-/*!40000 ALTER TABLE `content_translations` DISABLE KEYS */;
-/*!40000 ALTER TABLE `content_translations` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `content_types`
---
-
-DROP TABLE IF EXISTS `content_types`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `content_types` (
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  UNIQUE KEY `content_types_name_unique` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `content_types`
---
-
-LOCK TABLES `content_types` WRITE;
-/*!40000 ALTER TABLE `content_types` DISABLE KEYS */;
-INSERT INTO `content_types` VALUES ('category',1,'2016-12-08 19:55:39','2016-12-08 19:55:39'),('content',1,'2016-12-08 19:55:39','2016-12-08 19:55:39');
-/*!40000 ALTER TABLE `content_types` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `contents`
---
-
-DROP TABLE IF EXISTS `contents`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `contents` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `theme` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `author_id` int(10) unsigned DEFAULT NULL,
-  `path` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `parent_id` int(10) unsigned DEFAULT NULL,
-  `file_id` int(10) unsigned DEFAULT NULL,
-  `level` int(11) NOT NULL DEFAULT '0',
-  `weight` int(11) NOT NULL DEFAULT '0',
-  `rating` int(11) NOT NULL DEFAULT '0',
-  `visits` int(11) NOT NULL DEFAULT '0',
-  `is_on_home` tinyint(1) NOT NULL DEFAULT '0',
-  `is_comment_allowed` tinyint(1) NOT NULL DEFAULT '0',
-  `is_promoted` tinyint(1) NOT NULL DEFAULT '0',
-  `is_sticky` tinyint(1) NOT NULL DEFAULT '0',
-  `is_active` tinyint(1) NOT NULL DEFAULT '0',
-  `published_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `contents_type_path_parent_id_level_index` (`type`,`path`,`parent_id`,`level`),
-  KEY `contents_author_id_foreign` (`author_id`),
-  KEY `contents_parent_id_foreign` (`parent_id`),
-  KEY `contents_file_id_foreign` (`file_id`),
-  CONSTRAINT `contents_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE SET NULL,
-  CONSTRAINT `contents_file_id_foreign` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`) ON DELETE SET NULL,
-  CONSTRAINT `contents_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `contents` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `contents_type_foreign` FOREIGN KEY (`type`) REFERENCES `content_types` (`name`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `contents`
---
-
-LOCK TABLES `contents` WRITE;
-/*!40000 ALTER TABLE `contents` DISABLE KEYS */;
-/*!40000 ALTER TABLE `contents` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `file_translations`
---
-
-DROP TABLE IF EXISTS `file_translations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `file_translations` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `lang_code` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
-  `file_id` int(10) unsigned NOT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` text COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `file_translations_file_id_lang_code_unique` (`file_id`,`lang_code`),
-  KEY `file_translations_lang_code_foreign` (`lang_code`),
-  CONSTRAINT `file_translations_file_id_foreign` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `file_translations_lang_code_foreign` FOREIGN KEY (`lang_code`) REFERENCES `langs` (`code`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `file_translations`
---
-
-LOCK TABLES `file_translations` WRITE;
-/*!40000 ALTER TABLE `file_translations` DISABLE KEYS */;
-/*!40000 ALTER TABLE `file_translations` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `file_types`
---
-
-DROP TABLE IF EXISTS `file_types`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `file_types` (
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `extensions` text COLLATE utf8_unicode_ci,
-  `is_active` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  UNIQUE KEY `file_types_name_unique` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 --
--- Dumping data for table `file_types`
+-- Name: contents_type_path_parent_id_level_index; Type: INDEX; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `file_types` WRITE;
-/*!40000 ALTER TABLE `file_types` DISABLE KEYS */;
-INSERT INTO `file_types` VALUES ('document',NULL,1,'2016-12-08 19:55:40','2016-12-08 19:55:40'),('image',NULL,1,'2016-12-08 19:55:40','2016-12-08 19:55:40'),('music',NULL,1,'2016-12-08 19:55:40','2016-12-08 19:55:40'),('video',NULL,1,'2016-12-08 19:55:40','2016-12-08 19:55:40');
-/*!40000 ALTER TABLE `file_types` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE INDEX contents_type_path_parent_id_level_index ON contents USING btree (type, path, parent_id, level);
 
---
--- Table structure for table `files`
---
-
-DROP TABLE IF EXISTS `files`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `files` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `extension` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `size` int(11) DEFAULT NULL,
-  `mime_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `info` text COLLATE utf8_unicode_ci,
-  `created_by` int(10) unsigned DEFAULT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `files_created_by_foreign` (`created_by`),
-  KEY `files_type_foreign` (`type`),
-  CONSTRAINT `files_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE SET NULL,
-  CONSTRAINT `files_type_foreign` FOREIGN KEY (`type`) REFERENCES `file_types` (`name`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `files`
+-- Name: oauth_access_tokens_user_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `files` WRITE;
-/*!40000 ALTER TABLE `files` DISABLE KEYS */;
-/*!40000 ALTER TABLE `files` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `langs`
---
+CREATE INDEX oauth_access_tokens_user_id_index ON oauth_access_tokens USING btree (user_id);
 
-DROP TABLE IF EXISTS `langs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `langs` (
-  `code` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
-  `i18n` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `is_enabled` tinyint(1) NOT NULL DEFAULT '0',
-  `is_default` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  KEY `langs_code_index` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `langs`
+-- Name: oauth_clients_user_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `langs` WRITE;
-/*!40000 ALTER TABLE `langs` DISABLE KEYS */;
-INSERT INTO `langs` VALUES ('en','en_US',1,1,'2016-12-08 19:55:39','2016-12-08 19:55:39'),('pl','pl_PL',1,0,'2016-12-08 19:55:39','2016-12-08 19:55:39'),('de','de_DE',0,0,'2016-12-08 19:55:39','2016-12-08 19:55:39'),('fr','fr_FR',0,0,'2016-12-08 19:55:39','2016-12-08 19:55:39');
-/*!40000 ALTER TABLE `langs` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE INDEX oauth_clients_user_id_index ON oauth_clients USING btree (user_id);
 
---
--- Table structure for table `migrations`
---
-
-DROP TABLE IF EXISTS `migrations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `migrations` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `migrations`
+-- Name: oauth_personal_access_clients_client_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `migrations` WRITE;
-/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_10_12_100000_create_password_resets_table',1),(2,'2014_11_16_114110_create_lang',1),(3,'2014_11_16_114111_create_user',1),(4,'2014_11_16_114112_create_route',1),(5,'2014_11_16_114113_create_content',1),(6,'2015_09_07_100656_create_options',1),(7,'2015_11_26_115322_create_block',1),(8,'2016_05_08_111342_create_files_table',1),(9,'2016_05_08_140929_add_file_column_to_contents_table',1),(10,'2016_06_01_000001_create_oauth_auth_codes_table',1),(11,'2016_06_01_000002_create_oauth_access_tokens_table',1),(12,'2016_06_01_000003_create_oauth_refresh_tokens_table',1),(13,'2016_06_01_000004_create_oauth_clients_table',1),(14,'2016_06_01_000005_create_oauth_personal_access_clients_table',1),(15,'2016_08_13_113755_create_roles_and_permissions_table',1);
-/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE INDEX oauth_personal_access_clients_client_id_index ON oauth_personal_access_clients USING btree (client_id);
 
+
 --
--- Table structure for table `oauth_access_tokens`
+-- Name: oauth_refresh_tokens_access_token_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
 --
+
+CREATE INDEX oauth_refresh_tokens_access_token_id_index ON oauth_refresh_tokens USING btree (access_token_id);
 
-DROP TABLE IF EXISTS `oauth_access_tokens`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `oauth_access_tokens` (
-  `id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `client_id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `scopes` text COLLATE utf8_unicode_ci,
-  `revoked` tinyint(1) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `expires_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `oauth_access_tokens_user_id_index` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `oauth_access_tokens`
+-- Name: options_category_key_key_index; Type: INDEX; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `oauth_access_tokens` WRITE;
-/*!40000 ALTER TABLE `oauth_access_tokens` DISABLE KEYS */;
-/*!40000 ALTER TABLE `oauth_access_tokens` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE INDEX options_category_key_key_index ON options USING btree (category_key, key);
 
+
 --
--- Table structure for table `oauth_auth_codes`
+-- Name: password_resets_email_index; Type: INDEX; Schema: public; Owner: gzero-cms
 --
+
+CREATE INDEX password_resets_email_index ON password_resets USING btree (email);
 
-DROP TABLE IF EXISTS `oauth_auth_codes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `oauth_auth_codes` (
-  `id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `client_id` int(11) NOT NULL,
-  `scopes` text COLLATE utf8_unicode_ci,
-  `revoked` tinyint(1) NOT NULL,
-  `expires_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `oauth_auth_codes`
+-- Name: password_resets_token_index; Type: INDEX; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `oauth_auth_codes` WRITE;
-/*!40000 ALTER TABLE `oauth_auth_codes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `oauth_auth_codes` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE INDEX password_resets_token_index ON password_resets USING btree (token);
 
+
 --
--- Table structure for table `oauth_clients`
+-- Name: route_translations_url_index; Type: INDEX; Schema: public; Owner: gzero-cms
 --
+
+CREATE INDEX route_translations_url_index ON route_translations USING btree (url);
 
-DROP TABLE IF EXISTS `oauth_clients`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `oauth_clients` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `secret` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `redirect` text COLLATE utf8_unicode_ci NOT NULL,
-  `personal_access_client` tinyint(1) NOT NULL,
-  `password_client` tinyint(1) NOT NULL,
-  `revoked` tinyint(1) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `oauth_clients_user_id_index` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `oauth_clients`
+-- Name: uploadables_file_id_index; Type: INDEX; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `oauth_clients` WRITE;
-/*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
-INSERT INTO `oauth_clients` VALUES (1,NULL,'GZERO-CMS Personal Access Client','YX0vA7mdSeGBHIYUzrdedUfdRtkWyEHpJHuCOErw','http://localhost',1,0,0,'2016-12-08 19:56:10','2016-12-08 19:56:10'),(2,NULL,'GZERO-CMS Password Grant Client','tDVrxmGJdWNpKH37EK7olcr4ZeHqsYLI9SyvYto5','http://localhost',0,1,0,'2016-12-08 19:56:10','2016-12-08 19:56:10');
-/*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE INDEX uploadables_file_id_index ON uploadables USING btree (file_id);
 
+
 --
--- Table structure for table `oauth_personal_access_clients`
+-- Name: acl_permission_role acl_permission_role_permission_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
+
+ALTER TABLE ONLY acl_permission_role
+    ADD CONSTRAINT acl_permission_role_permission_id_foreign FOREIGN KEY (permission_id) REFERENCES acl_permissions(id) ON DELETE CASCADE;
 
-DROP TABLE IF EXISTS `oauth_personal_access_clients`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `oauth_personal_access_clients` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `client_id` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `oauth_personal_access_clients_client_id_index` (`client_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `oauth_personal_access_clients`
+-- Name: acl_permission_role acl_permission_role_role_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `oauth_personal_access_clients` WRITE;
-/*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
-INSERT INTO `oauth_personal_access_clients` VALUES (1,1,'2016-12-08 19:56:10','2016-12-08 19:56:10');
-/*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
-UNLOCK TABLES;
+ALTER TABLE ONLY acl_permission_role
+    ADD CONSTRAINT acl_permission_role_role_id_foreign FOREIGN KEY (role_id) REFERENCES acl_roles(id) ON DELETE CASCADE;
 
+
 --
--- Table structure for table `oauth_refresh_tokens`
+-- Name: acl_user_role acl_user_role_role_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
+
+ALTER TABLE ONLY acl_user_role
+    ADD CONSTRAINT acl_user_role_role_id_foreign FOREIGN KEY (role_id) REFERENCES acl_roles(id) ON DELETE CASCADE;
 
-DROP TABLE IF EXISTS `oauth_refresh_tokens`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `oauth_refresh_tokens` (
-  `id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `access_token_id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `revoked` tinyint(1) NOT NULL,
-  `expires_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `oauth_refresh_tokens_access_token_id_index` (`access_token_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `oauth_refresh_tokens`
+-- Name: acl_user_role acl_user_role_user_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `oauth_refresh_tokens` WRITE;
-/*!40000 ALTER TABLE `oauth_refresh_tokens` DISABLE KEYS */;
-/*!40000 ALTER TABLE `oauth_refresh_tokens` ENABLE KEYS */;
-UNLOCK TABLES;
+ALTER TABLE ONLY acl_user_role
+    ADD CONSTRAINT acl_user_role_user_id_foreign FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
 
+
 --
--- Table structure for table `option_categories`
+-- Name: block_translations block_translations_block_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
+
+ALTER TABLE ONLY block_translations
+    ADD CONSTRAINT block_translations_block_id_foreign FOREIGN KEY (block_id) REFERENCES blocks(id) ON DELETE CASCADE;
 
-DROP TABLE IF EXISTS `option_categories`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `option_categories` (
-  `key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`key`),
-  KEY `option_categories_key_index` (`key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `option_categories`
+-- Name: block_translations block_translations_lang_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `option_categories` WRITE;
-/*!40000 ALTER TABLE `option_categories` DISABLE KEYS */;
-INSERT INTO `option_categories` VALUES ('general','2016-12-08 19:55:40','2016-12-08 19:55:40'),('seo','2016-12-08 19:55:40','2016-12-08 19:55:40');
-/*!40000 ALTER TABLE `option_categories` ENABLE KEYS */;
-UNLOCK TABLES;
+ALTER TABLE ONLY block_translations
+    ADD CONSTRAINT block_translations_lang_code_foreign FOREIGN KEY (lang_code) REFERENCES langs(code) ON DELETE CASCADE;
 
+
 --
--- Table structure for table `options`
+-- Name: blocks blocks_author_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
+
+ALTER TABLE ONLY blocks
+    ADD CONSTRAINT blocks_author_id_foreign FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE SET NULL;
 
-DROP TABLE IF EXISTS `options`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `options` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `category_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `value` text COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `options_category_key_key_index` (`category_key`,`key`),
-  CONSTRAINT `options_category_key_foreign` FOREIGN KEY (`category_key`) REFERENCES `option_categories` (`key`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `options`
+-- Name: blocks blocks_type_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `options` WRITE;
-/*!40000 ALTER TABLE `options` DISABLE KEYS */;
-INSERT INTO `options` VALUES (1,'site_name','general','{\"en\":\"G-ZERO CMS\",\"pl\":\"G-ZERO CMS\",\"de\":\"G-ZERO CMS\",\"fr\":\"G-ZERO CMS\"}','2016-12-08 19:55:40','2016-12-08 19:55:40'),(2,'site_desc','general','{\"en\":\"Content management system.\",\"pl\":\"Content management system.\",\"de\":\"Content management system.\",\"fr\":\"Content management system.\"}','2016-12-08 19:55:40','2016-12-08 19:55:40'),(3,'default_page_size','general','{\"en\":5,\"pl\":5,\"de\":5,\"fr\":5}','2016-12-08 19:55:40','2016-12-08 19:55:40'),(4,'cookies_policy_url','general','{\"en\":null,\"pl\":null,\"de\":null,\"fr\":null}','2016-12-08 19:55:40','2016-12-08 19:55:40'),(5,'desc_length','seo','{\"en\":160,\"pl\":160,\"de\":160,\"fr\":160}','2016-12-08 19:55:40','2016-12-08 19:55:40'),(6,'google_analytics_id','seo','{\"en\":null,\"pl\":null,\"de\":null,\"fr\":null}','2016-12-08 19:55:40','2016-12-08 19:55:40');
-/*!40000 ALTER TABLE `options` ENABLE KEYS */;
-UNLOCK TABLES;
+ALTER TABLE ONLY blocks
+    ADD CONSTRAINT blocks_type_foreign FOREIGN KEY (type) REFERENCES block_types(name) ON DELETE CASCADE;
 
+
 --
--- Table structure for table `password_resets`
+-- Name: content_translations content_translations_content_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
+
+ALTER TABLE ONLY content_translations
+    ADD CONSTRAINT content_translations_content_id_foreign FOREIGN KEY (content_id) REFERENCES contents(id) ON DELETE CASCADE;
 
-DROP TABLE IF EXISTS `password_resets`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  KEY `password_resets_email_index` (`email`),
-  KEY `password_resets_token_index` (`token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `password_resets`
+-- Name: content_translations content_translations_lang_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `password_resets` WRITE;
-/*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
-/*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
-UNLOCK TABLES;
+ALTER TABLE ONLY content_translations
+    ADD CONSTRAINT content_translations_lang_code_foreign FOREIGN KEY (lang_code) REFERENCES langs(code) ON DELETE CASCADE;
 
+
 --
--- Table structure for table `route_translations`
+-- Name: contents contents_author_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
+
+ALTER TABLE ONLY contents
+    ADD CONSTRAINT contents_author_id_foreign FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE SET NULL;
 
-DROP TABLE IF EXISTS `route_translations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `route_translations` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `lang_code` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
-  `route_id` int(10) unsigned NOT NULL,
-  `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `route_translations_lang_code_route_id_unique` (`lang_code`,`route_id`),
-  UNIQUE KEY `route_translations_lang_code_url_unique` (`lang_code`,`url`),
-  KEY `route_translations_route_id_foreign` (`route_id`),
-  KEY `route_translations_url_index` (`url`),
-  CONSTRAINT `route_translations_lang_code_foreign` FOREIGN KEY (`lang_code`) REFERENCES `langs` (`code`) ON DELETE CASCADE,
-  CONSTRAINT `route_translations_route_id_foreign` FOREIGN KEY (`route_id`) REFERENCES `routes` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `route_translations`
+-- Name: contents contents_file_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `route_translations` WRITE;
-/*!40000 ALTER TABLE `route_translations` DISABLE KEYS */;
-/*!40000 ALTER TABLE `route_translations` ENABLE KEYS */;
-UNLOCK TABLES;
+ALTER TABLE ONLY contents
+    ADD CONSTRAINT contents_file_id_foreign FOREIGN KEY (file_id) REFERENCES files(id) ON DELETE SET NULL;
 
+
 --
--- Table structure for table `routes`
+-- Name: contents contents_parent_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
+
+ALTER TABLE ONLY contents
+    ADD CONSTRAINT contents_parent_id_foreign FOREIGN KEY (parent_id) REFERENCES contents(id) ON DELETE CASCADE;
 
-DROP TABLE IF EXISTS `routes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `routes` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `routable_id` int(10) unsigned DEFAULT NULL,
-  `routable_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `routes`
+-- Name: contents contents_type_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `routes` WRITE;
-/*!40000 ALTER TABLE `routes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `routes` ENABLE KEYS */;
-UNLOCK TABLES;
+ALTER TABLE ONLY contents
+    ADD CONSTRAINT contents_type_foreign FOREIGN KEY (type) REFERENCES content_types(name) ON DELETE CASCADE;
 
+
 --
--- Table structure for table `uploadables`
+-- Name: file_translations file_translations_file_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
+
+ALTER TABLE ONLY file_translations
+    ADD CONSTRAINT file_translations_file_id_foreign FOREIGN KEY (file_id) REFERENCES files(id) ON DELETE CASCADE;
 
-DROP TABLE IF EXISTS `uploadables`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `uploadables` (
-  `file_id` int(10) unsigned NOT NULL,
-  `uploadable_id` int(10) unsigned DEFAULT NULL,
-  `uploadable_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `weight` int(11) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  KEY `uploadables_file_id_index` (`file_id`),
-  CONSTRAINT `uploadables_file_id_foreign` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `uploadables`
+-- Name: file_translations file_translations_lang_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `uploadables` WRITE;
-/*!40000 ALTER TABLE `uploadables` DISABLE KEYS */;
-/*!40000 ALTER TABLE `uploadables` ENABLE KEYS */;
-UNLOCK TABLES;
+ALTER TABLE ONLY file_translations
+    ADD CONSTRAINT file_translations_lang_code_foreign FOREIGN KEY (lang_code) REFERENCES langs(code) ON DELETE CASCADE;
 
+
 --
--- Table structure for table `users`
+-- Name: files files_created_by_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
+
+ALTER TABLE ONLY files
+    ADD CONSTRAINT files_created_by_foreign FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL;
 
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `nick` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `first_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `is_admin` tinyint(1) NOT NULL DEFAULT '0',
-  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`),
-  UNIQUE KEY `users_nick_unique` (`nick`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Name: files files_type_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin@gzero.pl','$2y$10$8M6RUjmGV2.CK2GRG7GOiOzNw6Bj0v8mII.FrehzR7WzucgqdE0YW','Admin','John','Doe',1,NULL,'2016-12-08 19:55:39','2016-12-08 19:55:39');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
+ALTER TABLE ONLY files
+    ADD CONSTRAINT files_type_foreign FOREIGN KEY (type) REFERENCES file_types(name) ON DELETE CASCADE;
 
+
 --
--- Table structure for table `widgets`
+-- Name: options options_category_key_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
+
+ALTER TABLE ONLY options
+    ADD CONSTRAINT options_category_key_foreign FOREIGN KEY (category_key) REFERENCES option_categories(key) ON DELETE CASCADE;
 
-DROP TABLE IF EXISTS `widgets`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `widgets` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `args` text COLLATE utf8_unicode_ci,
-  `is_active` tinyint(1) NOT NULL DEFAULT '0',
-  `is_cacheable` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `widgets_name_unique` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `widgets`
+-- Name: route_translations route_translations_lang_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
 
-LOCK TABLES `widgets` WRITE;
-/*!40000 ALTER TABLE `widgets` DISABLE KEYS */;
-/*!40000 ALTER TABLE `widgets` ENABLE KEYS */;
-UNLOCK TABLES;
+ALTER TABLE ONLY route_translations
+    ADD CONSTRAINT route_translations_lang_code_foreign FOREIGN KEY (lang_code) REFERENCES langs(code) ON DELETE CASCADE;
 
+
 --
--- Dumping events for database 'gzero-cms'
+-- Name: route_translations route_translations_route_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
+
+ALTER TABLE ONLY route_translations
+    ADD CONSTRAINT route_translations_route_id_foreign FOREIGN KEY (route_id) REFERENCES routes(id) ON DELETE CASCADE;
 
+
 --
--- Dumping routines for database 'gzero-cms'
+-- Name: uploadables uploadables_file_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero-cms
 --
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+ALTER TABLE ONLY uploadables
+    ADD CONSTRAINT uploadables_file_id_foreign FOREIGN KEY (file_id) REFERENCES files(id) ON DELETE CASCADE;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+--
+-- PostgreSQL database dump complete
+--
 
--- Dump completed on 2016-12-08 19:56:18
