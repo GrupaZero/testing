@@ -7,6 +7,7 @@
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -822,8 +823,8 @@ ALTER SEQUENCE routes_id_seq OWNED BY routes.id;
 
 CREATE TABLE uploadables (
     file_id integer NOT NULL,
-    uploadable_id integer,
-    uploadable_type character varying(255),
+    uploadable_id integer NOT NULL,
+    uploadable_type character varying(255) NOT NULL,
     weight integer DEFAULT 0 NOT NULL,
     created_at timestamp(0) without time zone,
     updated_at timestamp(0) without time zone
@@ -1018,43 +1019,43 @@ ALTER TABLE ONLY widgets ALTER COLUMN id SET DEFAULT nextval('widgets_id_seq'::r
 --
 
 COPY acl_permission_role (permission_id, role_id, created_at, updated_at) FROM stdin;
-1	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-200	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-201	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-202	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-203	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-204	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-205	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-206	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-207	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-208	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-209	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-210	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-211	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-212	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-213	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-214	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-215	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-216	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-217	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-218	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-219	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-220	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-221	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-222	1	2017-02-03 16:17:20	2017-02-03 16:17:20
-1	2	2017-02-03 16:17:20	2017-02-03 16:17:20
-200	2	2017-02-03 16:17:20	2017-02-03 16:17:20
-201	2	2017-02-03 16:17:20	2017-02-03 16:17:20
-202	2	2017-02-03 16:17:20	2017-02-03 16:17:20
-203	2	2017-02-03 16:17:20	2017-02-03 16:17:20
-204	2	2017-02-03 16:17:20	2017-02-03 16:17:20
-205	2	2017-02-03 16:17:20	2017-02-03 16:17:20
-206	2	2017-02-03 16:17:20	2017-02-03 16:17:20
-207	2	2017-02-03 16:17:20	2017-02-03 16:17:20
-212	2	2017-02-03 16:17:20	2017-02-03 16:17:20
-213	2	2017-02-03 16:17:20	2017-02-03 16:17:20
-214	2	2017-02-03 16:17:20	2017-02-03 16:17:20
-215	2	2017-02-03 16:17:20	2017-02-03 16:17:20
+1	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+200	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+201	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+202	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+203	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+204	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+205	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+206	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+207	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+208	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+209	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+210	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+211	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+212	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+213	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+214	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+215	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+216	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+217	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+218	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+219	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+220	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+221	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+222	1	2017-03-19 09:59:55	2017-03-19 09:59:55
+1	2	2017-03-19 09:59:55	2017-03-19 09:59:55
+200	2	2017-03-19 09:59:55	2017-03-19 09:59:55
+201	2	2017-03-19 09:59:55	2017-03-19 09:59:55
+202	2	2017-03-19 09:59:55	2017-03-19 09:59:55
+203	2	2017-03-19 09:59:55	2017-03-19 09:59:55
+204	2	2017-03-19 09:59:55	2017-03-19 09:59:55
+205	2	2017-03-19 09:59:55	2017-03-19 09:59:55
+206	2	2017-03-19 09:59:55	2017-03-19 09:59:55
+207	2	2017-03-19 09:59:55	2017-03-19 09:59:55
+212	2	2017-03-19 09:59:55	2017-03-19 09:59:55
+213	2	2017-03-19 09:59:55	2017-03-19 09:59:55
+214	2	2017-03-19 09:59:55	2017-03-19 09:59:55
+215	2	2017-03-19 09:59:55	2017-03-19 09:59:55
 \.
 
 
@@ -1102,8 +1103,8 @@ SELECT pg_catalog.setval('acl_permissions_id_seq', 1, false);
 --
 
 COPY acl_roles (id, name, created_at, updated_at) FROM stdin;
-1	Admin	2017-02-03 16:17:20	2017-02-03 16:17:20
-2	Moderator	2017-02-03 16:17:20	2017-02-03 16:17:20
+1	Admin	2017-03-19 09:59:55	2017-03-19 09:59:55
+2	Moderator	2017-03-19 09:59:55	2017-03-19 09:59:55
 \.
 
 
@@ -1119,7 +1120,7 @@ SELECT pg_catalog.setval('acl_roles_id_seq', 2, true);
 --
 
 COPY acl_user_role (user_id, role_id, created_at, updated_at) FROM stdin;
-1	1	2017-02-03 16:17:20	2017-02-03 16:17:20
+1	1	2017-03-19 09:59:55	2017-03-19 09:59:55
 \.
 
 
@@ -1143,11 +1144,11 @@ SELECT pg_catalog.setval('block_translations_id_seq', 1, false);
 --
 
 COPY block_types (name, is_active, created_at, updated_at) FROM stdin;
-basic	t	2017-02-03 16:17:20	2017-02-03 16:17:20
-menu	t	2017-02-03 16:17:20	2017-02-03 16:17:20
-slider	t	2017-02-03 16:17:20	2017-02-03 16:17:20
-content	t	2017-02-03 16:17:20	2017-02-03 16:17:20
-widget	t	2017-02-03 16:17:20	2017-02-03 16:17:20
+basic	t	2017-03-19 09:59:54	2017-03-19 09:59:54
+menu	t	2017-03-19 09:59:54	2017-03-19 09:59:54
+slider	t	2017-03-19 09:59:54	2017-03-19 09:59:54
+content	t	2017-03-19 09:59:54	2017-03-19 09:59:54
+widget	t	2017-03-19 09:59:54	2017-03-19 09:59:54
 \.
 
 
@@ -1186,8 +1187,8 @@ SELECT pg_catalog.setval('content_translations_id_seq', 1, false);
 --
 
 COPY content_types (name, is_active, created_at, updated_at) FROM stdin;
-content	t	2017-02-03 16:17:20	2017-02-03 16:17:20
-category	t	2017-02-03 16:17:20	2017-02-03 16:17:20
+content	t	2017-03-19 09:59:54	2017-03-19 09:59:54
+category	t	2017-03-19 09:59:54	2017-03-19 09:59:54
 \.
 
 
@@ -1226,10 +1227,10 @@ SELECT pg_catalog.setval('file_translations_id_seq', 1, false);
 --
 
 COPY file_types (name, extensions, is_active, created_at, updated_at) FROM stdin;
-image	\N	t	2017-02-03 16:17:20	2017-02-03 16:17:20
-document	\N	t	2017-02-03 16:17:20	2017-02-03 16:17:20
-video	\N	t	2017-02-03 16:17:20	2017-02-03 16:17:20
-music	\N	t	2017-02-03 16:17:20	2017-02-03 16:17:20
+image	\N	t	2017-03-19 09:59:54	2017-03-19 09:59:54
+document	\N	t	2017-03-19 09:59:54	2017-03-19 09:59:54
+video	\N	t	2017-03-19 09:59:54	2017-03-19 09:59:54
+music	\N	t	2017-03-19 09:59:54	2017-03-19 09:59:54
 \.
 
 
@@ -1253,10 +1254,10 @@ SELECT pg_catalog.setval('files_id_seq', 1, false);
 --
 
 COPY langs (code, i18n, is_enabled, is_default, created_at, updated_at) FROM stdin;
-en	en_US	t	t	2017-02-03 16:17:20	2017-02-03 16:17:20
-pl	pl_PL	t	f	2017-02-03 16:17:20	2017-02-03 16:17:20
-de	de_DE	f	f	2017-02-03 16:17:20	2017-02-03 16:17:20
-fr	fr_FR	f	f	2017-02-03 16:17:20	2017-02-03 16:17:20
+en	en_US	t	t	2017-03-19 09:59:54	2017-03-19 09:59:54
+pl	pl_PL	t	f	2017-03-19 09:59:54	2017-03-19 09:59:54
+de	de_DE	f	f	2017-03-19 09:59:54	2017-03-19 09:59:54
+fr	fr_FR	f	f	2017-03-19 09:59:54	2017-03-19 09:59:54
 \.
 
 
@@ -1265,21 +1266,22 @@ fr	fr_FR	f	f	2017-02-03 16:17:20	2017-02-03 16:17:20
 --
 
 COPY migrations (id, migration, batch) FROM stdin;
-16	2014_10_12_100000_create_password_resets_table	1
-17	2014_11_16_114110_create_lang	1
-18	2014_11_16_114111_create_user	1
-19	2014_11_16_114112_create_route	1
-20	2014_11_16_114113_create_content	1
-21	2015_09_07_100656_create_options	1
-22	2015_11_26_115322_create_block	1
-23	2016_05_08_111342_create_files_table	1
-24	2016_05_08_140929_add_file_column_to_contents_table	1
-25	2016_06_01_000001_create_oauth_auth_codes_table	1
-26	2016_06_01_000002_create_oauth_access_tokens_table	1
-27	2016_06_01_000003_create_oauth_refresh_tokens_table	1
-28	2016_06_01_000004_create_oauth_clients_table	1
-29	2016_06_01_000005_create_oauth_personal_access_clients_table	1
-30	2016_08_13_113755_create_roles_and_permissions_table	1
+32	2014_10_12_100000_create_password_resets_table	1
+33	2014_11_16_114110_create_lang	1
+34	2014_11_16_114111_create_user	1
+35	2014_11_16_114112_create_route	1
+36	2014_11_16_114113_create_content	1
+37	2015_09_07_100656_create_options	1
+38	2015_11_26_115322_create_block	1
+39	2016_05_08_111342_create_files_table	1
+40	2016_05_08_140929_add_file_column_to_contents_table	1
+41	2016_06_01_000001_create_oauth_auth_codes_table	1
+42	2016_06_01_000002_create_oauth_access_tokens_table	1
+43	2016_06_01_000003_create_oauth_refresh_tokens_table	1
+44	2016_06_01_000004_create_oauth_clients_table	1
+45	2016_06_01_000005_create_oauth_personal_access_clients_table	1
+46	2016_08_13_113755_create_roles_and_permissions_table	1
+47	2017_03_09_134604_passport_create_clients	1
 \.
 
 
@@ -1287,7 +1289,7 @@ COPY migrations (id, migration, batch) FROM stdin;
 -- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('migrations_id_seq', 30, true);
+SELECT pg_catalog.setval('migrations_id_seq', 47, true);
 
 
 --
@@ -1311,8 +1313,8 @@ COPY oauth_auth_codes (id, user_id, client_id, scopes, revoked, expires_at) FROM
 --
 
 COPY oauth_clients (id, user_id, name, secret, redirect, personal_access_client, password_client, revoked, created_at, updated_at) FROM stdin;
-1	\N	GZERO-CMS Personal Access Client	udJ2IunB0w18AHmWfCqWC4kXEHjGcXQCHmcWs5eI	http://localhost	t	f	f	2017-02-03 16:17:31	2017-02-03 16:17:31
-2	\N	GZERO-CMS Password Grant Client	8Hcbayyk7DTQRBhzo5Vd0k4qSUFne8g8IDB6mpbc	http://localhost	f	t	f	2017-02-03 16:17:34	2017-02-03 16:17:34
+1	\N	Password Grant Client	ovNL1KBYLZf4eUIyTmvPOnCR5SBpin3KzAFbKT2U	http://localhost	f	t	f	2017-03-19 09:59:55	2017-03-19 09:59:55
+2	\N	Personal Access Client	wnVJS9Z1l7l2yQf4GSdcSYRTAH1QGKDAq5HIHcFN	http://localhost	t	f	f	2017-03-19 09:59:55	2017-03-19 09:59:55
 \.
 
 
@@ -1328,7 +1330,7 @@ SELECT pg_catalog.setval('oauth_clients_id_seq', 2, true);
 --
 
 COPY oauth_personal_access_clients (id, client_id, created_at, updated_at) FROM stdin;
-1	1	2017-02-03 16:17:31	2017-02-03 16:17:31
+1	2	2017-03-19 09:59:55	2017-03-19 09:59:55
 \.
 
 
@@ -1352,8 +1354,8 @@ COPY oauth_refresh_tokens (id, access_token_id, revoked, expires_at) FROM stdin;
 --
 
 COPY option_categories (key, created_at, updated_at) FROM stdin;
-general	2017-02-03 16:17:20	2017-02-03 16:17:20
-seo	2017-02-03 16:17:20	2017-02-03 16:17:20
+general	2017-03-19 09:59:54	2017-03-19 09:59:54
+seo	2017-03-19 09:59:54	2017-03-19 09:59:54
 \.
 
 
@@ -1362,12 +1364,12 @@ seo	2017-02-03 16:17:20	2017-02-03 16:17:20
 --
 
 COPY options (id, key, category_key, value, created_at, updated_at) FROM stdin;
-1	site_name	general	{"en":"G-ZERO CMS","pl":"G-ZERO CMS","de":"G-ZERO CMS","fr":"G-ZERO CMS"}	2017-02-03 16:17:20	2017-02-03 16:17:20
-2	site_desc	general	{"en":"Content management system.","pl":"Content management system.","de":"Content management system.","fr":"Content management system."}	2017-02-03 16:17:20	2017-02-03 16:17:20
-3	default_page_size	general	{"en":5,"pl":5,"de":5,"fr":5}	2017-02-03 16:17:20	2017-02-03 16:17:20
-4	cookies_policy_url	general	{"en":null,"pl":null,"de":null,"fr":null}	2017-02-03 16:17:20	2017-02-03 16:17:20
-5	desc_length	seo	{"en":160,"pl":160,"de":160,"fr":160}	2017-02-03 16:17:20	2017-02-03 16:17:20
-6	google_analytics_id	seo	{"en":null,"pl":null,"de":null,"fr":null}	2017-02-03 16:17:20	2017-02-03 16:17:20
+1	site_name	general	{"en":"G-ZERO CMS","pl":"G-ZERO CMS","de":"G-ZERO CMS","fr":"G-ZERO CMS"}	2017-03-19 09:59:54	2017-03-19 09:59:54
+2	site_desc	general	{"en":"Content management system.","pl":"Content management system.","de":"Content management system.","fr":"Content management system."}	2017-03-19 09:59:54	2017-03-19 09:59:54
+3	default_page_size	general	{"en":5,"pl":5,"de":5,"fr":5}	2017-03-19 09:59:54	2017-03-19 09:59:54
+4	cookies_policy_url	general	{"en":null,"pl":null,"de":null,"fr":null}	2017-03-19 09:59:54	2017-03-19 09:59:54
+5	desc_length	seo	{"en":160,"pl":160,"de":160,"fr":160}	2017-03-19 09:59:54	2017-03-19 09:59:54
+6	google_analytics_id	seo	{"en":null,"pl":null,"de":null,"fr":null}	2017-03-19 09:59:54	2017-03-19 09:59:54
 \.
 
 
@@ -1429,7 +1431,7 @@ COPY uploadables (file_id, uploadable_id, uploadable_type, weight, created_at, u
 --
 
 COPY users (id, email, password, nick, first_name, last_name, is_admin, remember_token, created_at, updated_at) FROM stdin;
-1	admin@gzero.pl	$2y$10$wmHxoYG4LFgx7RRpJFd1FuMcZy/I0hH0q4eui2NRDRxERWQwuQSfi	Admin	John	Doe	t	\N	2017-02-03 16:17:20	2017-02-03 16:17:20
+1	admin@gzero.pl	$2y$10$/JnEt/QIuO.7q/IS3Qacc.9q8gKdy3ohKTem4jCa2ghNJPq1gQJmq	Admin	John	Doe	t	\N	2017-03-19 09:59:54	2017-03-19 09:59:54
 \.
 
 
