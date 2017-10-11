@@ -19,21 +19,21 @@ SET search_path = public, pg_catalog;
 ALTER TABLE IF EXISTS ONLY public.uploadables DROP CONSTRAINT IF EXISTS uploadables_file_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.social_integrations DROP CONSTRAINT IF EXISTS social_integrations_user_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_route_id_foreign;
-ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_lang_code_foreign;
+ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_langauge_code_foreign;
 ALTER TABLE IF EXISTS ONLY public.options DROP CONSTRAINT IF EXISTS options_category_key_foreign;
 ALTER TABLE IF EXISTS ONLY public.files DROP CONSTRAINT IF EXISTS files_type_foreign;
 ALTER TABLE IF EXISTS ONLY public.files DROP CONSTRAINT IF EXISTS files_created_by_foreign;
-ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_lang_code_foreign;
+ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_langauge_code_foreign;
 ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_file_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.contents DROP CONSTRAINT IF EXISTS contents_type_foreign;
 ALTER TABLE IF EXISTS ONLY public.contents DROP CONSTRAINT IF EXISTS contents_thumb_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.contents DROP CONSTRAINT IF EXISTS contents_parent_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.contents DROP CONSTRAINT IF EXISTS contents_author_id_foreign;
-ALTER TABLE IF EXISTS ONLY public.content_translations DROP CONSTRAINT IF EXISTS content_translations_lang_code_foreign;
+ALTER TABLE IF EXISTS ONLY public.content_translations DROP CONSTRAINT IF EXISTS content_translations_langauge_code_foreign;
 ALTER TABLE IF EXISTS ONLY public.content_translations DROP CONSTRAINT IF EXISTS content_translations_content_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.blocks DROP CONSTRAINT IF EXISTS blocks_type_foreign;
 ALTER TABLE IF EXISTS ONLY public.blocks DROP CONSTRAINT IF EXISTS blocks_author_id_foreign;
-ALTER TABLE IF EXISTS ONLY public.block_translations DROP CONSTRAINT IF EXISTS block_translations_lang_code_foreign;
+ALTER TABLE IF EXISTS ONLY public.block_translations DROP CONSTRAINT IF EXISTS block_translations_langauge_code_foreign;
 ALTER TABLE IF EXISTS ONLY public.block_translations DROP CONSTRAINT IF EXISTS block_translations_block_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.acl_user_role DROP CONSTRAINT IF EXISTS acl_user_role_user_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.acl_user_role DROP CONSTRAINT IF EXISTS acl_user_role_role_id_foreign;
@@ -63,8 +63,8 @@ ALTER TABLE IF EXISTS ONLY public.social_integrations DROP CONSTRAINT IF EXISTS 
 ALTER TABLE IF EXISTS ONLY public.social_integrations DROP CONSTRAINT IF EXISTS social_integrations_pkey;
 ALTER TABLE IF EXISTS ONLY public.routes DROP CONSTRAINT IF EXISTS routes_pkey;
 ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_pkey;
-ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_lang_code_url_unique;
-ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_lang_code_route_id_unique;
+ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_langauge_code_url_unique;
+ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_langauge_code_route_id_unique;
 ALTER TABLE IF EXISTS ONLY public.options DROP CONSTRAINT IF EXISTS options_pkey;
 ALTER TABLE IF EXISTS ONLY public.option_categories DROP CONSTRAINT IF EXISTS option_categories_pkey;
 ALTER TABLE IF EXISTS ONLY public.oauth_refresh_tokens DROP CONSTRAINT IF EXISTS oauth_refresh_tokens_pkey;
@@ -73,11 +73,11 @@ ALTER TABLE IF EXISTS ONLY public.oauth_clients DROP CONSTRAINT IF EXISTS oauth_
 ALTER TABLE IF EXISTS ONLY public.oauth_auth_codes DROP CONSTRAINT IF EXISTS oauth_auth_codes_pkey;
 ALTER TABLE IF EXISTS ONLY public.oauth_access_tokens DROP CONSTRAINT IF EXISTS oauth_access_tokens_pkey;
 ALTER TABLE IF EXISTS ONLY public.migrations DROP CONSTRAINT IF EXISTS migrations_pkey;
-ALTER TABLE IF EXISTS ONLY public.langs DROP CONSTRAINT IF EXISTS langs_pkey;
+ALTER TABLE IF EXISTS ONLY public.langauges DROP CONSTRAINT IF EXISTS langauges_pkey;
 ALTER TABLE IF EXISTS ONLY public.files DROP CONSTRAINT IF EXISTS files_pkey;
 ALTER TABLE IF EXISTS ONLY public.file_types DROP CONSTRAINT IF EXISTS file_types_pkey;
 ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_pkey;
-ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_file_id_lang_code_unique;
+ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_file_id_langauge_code_unique;
 ALTER TABLE IF EXISTS ONLY public.contents DROP CONSTRAINT IF EXISTS contents_pkey;
 ALTER TABLE IF EXISTS ONLY public.content_types DROP CONSTRAINT IF EXISTS content_types_pkey;
 ALTER TABLE IF EXISTS ONLY public.content_translations DROP CONSTRAINT IF EXISTS content_translations_pkey;
@@ -129,7 +129,7 @@ DROP TABLE IF EXISTS public.oauth_auth_codes;
 DROP TABLE IF EXISTS public.oauth_access_tokens;
 DROP SEQUENCE IF EXISTS public.migrations_id_seq;
 DROP TABLE IF EXISTS public.migrations;
-DROP TABLE IF EXISTS public.langs;
+DROP TABLE IF EXISTS public.langauges;
 DROP SEQUENCE IF EXISTS public.files_id_seq;
 DROP TABLE IF EXISTS public.files;
 DROP TABLE IF EXISTS public.file_types;
@@ -280,7 +280,7 @@ CREATE TABLE acl_user_role (
 
 CREATE TABLE block_translations (
     id integer NOT NULL,
-    lang_code character varying(2) NOT NULL,
+    langauge_code character varying(2) NOT NULL,
     block_id integer NOT NULL,
     title character varying(255) NOT NULL,
     body text,
@@ -370,7 +370,7 @@ ALTER SEQUENCE blocks_id_seq OWNED BY blocks.id;
 
 CREATE TABLE content_translations (
     id integer NOT NULL,
-    lang_code character varying(2) NOT NULL,
+    langauge_code character varying(2) NOT NULL,
     content_id integer NOT NULL,
     title character varying(255),
     teaser text,
@@ -467,7 +467,7 @@ ALTER SEQUENCE contents_id_seq OWNED BY contents.id;
 
 CREATE TABLE file_translations (
     id integer NOT NULL,
-    lang_code character varying(2) NOT NULL,
+    langauge_code character varying(2) NOT NULL,
     file_id integer NOT NULL,
     title character varying(255),
     description text,
@@ -547,10 +547,10 @@ ALTER SEQUENCE files_id_seq OWNED BY files.id;
 
 
 --
--- Name: langs; Type: TABLE; Schema: public; Owner: -
+-- Name: langauges; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE langs (
+CREATE TABLE langauges (
     code character varying(2) NOT NULL,
     i18n character varying(5) NOT NULL,
     is_enabled boolean DEFAULT false NOT NULL,
@@ -762,7 +762,7 @@ CREATE TABLE password_resets (
 
 CREATE TABLE route_translations (
     id integer NOT NULL,
-    lang_code character varying(2) NOT NULL,
+    langauge_code character varying(2) NOT NULL,
     route_id integer NOT NULL,
     url character varying(255) NOT NULL,
     is_active boolean DEFAULT false NOT NULL,
@@ -1173,7 +1173,7 @@ COPY acl_user_role (user_id, role_id, created_at, updated_at) FROM stdin;
 -- Data for Name: block_translations; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY block_translations (id, lang_code, block_id, title, body, custom_fields, is_active, created_at, updated_at) FROM stdin;
+COPY block_translations (id, langauge_code, block_id, title, body, custom_fields, is_active, created_at, updated_at) FROM stdin;
 \.
 
 
@@ -1215,7 +1215,7 @@ SELECT pg_catalog.setval('blocks_id_seq', 1, false);
 -- Data for Name: content_translations; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY content_translations (id, lang_code, content_id, title, teaser, body, seo_title, seo_description, is_active, created_at, updated_at) FROM stdin;
+COPY content_translations (id, langauge_code, content_id, title, teaser, body, seo_title, seo_description, is_active, created_at, updated_at) FROM stdin;
 \.
 
 
@@ -1255,7 +1255,7 @@ SELECT pg_catalog.setval('contents_id_seq', 1, false);
 -- Data for Name: file_translations; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY file_translations (id, lang_code, file_id, title, description, created_at, updated_at) FROM stdin;
+COPY file_translations (id, langauge_code, file_id, title, description, created_at, updated_at) FROM stdin;
 \.
 
 
@@ -1294,10 +1294,10 @@ SELECT pg_catalog.setval('files_id_seq', 1, false);
 
 
 --
--- Data for Name: langs; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: langauges; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY langs (code, i18n, is_enabled, is_default, created_at, updated_at) FROM stdin;
+COPY langauges (code, i18n, is_enabled, is_default, created_at, updated_at) FROM stdin;
 pl	pl_PL	t	f	2017-03-26 14:01:00	2017-03-26 14:01:00
 de	de_DE	f	f	2017-03-26 14:01:00	2017-03-26 14:01:00
 fr	fr_FR	f	f	2017-03-26 14:01:00	2017-03-26 14:01:00
@@ -1311,7 +1311,7 @@ en	en_US	t	t	2017-03-26 14:01:00	2017-03-26 14:01:00
 
 COPY migrations (id, migration, batch) FROM stdin;
 1	2014_10_12_100000_create_password_resets_table	1
-2	2014_11_16_114110_create_lang	1
+2	2014_11_16_114110_create_langauge	1
 3	2014_11_16_114111_create_user	1
 4	2014_11_16_114112_create_route	1
 5	2014_11_16_114113_create_content	1
@@ -1437,7 +1437,7 @@ COPY password_resets (email, token, created_at) FROM stdin;
 -- Data for Name: route_translations; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY route_translations (id, lang_code, route_id, url, is_active, created_at, updated_at) FROM stdin;
+COPY route_translations (id, langauge_code, route_id, url, is_active, created_at, updated_at) FROM stdin;
 \.
 
 
@@ -1598,11 +1598,11 @@ ALTER TABLE ONLY contents
 
 
 --
--- Name: file_translations file_translations_file_id_lang_code_unique; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: file_translations file_translations_file_id_langauge_code_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY file_translations
-    ADD CONSTRAINT file_translations_file_id_lang_code_unique UNIQUE (file_id, lang_code);
+    ADD CONSTRAINT file_translations_file_id_langauge_code_unique UNIQUE (file_id, langauge_code);
 
 
 --
@@ -1630,11 +1630,11 @@ ALTER TABLE ONLY files
 
 
 --
--- Name: langs langs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: langauges langauges_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY langs
-    ADD CONSTRAINT langs_pkey PRIMARY KEY (code);
+ALTER TABLE ONLY langauges
+    ADD CONSTRAINT langauges_pkey PRIMARY KEY (code);
 
 
 --
@@ -1702,19 +1702,19 @@ ALTER TABLE ONLY options
 
 
 --
--- Name: route_translations route_translations_lang_code_route_id_unique; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: route_translations route_translations_langauge_code_route_id_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY route_translations
-    ADD CONSTRAINT route_translations_lang_code_route_id_unique UNIQUE (lang_code, route_id);
+    ADD CONSTRAINT route_translations_langauge_code_route_id_unique UNIQUE (langauge_code, route_id);
 
 
 --
--- Name: route_translations route_translations_lang_code_url_unique; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: route_translations route_translations_langauge_code_url_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY route_translations
-    ADD CONSTRAINT route_translations_lang_code_url_unique UNIQUE (lang_code, url);
+    ADD CONSTRAINT route_translations_langauge_code_url_unique UNIQUE (langauge_code, url);
 
 
 --
@@ -1935,11 +1935,11 @@ ALTER TABLE ONLY block_translations
 
 
 --
--- Name: block_translations block_translations_lang_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: block_translations block_translations_langauge_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY block_translations
-    ADD CONSTRAINT block_translations_lang_code_foreign FOREIGN KEY (lang_code) REFERENCES langs(code) ON DELETE CASCADE;
+    ADD CONSTRAINT block_translations_langauge_code_foreign FOREIGN KEY (langauge_code) REFERENCES langauges(code) ON DELETE CASCADE;
 
 
 --
@@ -1967,11 +1967,11 @@ ALTER TABLE ONLY content_translations
 
 
 --
--- Name: content_translations content_translations_lang_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: content_translations content_translations_langauge_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY content_translations
-    ADD CONSTRAINT content_translations_lang_code_foreign FOREIGN KEY (lang_code) REFERENCES langs(code) ON DELETE CASCADE;
+    ADD CONSTRAINT content_translations_langauge_code_foreign FOREIGN KEY (langauge_code) REFERENCES langauges(code) ON DELETE CASCADE;
 
 
 --
@@ -2015,11 +2015,11 @@ ALTER TABLE ONLY file_translations
 
 
 --
--- Name: file_translations file_translations_lang_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: file_translations file_translations_langauge_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY file_translations
-    ADD CONSTRAINT file_translations_lang_code_foreign FOREIGN KEY (lang_code) REFERENCES langs(code) ON DELETE CASCADE;
+    ADD CONSTRAINT file_translations_langauge_code_foreign FOREIGN KEY (langauge_code) REFERENCES langauges(code) ON DELETE CASCADE;
 
 
 --
@@ -2047,11 +2047,11 @@ ALTER TABLE ONLY options
 
 
 --
--- Name: route_translations route_translations_lang_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: route_translations route_translations_langauge_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY route_translations
-    ADD CONSTRAINT route_translations_lang_code_foreign FOREIGN KEY (lang_code) REFERENCES langs(code) ON DELETE CASCADE;
+    ADD CONSTRAINT route_translations_langauge_code_foreign FOREIGN KEY (langauge_code) REFERENCES langauges(code) ON DELETE CASCADE;
 
 
 --
