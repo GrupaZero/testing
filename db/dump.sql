@@ -57,7 +57,7 @@ DROP INDEX IF EXISTS public.acl_permission_role_permission_id_index;
 ALTER TABLE IF EXISTS ONLY public.widgets DROP CONSTRAINT IF EXISTS widgets_pkey;
 ALTER TABLE IF EXISTS ONLY public.widgets DROP CONSTRAINT IF EXISTS widgets_name_unique;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pkey;
-ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_nick_unique;
+ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_name_unique;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_email_unique;
 ALTER TABLE IF EXISTS ONLY public.social_integrations DROP CONSTRAINT IF EXISTS social_integrations_social_id_unique;
 ALTER TABLE IF EXISTS ONLY public.social_integrations DROP CONSTRAINT IF EXISTS social_integrations_pkey;
@@ -876,7 +876,7 @@ CREATE TABLE users (
     id integer NOT NULL,
     email character varying(255) NOT NULL,
     password character varying(255) NOT NULL,
-    nick character varying(255),
+    name character varying(255),
     first_name character varying(255),
     last_name character varying(255),
     is_admin boolean DEFAULT false NOT NULL,
@@ -1490,7 +1490,7 @@ COPY uploadables (file_id, uploadable_id, uploadable_type, weight, created_at, u
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY users (id, email, password, nick, first_name, last_name, is_admin, remember_token, created_at, updated_at, has_social_integrations) FROM stdin;
+COPY users (id, email, password, name, first_name, last_name, is_admin, remember_token, created_at, updated_at, has_social_integrations) FROM stdin;
 1	admin@gzero.pl	$2y$10$ojltc.dDXGCcPqDXpH5wb.bZPgLFLQGBt1cwj/7.YFivEEnMsG8Mi	Admin	John	Doe	t	\N	2017-03-26 14:01:00	2017-03-26 14:01:00	f
 \.
 
@@ -1758,11 +1758,11 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: users users_nick_unique; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users users_name_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
-    ADD CONSTRAINT users_nick_unique UNIQUE (nick);
+    ADD CONSTRAINT users_name_unique UNIQUE (name);
 
 
 --
