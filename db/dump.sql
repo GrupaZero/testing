@@ -1411,7 +1411,7 @@ seo	2017-03-26 14:01:00	2017-03-26 14:01:00
 COPY options (id, key, category_key, value, created_at, updated_at) FROM stdin;
 1	site_name	general	{"pl":"GZERO-CMS","de":"GZERO-CMS","fr":"GZERO-CMS","en":"GZERO-CMS"}	2017-03-26 14:01:00	2017-03-26 14:01:00
 2	site_desc	general	{"pl":"GZERO-CMS Content management system.","de":"GZERO-CMS Content management system.","fr":"GZERO-CMS Content management system.","en":"GZERO-CMS Content management system."}	2017-03-26 14:01:00	2017-03-26 14:01:00
-3	default_page_size	general	{"pl":5,"de":5,"fr":5,"en":5}	2017-03-26 14:01:00	2017-03-26 14:01:00
+3	default_page_size	general	{"pl":10,"de":10,"fr":10,"en":10}	2017-03-26 14:01:00	2017-03-26 14:01:00
 4	cookies_policy_url	general	{"pl":null,"de":null,"fr":null,"en":null}	2017-03-26 14:01:00	2017-03-26 14:01:00
 5	desc_length	seo	{"pl":160,"de":160,"fr":160,"en":160}	2017-03-26 14:01:00	2017-03-26 14:01:00
 6	google_analytics_id	seo	{"pl":null,"de":null,"fr":null,"en":null}	2017-03-26 14:01:00	2017-03-26 14:01:00
