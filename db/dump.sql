@@ -1004,43 +1004,43 @@ ALTER TABLE ONLY widgets ALTER COLUMN id SET DEFAULT nextval('widgets_id_seq'::r
 --
 
 COPY acl_permission_role (permission_id, role_id, created_at, updated_at) FROM stdin;
-1	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-200	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-201	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-202	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-203	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-204	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-205	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-206	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-207	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-208	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-209	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-210	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-211	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-212	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-213	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-214	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-215	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-216	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-217	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-218	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-219	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-220	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-221	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-222	1	2017-10-24 12:10:25	2017-10-24 12:10:25
-1	2	2017-10-24 12:10:25	2017-10-24 12:10:25
-200	2	2017-10-24 12:10:25	2017-10-24 12:10:25
-201	2	2017-10-24 12:10:25	2017-10-24 12:10:25
-202	2	2017-10-24 12:10:25	2017-10-24 12:10:25
-203	2	2017-10-24 12:10:25	2017-10-24 12:10:25
-204	2	2017-10-24 12:10:25	2017-10-24 12:10:25
-205	2	2017-10-24 12:10:25	2017-10-24 12:10:25
-206	2	2017-10-24 12:10:25	2017-10-24 12:10:25
-207	2	2017-10-24 12:10:25	2017-10-24 12:10:25
-212	2	2017-10-24 12:10:25	2017-10-24 12:10:25
-213	2	2017-10-24 12:10:25	2017-10-24 12:10:25
-214	2	2017-10-24 12:10:25	2017-10-24 12:10:25
-215	2	2017-10-24 12:10:25	2017-10-24 12:10:25
+1	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+200	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+201	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+202	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+203	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+204	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+205	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+206	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+207	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+208	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+209	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+210	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+211	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+212	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+213	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+214	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+215	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+216	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+217	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+218	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+219	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+220	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+221	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+222	1	2017-10-24 13:02:10	2017-10-24 13:02:10
+1	2	2017-10-24 13:02:10	2017-10-24 13:02:10
+200	2	2017-10-24 13:02:10	2017-10-24 13:02:10
+201	2	2017-10-24 13:02:10	2017-10-24 13:02:10
+202	2	2017-10-24 13:02:10	2017-10-24 13:02:10
+203	2	2017-10-24 13:02:10	2017-10-24 13:02:10
+204	2	2017-10-24 13:02:10	2017-10-24 13:02:10
+205	2	2017-10-24 13:02:10	2017-10-24 13:02:10
+206	2	2017-10-24 13:02:10	2017-10-24 13:02:10
+207	2	2017-10-24 13:02:10	2017-10-24 13:02:10
+212	2	2017-10-24 13:02:10	2017-10-24 13:02:10
+213	2	2017-10-24 13:02:10	2017-10-24 13:02:10
+214	2	2017-10-24 13:02:10	2017-10-24 13:02:10
+215	2	2017-10-24 13:02:10	2017-10-24 13:02:10
 \.
 
 
@@ -1088,8 +1088,8 @@ SELECT pg_catalog.setval('acl_permissions_id_seq', 1, false);
 --
 
 COPY acl_roles (id, name, created_at, updated_at) FROM stdin;
-1	Admin	2017-10-24 12:10:25	2017-10-24 12:10:25
-2	Moderator	2017-10-24 12:10:25	2017-10-24 12:10:25
+1	Admin	2017-10-24 13:02:10	2017-10-24 13:02:10
+2	Moderator	2017-10-24 13:02:10	2017-10-24 13:02:10
 \.
 
 
@@ -1097,7 +1097,7 @@ COPY acl_roles (id, name, created_at, updated_at) FROM stdin;
 -- Name: acl_roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero_cms
 --
 
-SELECT pg_catalog.setval('acl_roles_id_seq', 2, true);
+SELECT pg_catalog.setval('acl_roles_id_seq', 33, true);
 
 
 --
@@ -1105,7 +1105,7 @@ SELECT pg_catalog.setval('acl_roles_id_seq', 2, true);
 --
 
 COPY acl_user_role (user_id, role_id, created_at, updated_at) FROM stdin;
-1	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+1	1	2017-10-24 13:02:10	2017-10-24 13:02:10
 \.
 
 
@@ -1129,10 +1129,10 @@ SELECT pg_catalog.setval('block_translations_id_seq', 1, false);
 --
 
 COPY block_types (name, is_active, created_at, updated_at) FROM stdin;
-basic	t	2017-10-24 12:10:25	2017-10-24 12:10:25
-menu	t	2017-10-24 12:10:25	2017-10-24 12:10:25
-slider	t	2017-10-24 12:10:25	2017-10-24 12:10:25
-widget	t	2017-10-24 12:10:25	2017-10-24 12:10:25
+basic	t	2017-10-24 13:02:10	2017-10-24 13:02:10
+menu	t	2017-10-24 13:02:10	2017-10-24 13:02:10
+slider	t	2017-10-24 13:02:10	2017-10-24 13:02:10
+widget	t	2017-10-24 13:02:10	2017-10-24 13:02:10
 \.
 
 
@@ -1171,8 +1171,8 @@ SELECT pg_catalog.setval('content_translations_id_seq', 1, false);
 --
 
 COPY content_types (name, is_active, created_at, updated_at) FROM stdin;
-content	t	2017-10-24 12:10:25	2017-10-24 12:10:25
-category	t	2017-10-24 12:10:25	2017-10-24 12:10:25
+content	t	2017-10-24 13:02:10	2017-10-24 13:02:10
+category	t	2017-10-24 13:02:10	2017-10-24 13:02:10
 \.
 
 
@@ -1226,10 +1226,10 @@ SELECT pg_catalog.setval('file_translations_id_seq', 1, false);
 --
 
 COPY file_types (name, extensions, is_active, created_at, updated_at) FROM stdin;
-image	\N	t	2017-10-24 12:10:25	2017-10-24 12:10:25
-document	\N	t	2017-10-24 12:10:25	2017-10-24 12:10:25
-video	\N	t	2017-10-24 12:10:25	2017-10-24 12:10:25
-music	\N	t	2017-10-24 12:10:25	2017-10-24 12:10:25
+image	\N	t	2017-10-24 13:02:10	2017-10-24 13:02:10
+document	\N	t	2017-10-24 13:02:10	2017-10-24 13:02:10
+video	\N	t	2017-10-24 13:02:10	2017-10-24 13:02:10
+music	\N	t	2017-10-24 13:02:10	2017-10-24 13:02:10
 \.
 
 
@@ -1253,10 +1253,10 @@ SELECT pg_catalog.setval('files_id_seq', 1, false);
 --
 
 COPY langs (code, i18n, is_enabled, is_default, created_at, updated_at) FROM stdin;
-pl	pl_PL	t	f	2017-10-24 12:10:24	2017-10-24 12:10:24
-de	de_DE	f	f	2017-10-24 12:10:24	2017-10-24 12:10:24
-fr	fr_FR	f	f	2017-10-24 12:10:24	2017-10-24 12:10:24
-en	en_US	t	t	2017-10-24 12:10:24	2017-10-24 12:10:24
+pl	pl_PL	t	f	2017-10-24 13:02:10	2017-10-24 13:02:10
+de	de_DE	f	f	2017-10-24 13:02:10	2017-10-24 13:02:10
+fr	fr_FR	f	f	2017-10-24 13:02:10	2017-10-24 13:02:10
+en	en_US	t	t	2017-10-24 13:02:10	2017-10-24 13:02:10
 \.
 
 
@@ -1265,24 +1265,24 @@ en	en_US	t	t	2017-10-24 12:10:24	2017-10-24 12:10:24
 --
 
 COPY migrations (id, migration, batch) FROM stdin;
-91	2014_10_12_100000_create_password_resets_table	1
-92	2014_11_16_114110_create_lang	1
-93	2014_11_16_114111_create_user	1
-94	2014_11_16_114112_create_route	1
-95	2014_11_16_114113_create_content	1
-96	2015_09_07_100656_create_options	1
-97	2015_11_26_115322_create_block	1
-98	2016_05_08_111342_create_files_table	1
-99	2016_05_08_140929_add_file_column_to_contents_table	1
-100	2016_06_01_000001_create_oauth_auth_codes_table	1
-101	2016_06_01_000002_create_oauth_access_tokens_table	1
-102	2016_06_01_000003_create_oauth_refresh_tokens_table	1
-103	2016_06_01_000004_create_oauth_clients_table	1
-104	2016_06_01_000005_create_oauth_personal_access_clients_table	1
-105	2016_08_13_113755_create_roles_and_permissions_table	1
-106	2017_03_09_134604_passport_create_clients	1
-107	2017_04_26_135124_create_failed_jobs_table	1
-108	2017_10_24_094825_create_google_tag_manager_id_row_and_delete_google_analytics_id_row	1
+109	2014_10_12_100000_create_password_resets_table	1
+110	2014_11_16_114110_create_lang	1
+111	2014_11_16_114111_create_user	1
+112	2014_11_16_114112_create_route	1
+113	2014_11_16_114113_create_content	1
+114	2015_09_07_100656_create_options	1
+115	2015_11_26_115322_create_block	1
+116	2016_05_08_111342_create_files_table	1
+117	2016_05_08_140929_add_file_column_to_contents_table	1
+118	2016_06_01_000001_create_oauth_auth_codes_table	1
+119	2016_06_01_000002_create_oauth_access_tokens_table	1
+120	2016_06_01_000003_create_oauth_refresh_tokens_table	1
+121	2016_06_01_000004_create_oauth_clients_table	1
+122	2016_06_01_000005_create_oauth_personal_access_clients_table	1
+123	2016_08_13_113755_create_roles_and_permissions_table	1
+124	2017_03_09_134604_passport_create_clients	1
+125	2017_04_26_135124_create_failed_jobs_table	1
+126	2017_10_24_094825_create_google_tag_manager_id_row_and_delete_google_analytics_id_row	1
 \.
 
 
@@ -1290,7 +1290,7 @@ COPY migrations (id, migration, batch) FROM stdin;
 -- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero_cms
 --
 
-SELECT pg_catalog.setval('migrations_id_seq', 108, true);
+SELECT pg_catalog.setval('migrations_id_seq', 141, true);
 
 
 --
@@ -1314,8 +1314,8 @@ COPY oauth_auth_codes (id, user_id, client_id, scopes, revoked, expires_at) FROM
 --
 
 COPY oauth_clients (id, user_id, name, secret, redirect, personal_access_client, password_client, revoked, created_at, updated_at) FROM stdin;
-1	\N	Password Grant Client	aIGxTlYl8YBrqcPceAmXDGjZQPl3vnTbrQ058Tht	http://localhost	f	t	f	2017-10-24 12:10:25	2017-10-24 12:10:25
-2	\N	Personal Access Client	5CvkiIa6OrMfZ9wPoGvKBkcOc4CwA9YzOa6x0eqH	http://localhost	t	f	f	2017-10-24 12:10:25	2017-10-24 12:10:25
+1	\N	Password Grant Client	86q2qddWS41QlIi7llmSYAp814TKdyASgzFJXiIm	http://localhost	f	t	f	2017-10-24 13:02:10	2017-10-24 13:02:10
+2	\N	Personal Access Client	Kfr83HRJjnAfyBOWwgcoFp2CIQmKV1QBLnpyoCgR	http://localhost	t	f	f	2017-10-24 13:02:10	2017-10-24 13:02:10
 \.
 
 
@@ -1323,7 +1323,7 @@ COPY oauth_clients (id, user_id, name, secret, redirect, personal_access_client,
 -- Name: oauth_clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero_cms
 --
 
-SELECT pg_catalog.setval('oauth_clients_id_seq', 2, true);
+SELECT pg_catalog.setval('oauth_clients_id_seq', 33, true);
 
 
 --
@@ -1331,7 +1331,7 @@ SELECT pg_catalog.setval('oauth_clients_id_seq', 2, true);
 --
 
 COPY oauth_personal_access_clients (id, client_id, created_at, updated_at) FROM stdin;
-1	2	2017-10-24 12:10:25	2017-10-24 12:10:25
+1	2	2017-10-24 13:02:10	2017-10-24 13:02:10
 \.
 
 
@@ -1339,7 +1339,7 @@ COPY oauth_personal_access_clients (id, client_id, created_at, updated_at) FROM 
 -- Name: oauth_personal_access_clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero_cms
 --
 
-SELECT pg_catalog.setval('oauth_personal_access_clients_id_seq', 1, true);
+SELECT pg_catalog.setval('oauth_personal_access_clients_id_seq', 33, true);
 
 
 --
@@ -1355,8 +1355,8 @@ COPY oauth_refresh_tokens (id, access_token_id, revoked, expires_at) FROM stdin;
 --
 
 COPY option_categories (key, created_at, updated_at) FROM stdin;
-general	2017-10-24 12:10:25	2017-10-24 12:10:25
-seo	2017-10-24 12:10:25	2017-10-24 12:10:25
+general	2017-10-24 13:02:10	2017-10-24 13:02:10
+seo	2017-10-24 13:02:10	2017-10-24 13:02:10
 \.
 
 
@@ -1365,12 +1365,12 @@ seo	2017-10-24 12:10:25	2017-10-24 12:10:25
 --
 
 COPY options (id, key, category_key, value, created_at, updated_at) FROM stdin;
-1	site_name	general	{"pl":"GZERO-CMS","de":"GZERO-CMS","fr":"GZERO-CMS","en":"GZERO-CMS"}	2017-10-24 12:10:25	2017-10-24 12:10:25
-2	site_desc	general	{"pl":"GZERO-CMS Content management system.","de":"GZERO-CMS Content management system.","fr":"GZERO-CMS Content management system.","en":"GZERO-CMS Content management system."}	2017-10-24 12:10:25	2017-10-24 12:10:25
-3	default_page_size	general	{"pl":5,"de":5,"fr":5,"en":5}	2017-10-24 12:10:25	2017-10-24 12:10:25
-4	cookies_policy_url	general	{"pl":null,"de":null,"fr":null,"en":null}	2017-10-24 12:10:25	2017-10-24 12:10:25
-5	desc_length	seo	{"pl":160,"de":160,"fr":160,"en":160}	2017-10-24 12:10:25	2017-10-24 12:10:25
-7	google_tag_manager_id	seo	{"pl":null,"de":null,"fr":null,"en":null}	2017-10-24 12:10:25	2017-10-24 12:10:25
+1	site_name	general	{"pl":"GZERO-CMS","de":"GZERO-CMS","fr":"GZERO-CMS","en":"GZERO-CMS"}	2017-10-24 13:02:10	2017-10-24 13:02:10
+2	site_desc	general	{"pl":"GZERO-CMS Content management system.","de":"GZERO-CMS Content management system.","fr":"GZERO-CMS Content management system.","en":"GZERO-CMS Content management system."}	2017-10-24 13:02:10	2017-10-24 13:02:10
+3	default_page_size	general	{"pl":5,"de":5,"fr":5,"en":5}	2017-10-24 13:02:10	2017-10-24 13:02:10
+4	cookies_policy_url	general	{"pl":null,"de":null,"fr":null,"en":null}	2017-10-24 13:02:10	2017-10-24 13:02:10
+5	desc_length	seo	{"pl":160,"de":160,"fr":160,"en":160}	2017-10-24 13:02:10	2017-10-24 13:02:10
+7	google_tag_manager_id	seo	{"pl":null,"de":null,"fr":null,"en":null}	2017-10-24 13:02:10	2017-10-24 13:02:10
 \.
 
 
@@ -1378,7 +1378,7 @@ COPY options (id, key, category_key, value, created_at, updated_at) FROM stdin;
 -- Name: options_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero_cms
 --
 
-SELECT pg_catalog.setval('options_id_seq', 7, true);
+SELECT pg_catalog.setval('options_id_seq', 33, true);
 
 
 --
@@ -1432,7 +1432,7 @@ COPY uploadables (file_id, uploadable_id, uploadable_type, weight, created_at, u
 --
 
 COPY users (id, email, password, nick, first_name, last_name, is_admin, remember_token, created_at, updated_at) FROM stdin;
-1	admin@gzero.pl	$2y$10$qI2yBGzjihzWtnpq3pU6EOr8nnBQKJjw23ZnOYFV/UvSGrsRjZwS.	Admin	John	Doe	t	\N	2017-10-24 12:10:24	2017-10-24 12:10:24
+1	admin@gzero.pl	$2y$10$RBSDbpEdf8mic408yh8zLuod2P4ukx5U18Ptrj8RBeDYNmWA.zNoK	Admin	John	Doe	t	\N	2017-10-24 13:02:10	2017-10-24 13:02:10
 \.
 
 
@@ -1440,7 +1440,7 @@ COPY users (id, email, password, nick, first_name, last_name, is_admin, remember
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero_cms
 --
 
-SELECT pg_catalog.setval('users_id_seq', 1, true);
+SELECT pg_catalog.setval('users_id_seq', 33, true);
 
 
 --
