@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.3
--- Dumped by pg_dump version 9.6.3
+-- Dumped from database version 9.6.4
+-- Dumped by pg_dump version 9.6.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -338,101 +338,6 @@ ALTER TABLE contents_id_seq OWNER TO gzero_cms;
 --
 
 ALTER SEQUENCE contents_id_seq OWNED BY contents.id;
-
-
---
--- Name: event_action_user; Type: TABLE; Schema: public; Owner: gzero_cms
---
-
-CREATE TABLE event_action_user (
-    event_action_id integer NOT NULL,
-    user_id integer NOT NULL,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone
-);
-
-
-ALTER TABLE event_action_user OWNER TO gzero_cms;
-
---
--- Name: event_actions; Type: TABLE; Schema: public; Owner: gzero_cms
---
-
-CREATE TABLE event_actions (
-    id integer NOT NULL,
-    event_id integer NOT NULL,
-    title character varying(255) NOT NULL,
-    description text,
-    points integer NOT NULL,
-    handler character varying(255) NOT NULL,
-    args text NOT NULL,
-    thumb_id integer,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone
-);
-
-
-ALTER TABLE event_actions OWNER TO gzero_cms;
-
---
--- Name: event_actions_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero_cms
---
-
-CREATE SEQUENCE event_actions_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE event_actions_id_seq OWNER TO gzero_cms;
-
---
--- Name: event_actions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero_cms
---
-
-ALTER SEQUENCE event_actions_id_seq OWNED BY event_actions.id;
-
-
---
--- Name: events; Type: TABLE; Schema: public; Owner: gzero_cms
---
-
-CREATE TABLE events (
-    id integer NOT NULL,
-    title character varying(255) NOT NULL,
-    description text,
-    winner_id integer,
-    thumb_id integer,
-    regulations_id integer NOT NULL,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    ends_at timestamp(0) without time zone NOT NULL
-);
-
-
-ALTER TABLE events OWNER TO gzero_cms;
-
---
--- Name: events_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero_cms
---
-
-CREATE SEQUENCE events_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE events_id_seq OWNER TO gzero_cms;
-
---
--- Name: events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero_cms
---
-
-ALTER SEQUENCE events_id_seq OWNED BY events.id;
 
 
 --
@@ -881,41 +786,6 @@ ALTER SEQUENCE routes_id_seq OWNED BY routes.id;
 
 
 --
--- Name: social_integrations; Type: TABLE; Schema: public; Owner: gzero_cms
---
-
-CREATE TABLE social_integrations (
-    id integer NOT NULL,
-    user_id integer,
-    social_id character varying(255) NOT NULL,
-    created_at timestamp(0) without time zone NOT NULL
-);
-
-
-ALTER TABLE social_integrations OWNER TO gzero_cms;
-
---
--- Name: social_integrations_id_seq; Type: SEQUENCE; Schema: public; Owner: gzero_cms
---
-
-CREATE SEQUENCE social_integrations_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE social_integrations_id_seq OWNER TO gzero_cms;
-
---
--- Name: social_integrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gzero_cms
---
-
-ALTER SEQUENCE social_integrations_id_seq OWNED BY social_integrations.id;
-
-
---
 -- Name: uploadables; Type: TABLE; Schema: public; Owner: gzero_cms
 --
 
@@ -945,8 +815,7 @@ CREATE TABLE users (
     is_admin boolean DEFAULT false NOT NULL,
     remember_token character varying(100),
     created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    has_social_integrations boolean DEFAULT false NOT NULL
+    updated_at timestamp(0) without time zone
 );
 
 
@@ -1054,20 +923,6 @@ ALTER TABLE ONLY contents ALTER COLUMN id SET DEFAULT nextval('contents_id_seq':
 
 
 --
--- Name: event_actions id; Type: DEFAULT; Schema: public; Owner: gzero_cms
---
-
-ALTER TABLE ONLY event_actions ALTER COLUMN id SET DEFAULT nextval('event_actions_id_seq'::regclass);
-
-
---
--- Name: events id; Type: DEFAULT; Schema: public; Owner: gzero_cms
---
-
-ALTER TABLE ONLY events ALTER COLUMN id SET DEFAULT nextval('events_id_seq'::regclass);
-
-
---
 -- Name: failed_jobs id; Type: DEFAULT; Schema: public; Owner: gzero_cms
 --
 
@@ -1131,13 +986,6 @@ ALTER TABLE ONLY routes ALTER COLUMN id SET DEFAULT nextval('routes_id_seq'::reg
 
 
 --
--- Name: social_integrations id; Type: DEFAULT; Schema: public; Owner: gzero_cms
---
-
-ALTER TABLE ONLY social_integrations ALTER COLUMN id SET DEFAULT nextval('social_integrations_id_seq'::regclass);
-
-
---
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: gzero_cms
 --
 
@@ -1156,43 +1004,43 @@ ALTER TABLE ONLY widgets ALTER COLUMN id SET DEFAULT nextval('widgets_id_seq'::r
 --
 
 COPY acl_permission_role (permission_id, role_id, created_at, updated_at) FROM stdin;
-1	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-200	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-201	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-202	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-203	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-204	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-205	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-206	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-207	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-208	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-209	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-210	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-211	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-212	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-213	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-214	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-215	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-216	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-217	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-218	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-219	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-220	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-221	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-222	1	2017-07-04 10:54:11	2017-07-04 10:54:11
-1	2	2017-07-04 10:54:11	2017-07-04 10:54:11
-200	2	2017-07-04 10:54:11	2017-07-04 10:54:11
-201	2	2017-07-04 10:54:11	2017-07-04 10:54:11
-202	2	2017-07-04 10:54:11	2017-07-04 10:54:11
-203	2	2017-07-04 10:54:11	2017-07-04 10:54:11
-204	2	2017-07-04 10:54:11	2017-07-04 10:54:11
-205	2	2017-07-04 10:54:11	2017-07-04 10:54:11
-206	2	2017-07-04 10:54:11	2017-07-04 10:54:11
-207	2	2017-07-04 10:54:11	2017-07-04 10:54:11
-212	2	2017-07-04 10:54:11	2017-07-04 10:54:11
-213	2	2017-07-04 10:54:11	2017-07-04 10:54:11
-214	2	2017-07-04 10:54:11	2017-07-04 10:54:11
-215	2	2017-07-04 10:54:11	2017-07-04 10:54:11
+1	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+200	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+201	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+202	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+203	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+204	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+205	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+206	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+207	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+208	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+209	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+210	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+211	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+212	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+213	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+214	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+215	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+216	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+217	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+218	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+219	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+220	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+221	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+222	1	2017-10-24 12:10:25	2017-10-24 12:10:25
+1	2	2017-10-24 12:10:25	2017-10-24 12:10:25
+200	2	2017-10-24 12:10:25	2017-10-24 12:10:25
+201	2	2017-10-24 12:10:25	2017-10-24 12:10:25
+202	2	2017-10-24 12:10:25	2017-10-24 12:10:25
+203	2	2017-10-24 12:10:25	2017-10-24 12:10:25
+204	2	2017-10-24 12:10:25	2017-10-24 12:10:25
+205	2	2017-10-24 12:10:25	2017-10-24 12:10:25
+206	2	2017-10-24 12:10:25	2017-10-24 12:10:25
+207	2	2017-10-24 12:10:25	2017-10-24 12:10:25
+212	2	2017-10-24 12:10:25	2017-10-24 12:10:25
+213	2	2017-10-24 12:10:25	2017-10-24 12:10:25
+214	2	2017-10-24 12:10:25	2017-10-24 12:10:25
+215	2	2017-10-24 12:10:25	2017-10-24 12:10:25
 \.
 
 
@@ -1240,8 +1088,8 @@ SELECT pg_catalog.setval('acl_permissions_id_seq', 1, false);
 --
 
 COPY acl_roles (id, name, created_at, updated_at) FROM stdin;
-1	Admin	2017-07-04 10:54:11	2017-07-04 10:54:11
-2	Moderator	2017-07-04 10:54:11	2017-07-04 10:54:11
+1	Admin	2017-10-24 12:10:25	2017-10-24 12:10:25
+2	Moderator	2017-10-24 12:10:25	2017-10-24 12:10:25
 \.
 
 
@@ -1257,7 +1105,7 @@ SELECT pg_catalog.setval('acl_roles_id_seq', 2, true);
 --
 
 COPY acl_user_role (user_id, role_id, created_at, updated_at) FROM stdin;
-1	1	2017-07-04 10:54:11	2017-07-04 10:54:11
+1	1	2017-10-24 12:10:25	2017-10-24 12:10:25
 \.
 
 
@@ -1281,10 +1129,10 @@ SELECT pg_catalog.setval('block_translations_id_seq', 1, false);
 --
 
 COPY block_types (name, is_active, created_at, updated_at) FROM stdin;
-basic	t	2017-07-04 10:54:11	2017-07-04 10:54:11
-menu	t	2017-07-04 10:54:11	2017-07-04 10:54:11
-slider	t	2017-07-04 10:54:11	2017-07-04 10:54:11
-widget	t	2017-07-04 10:54:11	2017-07-04 10:54:11
+basic	t	2017-10-24 12:10:25	2017-10-24 12:10:25
+menu	t	2017-10-24 12:10:25	2017-10-24 12:10:25
+slider	t	2017-10-24 12:10:25	2017-10-24 12:10:25
+widget	t	2017-10-24 12:10:25	2017-10-24 12:10:25
 \.
 
 
@@ -1323,8 +1171,8 @@ SELECT pg_catalog.setval('content_translations_id_seq', 1, false);
 --
 
 COPY content_types (name, is_active, created_at, updated_at) FROM stdin;
-content	t	2017-07-04 10:54:11	2017-07-04 10:54:11
-category	t	2017-07-04 10:54:11	2017-07-04 10:54:11
+content	t	2017-10-24 12:10:25	2017-10-24 12:10:25
+category	t	2017-10-24 12:10:25	2017-10-24 12:10:25
 \.
 
 
@@ -1341,44 +1189,6 @@ COPY contents (id, type, theme, author_id, path, parent_id, level, weight, ratin
 --
 
 SELECT pg_catalog.setval('contents_id_seq', 1, false);
-
-
---
--- Data for Name: event_action_user; Type: TABLE DATA; Schema: public; Owner: gzero_cms
---
-
-COPY event_action_user (event_action_id, user_id, created_at, updated_at) FROM stdin;
-\.
-
-
---
--- Data for Name: event_actions; Type: TABLE DATA; Schema: public; Owner: gzero_cms
---
-
-COPY event_actions (id, event_id, title, description, points, handler, args, thumb_id, created_at, updated_at) FROM stdin;
-\.
-
-
---
--- Name: event_actions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero_cms
---
-
-SELECT pg_catalog.setval('event_actions_id_seq', 1, false);
-
-
---
--- Data for Name: events; Type: TABLE DATA; Schema: public; Owner: gzero_cms
---
-
-COPY events (id, title, description, winner_id, thumb_id, regulations_id, created_at, updated_at, ends_at) FROM stdin;
-\.
-
-
---
--- Name: events_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero_cms
---
-
-SELECT pg_catalog.setval('events_id_seq', 1, false);
 
 
 --
@@ -1416,10 +1226,10 @@ SELECT pg_catalog.setval('file_translations_id_seq', 1, false);
 --
 
 COPY file_types (name, extensions, is_active, created_at, updated_at) FROM stdin;
-image	\N	t	2017-07-04 10:54:11	2017-07-04 10:54:11
-document	\N	t	2017-07-04 10:54:11	2017-07-04 10:54:11
-video	\N	t	2017-07-04 10:54:11	2017-07-04 10:54:11
-music	\N	t	2017-07-04 10:54:11	2017-07-04 10:54:11
+image	\N	t	2017-10-24 12:10:25	2017-10-24 12:10:25
+document	\N	t	2017-10-24 12:10:25	2017-10-24 12:10:25
+video	\N	t	2017-10-24 12:10:25	2017-10-24 12:10:25
+music	\N	t	2017-10-24 12:10:25	2017-10-24 12:10:25
 \.
 
 
@@ -1443,10 +1253,10 @@ SELECT pg_catalog.setval('files_id_seq', 1, false);
 --
 
 COPY langs (code, i18n, is_enabled, is_default, created_at, updated_at) FROM stdin;
-en	en_US	t	f	2017-07-04 10:54:11	2017-07-04 10:54:11
-de	de_DE	f	f	2017-07-04 10:54:11	2017-07-04 10:54:11
-fr	fr_FR	f	f	2017-07-04 10:54:11	2017-07-04 10:54:11
-pl	pl_PL	t	t	2017-07-04 10:54:11	2017-07-04 10:54:11
+pl	pl_PL	t	f	2017-10-24 12:10:24	2017-10-24 12:10:24
+de	de_DE	f	f	2017-10-24 12:10:24	2017-10-24 12:10:24
+fr	fr_FR	f	f	2017-10-24 12:10:24	2017-10-24 12:10:24
+en	en_US	t	t	2017-10-24 12:10:24	2017-10-24 12:10:24
 \.
 
 
@@ -1455,26 +1265,24 @@ pl	pl_PL	t	t	2017-07-04 10:54:11	2017-07-04 10:54:11
 --
 
 COPY migrations (id, migration, batch) FROM stdin;
-74	2014_10_12_100000_create_password_resets_table	1
-75	2014_11_16_114110_create_lang	1
-76	2014_11_16_114111_create_user	1
-77	2014_11_16_114112_create_route	1
-78	2014_11_16_114113_create_content	1
-79	2015_03_28_091847_create_social	1
-80	2015_09_07_100656_create_options	1
-81	2015_11_26_115322_create_block	1
-82	2016_05_08_111342_create_files_table	1
-83	2016_05_08_140929_add_file_column_to_contents_table	1
-84	2016_06_01_000001_create_oauth_auth_codes_table	1
-85	2016_06_01_000002_create_oauth_access_tokens_table	1
-86	2016_06_01_000003_create_oauth_refresh_tokens_table	1
-87	2016_06_01_000004_create_oauth_clients_table	1
-88	2016_06_01_000005_create_oauth_personal_access_clients_table	1
-89	2016_08_13_113755_create_roles_and_permissions_table	1
-90	2017_03_09_134604_passport_create_clients	1
-91	2017_04_26_135124_create_failed_jobs_table	1
-92	2017_05_17_095717_null_first_name_and_last_name_fields	1
-93	2017_06_19_091940_create_events	1
+91	2014_10_12_100000_create_password_resets_table	1
+92	2014_11_16_114110_create_lang	1
+93	2014_11_16_114111_create_user	1
+94	2014_11_16_114112_create_route	1
+95	2014_11_16_114113_create_content	1
+96	2015_09_07_100656_create_options	1
+97	2015_11_26_115322_create_block	1
+98	2016_05_08_111342_create_files_table	1
+99	2016_05_08_140929_add_file_column_to_contents_table	1
+100	2016_06_01_000001_create_oauth_auth_codes_table	1
+101	2016_06_01_000002_create_oauth_access_tokens_table	1
+102	2016_06_01_000003_create_oauth_refresh_tokens_table	1
+103	2016_06_01_000004_create_oauth_clients_table	1
+104	2016_06_01_000005_create_oauth_personal_access_clients_table	1
+105	2016_08_13_113755_create_roles_and_permissions_table	1
+106	2017_03_09_134604_passport_create_clients	1
+107	2017_04_26_135124_create_failed_jobs_table	1
+108	2017_10_24_094825_create_google_tag_manager_id_row_and_delete_google_analytics_id_row	1
 \.
 
 
@@ -1482,7 +1290,7 @@ COPY migrations (id, migration, batch) FROM stdin;
 -- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero_cms
 --
 
-SELECT pg_catalog.setval('migrations_id_seq', 93, true);
+SELECT pg_catalog.setval('migrations_id_seq', 108, true);
 
 
 --
@@ -1506,8 +1314,8 @@ COPY oauth_auth_codes (id, user_id, client_id, scopes, revoked, expires_at) FROM
 --
 
 COPY oauth_clients (id, user_id, name, secret, redirect, personal_access_client, password_client, revoked, created_at, updated_at) FROM stdin;
-1	\N	Password Grant Client	JkqL11blFCNDFVhc8QHGvyPTEU2vMftbYsKCcx4v	http://localhost	f	t	f	2017-07-04 10:54:11	2017-07-04 10:54:11
-2	\N	Personal Access Client	NSXQx52cNyrKTVgvHAMNFptfFUPajdTEoJhZk7TN	http://localhost	t	f	f	2017-07-04 10:54:11	2017-07-04 10:54:11
+1	\N	Password Grant Client	aIGxTlYl8YBrqcPceAmXDGjZQPl3vnTbrQ058Tht	http://localhost	f	t	f	2017-10-24 12:10:25	2017-10-24 12:10:25
+2	\N	Personal Access Client	5CvkiIa6OrMfZ9wPoGvKBkcOc4CwA9YzOa6x0eqH	http://localhost	t	f	f	2017-10-24 12:10:25	2017-10-24 12:10:25
 \.
 
 
@@ -1523,7 +1331,7 @@ SELECT pg_catalog.setval('oauth_clients_id_seq', 2, true);
 --
 
 COPY oauth_personal_access_clients (id, client_id, created_at, updated_at) FROM stdin;
-1	2	2017-07-04 10:54:11	2017-07-04 10:54:11
+1	2	2017-10-24 12:10:25	2017-10-24 12:10:25
 \.
 
 
@@ -1547,8 +1355,8 @@ COPY oauth_refresh_tokens (id, access_token_id, revoked, expires_at) FROM stdin;
 --
 
 COPY option_categories (key, created_at, updated_at) FROM stdin;
-general	2017-07-04 10:54:11	2017-07-04 10:54:11
-seo	2017-07-04 10:54:11	2017-07-04 10:54:11
+general	2017-10-24 12:10:25	2017-10-24 12:10:25
+seo	2017-10-24 12:10:25	2017-10-24 12:10:25
 \.
 
 
@@ -1557,12 +1365,12 @@ seo	2017-07-04 10:54:11	2017-07-04 10:54:11
 --
 
 COPY options (id, key, category_key, value, created_at, updated_at) FROM stdin;
-1	site_name	general	{"en":"Kurs Manga","de":"Kurs Manga","fr":"Kurs Manga","pl":"Kurs Manga"}	2017-07-04 10:54:11	2017-07-04 10:54:11
-2	site_desc	general	{"en":"GZERO-CMS Content management system.","de":"GZERO-CMS Content management system.","fr":"GZERO-CMS Content management system.","pl":"GZERO-CMS Content management system."}	2017-07-04 10:54:11	2017-07-04 10:54:11
-3	default_page_size	general	{"en":5,"de":5,"fr":5,"pl":5}	2017-07-04 10:54:11	2017-07-04 10:54:11
-4	cookies_policy_url	general	{"en":null,"de":null,"fr":null,"pl":null}	2017-07-04 10:54:11	2017-07-04 10:54:11
-5	desc_length	seo	{"en":160,"de":160,"fr":160,"pl":160}	2017-07-04 10:54:11	2017-07-04 10:54:11
-6	google_analytics_id	seo	{"en":null,"de":null,"fr":null,"pl":null}	2017-07-04 10:54:11	2017-07-04 10:54:11
+1	site_name	general	{"pl":"GZERO-CMS","de":"GZERO-CMS","fr":"GZERO-CMS","en":"GZERO-CMS"}	2017-10-24 12:10:25	2017-10-24 12:10:25
+2	site_desc	general	{"pl":"GZERO-CMS Content management system.","de":"GZERO-CMS Content management system.","fr":"GZERO-CMS Content management system.","en":"GZERO-CMS Content management system."}	2017-10-24 12:10:25	2017-10-24 12:10:25
+3	default_page_size	general	{"pl":5,"de":5,"fr":5,"en":5}	2017-10-24 12:10:25	2017-10-24 12:10:25
+4	cookies_policy_url	general	{"pl":null,"de":null,"fr":null,"en":null}	2017-10-24 12:10:25	2017-10-24 12:10:25
+5	desc_length	seo	{"pl":160,"de":160,"fr":160,"en":160}	2017-10-24 12:10:25	2017-10-24 12:10:25
+7	google_tag_manager_id	seo	{"pl":null,"de":null,"fr":null,"en":null}	2017-10-24 12:10:25	2017-10-24 12:10:25
 \.
 
 
@@ -1570,7 +1378,7 @@ COPY options (id, key, category_key, value, created_at, updated_at) FROM stdin;
 -- Name: options_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero_cms
 --
 
-SELECT pg_catalog.setval('options_id_seq', 6, true);
+SELECT pg_catalog.setval('options_id_seq', 7, true);
 
 
 --
@@ -1612,21 +1420,6 @@ SELECT pg_catalog.setval('routes_id_seq', 1, false);
 
 
 --
--- Data for Name: social_integrations; Type: TABLE DATA; Schema: public; Owner: gzero_cms
---
-
-COPY social_integrations (id, user_id, social_id, created_at) FROM stdin;
-\.
-
-
---
--- Name: social_integrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gzero_cms
---
-
-SELECT pg_catalog.setval('social_integrations_id_seq', 1, false);
-
-
---
 -- Data for Name: uploadables; Type: TABLE DATA; Schema: public; Owner: gzero_cms
 --
 
@@ -1638,8 +1431,8 @@ COPY uploadables (file_id, uploadable_id, uploadable_type, weight, created_at, u
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: gzero_cms
 --
 
-COPY users (id, email, password, nick, first_name, last_name, is_admin, remember_token, created_at, updated_at, has_social_integrations) FROM stdin;
-1	admin@gzero.pl	$2y$10$aKFfklfqkhbk54RSQuY/weW8J9rMz/fTBmFz0Chj3KKK1ii.Rdcoy	Admin	\N	\N	t	\N	2017-07-04 10:54:11	2017-07-04 10:54:11	f
+COPY users (id, email, password, nick, first_name, last_name, is_admin, remember_token, created_at, updated_at) FROM stdin;
+1	admin@gzero.pl	$2y$10$qI2yBGzjihzWtnpq3pU6EOr8nnBQKJjw23ZnOYFV/UvSGrsRjZwS.	Admin	John	Doe	t	\N	2017-10-24 12:10:24	2017-10-24 12:10:24
 \.
 
 
@@ -1743,22 +1536,6 @@ ALTER TABLE ONLY content_types
 
 ALTER TABLE ONLY contents
     ADD CONSTRAINT contents_pkey PRIMARY KEY (id);
-
-
---
--- Name: event_actions event_actions_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero_cms
---
-
-ALTER TABLE ONLY event_actions
-    ADD CONSTRAINT event_actions_pkey PRIMARY KEY (id);
-
-
---
--- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero_cms
---
-
-ALTER TABLE ONLY events
-    ADD CONSTRAINT events_pkey PRIMARY KEY (id);
 
 
 --
@@ -1903,22 +1680,6 @@ ALTER TABLE ONLY route_translations
 
 ALTER TABLE ONLY routes
     ADD CONSTRAINT routes_pkey PRIMARY KEY (id);
-
-
---
--- Name: social_integrations social_integrations_pkey; Type: CONSTRAINT; Schema: public; Owner: gzero_cms
---
-
-ALTER TABLE ONLY social_integrations
-    ADD CONSTRAINT social_integrations_pkey PRIMARY KEY (id);
-
-
---
--- Name: social_integrations social_integrations_social_id_unique; Type: CONSTRAINT; Schema: public; Owner: gzero_cms
---
-
-ALTER TABLE ONLY social_integrations
-    ADD CONSTRAINT social_integrations_social_id_unique UNIQUE (social_id);
 
 
 --
@@ -2172,46 +1933,6 @@ ALTER TABLE ONLY contents
 
 
 --
--- Name: event_action_user event_action_user_event_action_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero_cms
---
-
-ALTER TABLE ONLY event_action_user
-    ADD CONSTRAINT event_action_user_event_action_id_foreign FOREIGN KEY (event_action_id) REFERENCES event_actions(id) ON DELETE CASCADE;
-
-
---
--- Name: event_action_user event_action_user_user_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero_cms
---
-
-ALTER TABLE ONLY event_action_user
-    ADD CONSTRAINT event_action_user_user_id_foreign FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
-
-
---
--- Name: event_actions event_actions_event_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero_cms
---
-
-ALTER TABLE ONLY event_actions
-    ADD CONSTRAINT event_actions_event_id_foreign FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE;
-
-
---
--- Name: events events_regulations_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero_cms
---
-
-ALTER TABLE ONLY events
-    ADD CONSTRAINT events_regulations_id_foreign FOREIGN KEY (regulations_id) REFERENCES contents(id) ON DELETE SET NULL;
-
-
---
--- Name: events events_winner_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero_cms
---
-
-ALTER TABLE ONLY events
-    ADD CONSTRAINT events_winner_id_foreign FOREIGN KEY (winner_id) REFERENCES users(id) ON DELETE CASCADE;
-
-
---
 -- Name: file_translations file_translations_file_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero_cms
 --
 
@@ -2265,14 +1986,6 @@ ALTER TABLE ONLY route_translations
 
 ALTER TABLE ONLY route_translations
     ADD CONSTRAINT route_translations_route_id_foreign FOREIGN KEY (route_id) REFERENCES routes(id) ON DELETE CASCADE;
-
-
---
--- Name: social_integrations social_integrations_user_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: gzero_cms
---
-
-ALTER TABLE ONLY social_integrations
-    ADD CONSTRAINT social_integrations_user_id_foreign FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
 
 
 --
