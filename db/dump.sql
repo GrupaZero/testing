@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.1
--- Dumped by pg_dump version 9.6.1
+-- Dumped from database version 9.6.4
+-- Dumped by pg_dump version 9.6.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -17,7 +17,6 @@ SET row_security = off;
 SET search_path = public, pg_catalog;
 
 ALTER TABLE IF EXISTS ONLY public.uploadables DROP CONSTRAINT IF EXISTS uploadables_file_id_foreign;
-ALTER TABLE IF EXISTS ONLY public.social_integrations DROP CONSTRAINT IF EXISTS social_integrations_user_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_route_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_language_code_foreign;
 ALTER TABLE IF EXISTS ONLY public.options DROP CONSTRAINT IF EXISTS options_category_key_foreign;
@@ -41,7 +40,6 @@ ALTER TABLE IF EXISTS ONLY public.acl_permission_role DROP CONSTRAINT IF EXISTS 
 ALTER TABLE IF EXISTS ONLY public.acl_permission_role DROP CONSTRAINT IF EXISTS acl_permission_role_permission_id_foreign;
 DROP INDEX IF EXISTS public.uploadables_file_id_index;
 DROP INDEX IF EXISTS public.route_translations_url_index;
-DROP INDEX IF EXISTS public.password_resets_token_index;
 DROP INDEX IF EXISTS public.password_resets_email_index;
 DROP INDEX IF EXISTS public.options_category_key_key_index;
 DROP INDEX IF EXISTS public.oauth_refresh_tokens_access_token_id_index;
@@ -59,8 +57,6 @@ ALTER TABLE IF EXISTS ONLY public.widgets DROP CONSTRAINT IF EXISTS widgets_name
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pkey;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_name_unique;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_email_unique;
-ALTER TABLE IF EXISTS ONLY public.social_integrations DROP CONSTRAINT IF EXISTS social_integrations_social_id_unique;
-ALTER TABLE IF EXISTS ONLY public.social_integrations DROP CONSTRAINT IF EXISTS social_integrations_pkey;
 ALTER TABLE IF EXISTS ONLY public.routes DROP CONSTRAINT IF EXISTS routes_pkey;
 ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_pkey;
 ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_language_code_url_unique;
@@ -77,7 +73,8 @@ ALTER TABLE IF EXISTS ONLY public.languages DROP CONSTRAINT IF EXISTS languages_
 ALTER TABLE IF EXISTS ONLY public.files DROP CONSTRAINT IF EXISTS files_pkey;
 ALTER TABLE IF EXISTS ONLY public.file_types DROP CONSTRAINT IF EXISTS file_types_pkey;
 ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_pkey;
-ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_file_id_language_code_unique;
+ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_file_id_lang_code_unique;
+ALTER TABLE IF EXISTS ONLY public.failed_jobs DROP CONSTRAINT IF EXISTS failed_jobs_pkey;
 ALTER TABLE IF EXISTS ONLY public.contents DROP CONSTRAINT IF EXISTS contents_pkey;
 ALTER TABLE IF EXISTS ONLY public.content_types DROP CONSTRAINT IF EXISTS content_types_pkey;
 ALTER TABLE IF EXISTS ONLY public.content_translations DROP CONSTRAINT IF EXISTS content_translations_pkey;
@@ -90,7 +87,6 @@ ALTER TABLE IF EXISTS ONLY public.acl_permissions DROP CONSTRAINT IF EXISTS acl_
 ALTER TABLE IF EXISTS ONLY public.acl_permissions DROP CONSTRAINT IF EXISTS acl_permissions_name_unique;
 ALTER TABLE IF EXISTS public.widgets ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.users ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE IF EXISTS public.social_integrations ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.routes ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.route_translations ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.options ALTER COLUMN id DROP DEFAULT;
@@ -99,6 +95,7 @@ ALTER TABLE IF EXISTS public.oauth_clients ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.migrations ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.files ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.file_translations ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.failed_jobs ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.contents ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.content_translations ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.blocks ALTER COLUMN id DROP DEFAULT;
@@ -110,8 +107,6 @@ DROP TABLE IF EXISTS public.widgets;
 DROP SEQUENCE IF EXISTS public.users_id_seq;
 DROP TABLE IF EXISTS public.users;
 DROP TABLE IF EXISTS public.uploadables;
-DROP SEQUENCE IF EXISTS public.social_integrations_id_seq;
-DROP TABLE IF EXISTS public.social_integrations;
 DROP SEQUENCE IF EXISTS public.routes_id_seq;
 DROP TABLE IF EXISTS public.routes;
 DROP SEQUENCE IF EXISTS public.route_translations_id_seq;
@@ -135,6 +130,8 @@ DROP TABLE IF EXISTS public.files;
 DROP TABLE IF EXISTS public.file_types;
 DROP SEQUENCE IF EXISTS public.file_translations_id_seq;
 DROP TABLE IF EXISTS public.file_translations;
+DROP SEQUENCE IF EXISTS public.failed_jobs_id_seq;
+DROP TABLE IF EXISTS public.failed_jobs;
 DROP SEQUENCE IF EXISTS public.contents_id_seq;
 DROP TABLE IF EXISTS public.contents;
 DROP TABLE IF EXISTS public.content_types;
@@ -151,7 +148,6 @@ DROP TABLE IF EXISTS public.acl_roles;
 DROP SEQUENCE IF EXISTS public.acl_permissions_id_seq;
 DROP TABLE IF EXISTS public.acl_permissions;
 DROP TABLE IF EXISTS public.acl_permission_role;
-DROP EXTENSION IF EXISTS plpgsql;
 DROP SCHEMA IF EXISTS public;
 --
 -- Name: public; Type: SCHEMA; Schema: -; Owner: -
@@ -165,20 +161,6 @@ CREATE SCHEMA public;
 --
 
 COMMENT ON SCHEMA public IS 'standard public schema';
-
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 SET search_path = public, pg_catalog;
@@ -217,11 +199,11 @@ CREATE TABLE acl_permissions (
 --
 
 CREATE SEQUENCE acl_permissions_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -248,11 +230,11 @@ CREATE TABLE acl_roles (
 --
 
 CREATE SEQUENCE acl_roles_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -296,11 +278,11 @@ CREATE TABLE block_translations (
 --
 
 CREATE SEQUENCE block_translations_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -350,11 +332,11 @@ CREATE TABLE blocks (
 --
 
 CREATE SEQUENCE blocks_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -388,11 +370,11 @@ CREATE TABLE content_translations (
 --
 
 CREATE SEQUENCE content_translations_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -447,11 +429,11 @@ CREATE TABLE contents (
 --
 
 CREATE SEQUENCE contents_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -459,6 +441,39 @@ CACHE 1;
 --
 
 ALTER SEQUENCE contents_id_seq OWNED BY contents.id;
+
+
+--
+-- Name: failed_jobs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE failed_jobs (
+    id bigint NOT NULL,
+    connection text NOT NULL,
+    queue text NOT NULL,
+    payload text NOT NULL,
+    exception text NOT NULL,
+    failed_at timestamp(0) without time zone DEFAULT ('now'::text)::timestamp(0) with time zone NOT NULL
+);
+
+
+--
+-- Name: failed_jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE failed_jobs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: failed_jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE failed_jobs_id_seq OWNED BY failed_jobs.id;
 
 
 --
@@ -481,11 +496,11 @@ CREATE TABLE file_translations (
 --
 
 CREATE SEQUENCE file_translations_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -532,11 +547,11 @@ CREATE TABLE files (
 --
 
 CREATE SEQUENCE files_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -576,11 +591,11 @@ CREATE TABLE migrations (
 --
 
 CREATE SEQUENCE migrations_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -644,11 +659,11 @@ CREATE TABLE oauth_clients (
 --
 
 CREATE SEQUENCE oauth_clients_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -675,11 +690,11 @@ CREATE TABLE oauth_personal_access_clients (
 --
 
 CREATE SEQUENCE oauth_personal_access_clients_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -731,11 +746,11 @@ CREATE TABLE options (
 --
 
 CREATE SEQUENCE options_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -776,11 +791,11 @@ CREATE TABLE route_translations (
 --
 
 CREATE SEQUENCE route_translations_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -809,11 +824,11 @@ CREATE TABLE routes (
 --
 
 CREATE SEQUENCE routes_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -821,37 +836,6 @@ CACHE 1;
 --
 
 ALTER SEQUENCE routes_id_seq OWNED BY routes.id;
-
-
---
--- Name: social_integrations; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE social_integrations (
-    id integer NOT NULL,
-    user_id integer,
-    social_id character varying(255) NOT NULL,
-    created_at timestamp(0) without time zone NOT NULL
-);
-
-
---
--- Name: social_integrations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE social_integrations_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
-
-
---
--- Name: social_integrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE social_integrations_id_seq OWNED BY social_integrations.id;
 
 
 --
@@ -882,8 +866,7 @@ CREATE TABLE users (
     is_admin boolean DEFAULT false NOT NULL,
     remember_token character varying(100),
     created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    has_social_integrations boolean DEFAULT false NOT NULL
+    updated_at timestamp(0) without time zone
 );
 
 
@@ -892,11 +875,11 @@ CREATE TABLE users (
 --
 
 CREATE SEQUENCE users_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -926,11 +909,11 @@ CREATE TABLE widgets (
 --
 
 CREATE SEQUENCE widgets_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -980,6 +963,13 @@ ALTER TABLE ONLY content_translations ALTER COLUMN id SET DEFAULT nextval('conte
 --
 
 ALTER TABLE ONLY contents ALTER COLUMN id SET DEFAULT nextval('contents_id_seq'::regclass);
+
+
+--
+-- Name: failed_jobs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY failed_jobs ALTER COLUMN id SET DEFAULT nextval('failed_jobs_id_seq'::regclass);
 
 
 --
@@ -1039,13 +1029,6 @@ ALTER TABLE ONLY routes ALTER COLUMN id SET DEFAULT nextval('routes_id_seq'::reg
 
 
 --
--- Name: social_integrations id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY social_integrations ALTER COLUMN id SET DEFAULT nextval('social_integrations_id_seq'::regclass);
-
-
---
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1064,43 +1047,43 @@ ALTER TABLE ONLY widgets ALTER COLUMN id SET DEFAULT nextval('widgets_id_seq'::r
 --
 
 COPY acl_permission_role (permission_id, role_id, created_at, updated_at) FROM stdin;
-1	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-200	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-201	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-202	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-203	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-204	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-205	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-206	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-207	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-208	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-209	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-210	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-211	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-212	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-213	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-214	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-215	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-216	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-217	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-218	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-219	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-220	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-221	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-222	1	2017-03-26 14:01:01	2017-03-26 14:01:01
-1	2	2017-03-26 14:01:01	2017-03-26 14:01:01
-200	2	2017-03-26 14:01:01	2017-03-26 14:01:01
-201	2	2017-03-26 14:01:01	2017-03-26 14:01:01
-202	2	2017-03-26 14:01:01	2017-03-26 14:01:01
-203	2	2017-03-26 14:01:01	2017-03-26 14:01:01
-204	2	2017-03-26 14:01:01	2017-03-26 14:01:01
-205	2	2017-03-26 14:01:01	2017-03-26 14:01:01
-206	2	2017-03-26 14:01:01	2017-03-26 14:01:01
-207	2	2017-03-26 14:01:01	2017-03-26 14:01:01
-212	2	2017-03-26 14:01:01	2017-03-26 14:01:01
-213	2	2017-03-26 14:01:01	2017-03-26 14:01:01
-214	2	2017-03-26 14:01:01	2017-03-26 14:01:01
-215	2	2017-03-26 14:01:01	2017-03-26 14:01:01
+1	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+200	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+201	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+202	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+203	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+204	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+205	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+206	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+207	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+208	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+209	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+210	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+211	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+212	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+213	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+214	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+215	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+216	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+217	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+218	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+219	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+220	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+221	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+222	1	2017-10-25 10:37:15	2017-10-25 10:37:15
+1	2	2017-10-25 10:37:15	2017-10-25 10:37:15
+200	2	2017-10-25 10:37:15	2017-10-25 10:37:15
+201	2	2017-10-25 10:37:15	2017-10-25 10:37:15
+202	2	2017-10-25 10:37:15	2017-10-25 10:37:15
+203	2	2017-10-25 10:37:15	2017-10-25 10:37:15
+204	2	2017-10-25 10:37:15	2017-10-25 10:37:15
+205	2	2017-10-25 10:37:15	2017-10-25 10:37:15
+206	2	2017-10-25 10:37:15	2017-10-25 10:37:15
+207	2	2017-10-25 10:37:15	2017-10-25 10:37:15
+212	2	2017-10-25 10:37:15	2017-10-25 10:37:15
+213	2	2017-10-25 10:37:15	2017-10-25 10:37:15
+214	2	2017-10-25 10:37:15	2017-10-25 10:37:15
+215	2	2017-10-25 10:37:15	2017-10-25 10:37:15
 \.
 
 
@@ -1148,8 +1131,8 @@ SELECT pg_catalog.setval('acl_permissions_id_seq', 1, false);
 --
 
 COPY acl_roles (id, name, created_at, updated_at) FROM stdin;
-1	Admin	2017-03-26 14:01:01	2017-03-26 14:01:01
-2	Moderator	2017-03-26 14:01:01	2017-03-26 14:01:01
+1	Admin	2017-10-25 10:37:15	2017-10-25 10:37:15
+2	Moderator	2017-10-25 10:37:15	2017-10-25 10:37:15
 \.
 
 
@@ -1165,7 +1148,7 @@ SELECT pg_catalog.setval('acl_roles_id_seq', 2, true);
 --
 
 COPY acl_user_role (user_id, role_id, created_at, updated_at) FROM stdin;
-1	1	2017-03-26 14:01:01	2017-03-26 14:01:01
+1	1	2017-10-25 10:37:15	2017-10-25 10:37:15
 \.
 
 
@@ -1189,10 +1172,10 @@ SELECT pg_catalog.setval('block_translations_id_seq', 1, false);
 --
 
 COPY block_types (name, is_active, created_at, updated_at) FROM stdin;
-basic	t	2017-03-26 14:01:00	2017-03-26 14:01:00
-menu	t	2017-03-26 14:01:00	2017-03-26 14:01:00
-slider	t	2017-03-26 14:01:00	2017-03-26 14:01:00
-widget	t	2017-03-26 14:01:00	2017-03-26 14:01:00
+basic	t	2017-10-25 10:37:15	2017-10-25 10:37:15
+menu	t	2017-10-25 10:37:15	2017-10-25 10:37:15
+slider	t	2017-10-25 10:37:15	2017-10-25 10:37:15
+widget	t	2017-10-25 10:37:15	2017-10-25 10:37:15
 \.
 
 
@@ -1231,8 +1214,8 @@ SELECT pg_catalog.setval('content_translations_id_seq', 1, false);
 --
 
 COPY content_types (name, is_active, created_at, updated_at) FROM stdin;
-content	t	2017-03-26 14:01:00	2017-03-26 14:01:00
-category	t	2017-03-26 14:01:00	2017-03-26 14:01:00
+content	t	2017-10-25 10:37:15	2017-10-25 10:37:15
+category	t	2017-10-25 10:37:15	2017-10-25 10:37:15
 \.
 
 
@@ -1249,6 +1232,21 @@ COPY contents (id, type, theme, author_id, path, parent_id, level, weight, ratin
 --
 
 SELECT pg_catalog.setval('contents_id_seq', 1, false);
+
+
+--
+-- Data for Name: failed_jobs; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY failed_jobs (id, connection, queue, payload, exception, failed_at) FROM stdin;
+\.
+
+
+--
+-- Name: failed_jobs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('failed_jobs_id_seq', 1, false);
 
 
 --
@@ -1271,10 +1269,10 @@ SELECT pg_catalog.setval('file_translations_id_seq', 1, false);
 --
 
 COPY file_types (name, extensions, is_active, created_at, updated_at) FROM stdin;
-image	\N	t	2017-03-26 14:01:00	2017-03-26 14:01:00
-document	\N	t	2017-03-26 14:01:00	2017-03-26 14:01:00
-video	\N	t	2017-03-26 14:01:01	2017-03-26 14:01:01
-music	\N	t	2017-03-26 14:01:01	2017-03-26 14:01:01
+image	\N	t	2017-10-25 10:37:15	2017-10-25 10:37:15
+document	\N	t	2017-10-25 10:37:15	2017-10-25 10:37:15
+video	\N	t	2017-10-25 10:37:15	2017-10-25 10:37:15
+music	\N	t	2017-10-25 10:37:15	2017-10-25 10:37:15
 \.
 
 
@@ -1296,12 +1294,11 @@ SELECT pg_catalog.setval('files_id_seq', 1, false);
 --
 -- Data for Name: languages; Type: TABLE DATA; Schema: public; Owner: -
 --
-
-COPY languages (code, i18n, is_enabled, is_default, created_at, updated_at) FROM stdin;
-pl	pl_PL	t	f	2017-03-26 14:01:00	2017-03-26 14:01:00
-de	de_DE	f	f	2017-03-26 14:01:00	2017-03-26 14:01:00
-fr	fr_FR	f	f	2017-03-26 14:01:00	2017-03-26 14:01:00
-en	en_US	t	t	2017-03-26 14:01:00	2017-03-26 14:01:00
+COPY langs (code, i18n, is_enabled, is_default, created_at, updated_at) FROM stdin;
+pl	pl_PL	t	f	2017-10-25 10:37:15	2017-10-25 10:37:15
+de	de_DE	f	f	2017-10-25 10:37:15	2017-10-25 10:37:15
+fr	fr_FR	f	f	2017-10-25 10:37:15	2017-10-25 10:37:15
+en	en_US	t	t	2017-10-25 10:37:15	2017-10-25 10:37:15
 \.
 
 
@@ -1310,23 +1307,24 @@ en	en_US	t	t	2017-03-26 14:01:00	2017-03-26 14:01:00
 --
 
 COPY migrations (id, migration, batch) FROM stdin;
-1	2014_10_12_100000_create_password_resets_table	1
-2	2014_11_16_114110_create_language	1
-3	2014_11_16_114111_create_user	1
-4	2014_11_16_114112_create_route	1
-5	2014_11_16_114113_create_content	1
-6	2015_03_28_091847_create_social	1
-7	2015_09_07_100656_create_options	1
-8	2015_11_26_115322_create_block	1
-9	2016_05_08_111342_create_files_table	1
-10	2016_05_08_140929_add_file_column_to_contents_table	1
-11	2016_06_01_000001_create_oauth_auth_codes_table	1
-12	2016_06_01_000002_create_oauth_access_tokens_table	1
-13	2016_06_01_000003_create_oauth_refresh_tokens_table	1
-14	2016_06_01_000004_create_oauth_clients_table	1
-15	2016_06_01_000005_create_oauth_personal_access_clients_table	1
-16	2016_08_13_113755_create_roles_and_permissions_table	1
-17	2017_03_09_134604_passport_create_clients	1
+142	2014_10_12_100000_create_password_resets_table	1
+143	2014_11_16_114110_create_lang	1
+144	2014_11_16_114111_create_user	1
+145	2014_11_16_114112_create_route	1
+146	2014_11_16_114113_create_content	1
+147	2015_09_07_100656_create_options	1
+148	2015_11_26_115322_create_block	1
+149	2016_05_08_111342_create_files_table	1
+150	2016_05_08_140929_add_file_column_to_contents_table	1
+151	2016_06_01_000001_create_oauth_auth_codes_table	1
+152	2016_06_01_000002_create_oauth_access_tokens_table	1
+153	2016_06_01_000003_create_oauth_refresh_tokens_table	1
+154	2016_06_01_000004_create_oauth_clients_table	1
+155	2016_06_01_000005_create_oauth_personal_access_clients_table	1
+156	2016_08_13_113755_create_roles_and_permissions_table	1
+157	2017_03_09_134604_passport_create_clients	1
+158	2017_04_26_135124_create_failed_jobs_table	1
+159	2017_10_24_094825_create_google_tag_manager_id_row_and_delete_google_analytics_id_row	1
 \.
 
 
@@ -1334,7 +1332,7 @@ COPY migrations (id, migration, batch) FROM stdin;
 -- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('migrations_id_seq', 17, true);
+SELECT pg_catalog.setval('migrations_id_seq', 159, true);
 
 
 --
@@ -1358,8 +1356,8 @@ COPY oauth_auth_codes (id, user_id, client_id, scopes, revoked, expires_at) FROM
 --
 
 COPY oauth_clients (id, user_id, name, secret, redirect, personal_access_client, password_client, revoked, created_at, updated_at) FROM stdin;
-1	\N	Password Grant Client	z4Lua7hpZGRo3KBMeTtJvYwh7bESInmF6GBgxNVb	http://localhost	f	t	f	2017-03-26 14:01:01	2017-03-26 14:01:01
-2	\N	Personal Access Client	Gqycv7NudCVz9m3kmgzRWQHLG5x8Lc06rt62ayRJ	http://localhost	t	f	f	2017-03-26 14:01:01	2017-03-26 14:01:01
+1	\N	Password Grant Client	faAkfC4Uqxstrya93SKbAhk9nIPCeHCnCvxZ73fH	http://localhost	f	t	f	2017-10-25 10:37:15	2017-10-25 10:37:15
+2	\N	Personal Access Client	cMWwQfpaZ5wAmV4IucoQsW9Yh3dKx9lpdvoW80jv	http://localhost	t	f	f	2017-10-25 10:37:15	2017-10-25 10:37:15
 \.
 
 
@@ -1375,7 +1373,7 @@ SELECT pg_catalog.setval('oauth_clients_id_seq', 2, true);
 --
 
 COPY oauth_personal_access_clients (id, client_id, created_at, updated_at) FROM stdin;
-1	2	2017-03-26 14:01:01	2017-03-26 14:01:01
+1	2	2017-10-25 10:37:15	2017-10-25 10:37:15
 \.
 
 
@@ -1399,8 +1397,8 @@ COPY oauth_refresh_tokens (id, access_token_id, revoked, expires_at) FROM stdin;
 --
 
 COPY option_categories (key, created_at, updated_at) FROM stdin;
-general	2017-03-26 14:01:00	2017-03-26 14:01:00
-seo	2017-03-26 14:01:00	2017-03-26 14:01:00
+general	2017-10-25 10:37:15	2017-10-25 10:37:15
+seo	2017-10-25 10:37:15	2017-10-25 10:37:15
 \.
 
 
@@ -1409,12 +1407,12 @@ seo	2017-03-26 14:01:00	2017-03-26 14:01:00
 --
 
 COPY options (id, key, category_key, value, created_at, updated_at) FROM stdin;
-1	site_name	general	{"pl":"GZERO-CMS","de":"GZERO-CMS","fr":"GZERO-CMS","en":"GZERO-CMS"}	2017-03-26 14:01:00	2017-03-26 14:01:00
-2	site_desc	general	{"pl":"GZERO-CMS Content management system.","de":"GZERO-CMS Content management system.","fr":"GZERO-CMS Content management system.","en":"GZERO-CMS Content management system."}	2017-03-26 14:01:00	2017-03-26 14:01:00
-3	default_page_size	general	{"pl":10,"de":10,"fr":10,"en":10}	2017-03-26 14:01:00	2017-03-26 14:01:00
-4	cookies_policy_url	general	{"pl":null,"de":null,"fr":null,"en":null}	2017-03-26 14:01:00	2017-03-26 14:01:00
-5	desc_length	seo	{"pl":160,"de":160,"fr":160,"en":160}	2017-03-26 14:01:00	2017-03-26 14:01:00
-6	google_analytics_id	seo	{"pl":null,"de":null,"fr":null,"en":null}	2017-03-26 14:01:00	2017-03-26 14:01:00
+1	site_name	general	{"pl":"GZERO-CMS","de":"GZERO-CMS","fr":"GZERO-CMS","en":"GZERO-CMS"}	2017-10-25 10:37:15	2017-10-25 10:37:15
+2	site_desc	general	{"pl":"GZERO-CMS Content management system.","de":"GZERO-CMS Content management system.","fr":"GZERO-CMS Content management system.","en":"GZERO-CMS Content management system."}	2017-10-25 10:37:15	2017-10-25 10:37:15
+3	default_page_size	general	{"pl":5,"de":5,"fr":5,"en":5}	2017-10-25 10:37:15	2017-10-25 10:37:15
+4	cookies_policy_url	general	{"pl":null,"de":null,"fr":null,"en":null}	2017-10-25 10:37:15	2017-10-25 10:37:15
+5	desc_length	seo	{"pl":160,"de":160,"fr":160,"en":160}	2017-10-25 10:37:15	2017-10-25 10:37:15
+7	google_tag_manager_id	seo	{"pl":null,"de":null,"fr":null,"en":null}	2017-10-25 10:37:15	2017-10-25 10:37:15
 \.
 
 
@@ -1422,7 +1420,7 @@ COPY options (id, key, category_key, value, created_at, updated_at) FROM stdin;
 -- Name: options_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('options_id_seq', 6, true);
+SELECT pg_catalog.setval('options_id_seq', 7, true);
 
 
 --
@@ -1464,21 +1462,6 @@ SELECT pg_catalog.setval('routes_id_seq', 1, false);
 
 
 --
--- Data for Name: social_integrations; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY social_integrations (id, user_id, social_id, created_at) FROM stdin;
-\.
-
-
---
--- Name: social_integrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('social_integrations_id_seq', 1, false);
-
-
---
 -- Data for Name: uploadables; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -1490,8 +1473,8 @@ COPY uploadables (file_id, uploadable_id, uploadable_type, weight, created_at, u
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY users (id, email, password, name, first_name, last_name, is_admin, remember_token, created_at, updated_at, has_social_integrations) FROM stdin;
-1	admin@gzero.pl	$2y$10$ojltc.dDXGCcPqDXpH5wb.bZPgLFLQGBt1cwj/7.YFivEEnMsG8Mi	Admin	John	Doe	t	\N	2017-03-26 14:01:00	2017-03-26 14:01:00	f
+COPY users (id, email, password, nick, first_name, last_name, is_admin, remember_token, created_at, updated_at) FROM stdin;
+1	admin@gzero.pl	$2y$10$EUAr7P1tddDBZar34CsWyOgbSV4BTs6F8cvkhP42zZqi/cX0W2sea	Admin	John	Doe	t	\N	2017-10-25 10:37:15	2017-10-25 10:37:15
 \.
 
 
@@ -1598,7 +1581,15 @@ ALTER TABLE ONLY contents
 
 
 --
--- Name: file_translations file_translations_file_id_language_code_unique; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: failed_jobs failed_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY failed_jobs
+    ADD CONSTRAINT failed_jobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: file_translations file_translations_file_id_lang_code_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY file_translations
@@ -1734,22 +1725,6 @@ ALTER TABLE ONLY routes
 
 
 --
--- Name: social_integrations social_integrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY social_integrations
-    ADD CONSTRAINT social_integrations_pkey PRIMARY KEY (id);
-
-
---
--- Name: social_integrations social_integrations_social_id_unique; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY social_integrations
-    ADD CONSTRAINT social_integrations_social_id_unique UNIQUE (social_id);
-
-
---
 -- Name: users users_email_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1871,13 +1846,6 @@ CREATE INDEX options_category_key_key_index ON options USING btree (category_key
 --
 
 CREATE INDEX password_resets_email_index ON password_resets USING btree (email);
-
-
---
--- Name: password_resets_token_index; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX password_resets_token_index ON password_resets USING btree (token);
 
 
 --
@@ -2063,19 +2031,18 @@ ALTER TABLE ONLY route_translations
 
 
 --
--- Name: social_integrations social_integrations_user_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY social_integrations
-    ADD CONSTRAINT social_integrations_user_id_foreign FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
-
-
---
 -- Name: uploadables uploadables_file_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY uploadables
     ADD CONSTRAINT uploadables_file_id_foreign FOREIGN KEY (file_id) REFERENCES files(id) ON DELETE CASCADE;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: -
+--
+
+GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
