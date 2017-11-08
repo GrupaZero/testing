@@ -858,7 +858,7 @@ COPY options (id, key, category_key, value, created_at, updated_at) FROM stdin;
 2	site_desc	general	{"en":"GZERO-CMS Content management system.","de":"GZERO-CMS Content management system.","fr":"GZERO-CMS Content management system.","pl":"GZERO-CMS Content management system."}	2017-11-08 15:24:04	2017-11-08 15:24:04
 3	default_page_size	general	{"en":10,"de":10,"fr":10,"pl":10}	2017-11-08 15:24:04	2017-11-08 15:24:04
 4	cookies_policy_url	general	{"en":null,"de":null,"fr":null,"pl":null}	2017-11-08 15:24:04	2017-11-08 15:24:04
-5	desc_length	seo	{"en":null,"de":null,"fr":null,"pl":null}	2017-11-08 15:24:04	2017-11-08 15:24:04
+5	desc_length	seo	{"en":160,"de":160,"fr":160,"pl":160}	2017-11-08 15:24:04	2017-11-08 15:24:04
 6	google_analytics_id	seo	{"en":null,"de":null,"fr":null,"pl":null}	2017-11-08 15:24:04	2017-11-08 15:24:04
 \.
 
