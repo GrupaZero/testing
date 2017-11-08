@@ -747,10 +747,10 @@ SELECT pg_catalog.setval('failed_jobs_id_seq', 1, false);
 --
 
 COPY languages (code, i18n, is_enabled, is_default, created_at, updated_at) FROM stdin;
-en	en_US	t	f	2017-11-08 15:23:00	2017-11-08 15:23:00
+en	en_US	t	t	2017-11-08 15:23:00	2017-11-08 15:23:00
 de	de_DE	f	f	2017-11-08 15:23:00	2017-11-08 15:23:00
 fr	fr_FR	f	f	2017-11-08 15:23:00	2017-11-08 15:23:00
-pl	pl_PL	t	t	2017-11-08 15:23:00	2017-11-08 15:23:00
+pl	pl_PL	t	f	2017-11-08 15:23:00	2017-11-08 15:23:00
 \.
 
 
