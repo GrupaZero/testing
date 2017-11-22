@@ -1245,8 +1245,8 @@ SELECT pg_catalog.setval('content_translations_id_seq', 1, false);
 --
 
 COPY content_types (id, name, handler, created_at, updated_at) FROM stdin;
-1	content	Gzero\\Cms\\Handler\\Content\\Content	2017-11-22 16:20:29	2017-11-22 16:20:29
-2	category	Gzero\\Cms\\Handler\\Content\\Category	2017-11-22 16:20:29	2017-11-22 16:20:29
+1	content	Gzero\\Cms\\Handlers\\Content\\ContentHandler	2017-11-22 16:20:29	2017-11-22 16:20:29
+2	category	Gzero\\Cms\\Handlers\\Content\\CategoryHandler	2017-11-22 16:20:29	2017-11-22 16:20:29
 \.
 
 
