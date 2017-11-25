@@ -17,8 +17,7 @@ SET row_security = off;
 SET search_path = public, pg_catalog;
 
 ALTER TABLE IF EXISTS ONLY public.uploadables DROP CONSTRAINT IF EXISTS uploadables_file_id_foreign;
-ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_route_id_foreign;
-ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_language_code_foreign;
+ALTER TABLE IF EXISTS ONLY public.routes DROP CONSTRAINT IF EXISTS routes_language_code_foreign;
 ALTER TABLE IF EXISTS ONLY public.options DROP CONSTRAINT IF EXISTS options_category_key_foreign;
 ALTER TABLE IF EXISTS ONLY public.files DROP CONSTRAINT IF EXISTS files_type_foreign;
 ALTER TABLE IF EXISTS ONLY public.files DROP CONSTRAINT IF EXISTS files_created_by_foreign;
@@ -40,7 +39,7 @@ ALTER TABLE IF EXISTS ONLY public.acl_user_role DROP CONSTRAINT IF EXISTS acl_us
 ALTER TABLE IF EXISTS ONLY public.acl_permission_role DROP CONSTRAINT IF EXISTS acl_permission_role_role_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.acl_permission_role DROP CONSTRAINT IF EXISTS acl_permission_role_permission_id_foreign;
 DROP INDEX IF EXISTS public.uploadables_file_id_index;
-DROP INDEX IF EXISTS public.route_translations_path_index;
+DROP INDEX IF EXISTS public.routes_path_index;
 DROP INDEX IF EXISTS public.password_resets_email_index;
 DROP INDEX IF EXISTS public.options_category_key_key_index;
 DROP INDEX IF EXISTS public.oauth_refresh_tokens_access_token_id_index;
@@ -59,9 +58,7 @@ ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pkey;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_name_unique;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_email_unique;
 ALTER TABLE IF EXISTS ONLY public.routes DROP CONSTRAINT IF EXISTS routes_pkey;
-ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_pkey;
-ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_language_code_route_id_unique;
-ALTER TABLE IF EXISTS ONLY public.route_translations DROP CONSTRAINT IF EXISTS route_translations_language_code_path_unique;
+ALTER TABLE IF EXISTS ONLY public.routes DROP CONSTRAINT IF EXISTS routes_language_code_path_unique;
 ALTER TABLE IF EXISTS ONLY public.options DROP CONSTRAINT IF EXISTS options_pkey;
 ALTER TABLE IF EXISTS ONLY public.option_categories DROP CONSTRAINT IF EXISTS option_categories_pkey;
 ALTER TABLE IF EXISTS ONLY public.oauth_refresh_tokens DROP CONSTRAINT IF EXISTS oauth_refresh_tokens_pkey;
@@ -90,7 +87,6 @@ ALTER TABLE IF EXISTS ONLY public.acl_permissions DROP CONSTRAINT IF EXISTS acl_
 ALTER TABLE IF EXISTS public.widgets ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.users ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.routes ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE IF EXISTS public.route_translations ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.options ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.oauth_personal_access_clients ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.oauth_clients ALTER COLUMN id DROP DEFAULT;
@@ -112,8 +108,6 @@ DROP TABLE IF EXISTS public.users;
 DROP TABLE IF EXISTS public.uploadables;
 DROP SEQUENCE IF EXISTS public.routes_id_seq;
 DROP TABLE IF EXISTS public.routes;
-DROP SEQUENCE IF EXISTS public.route_translations_id_seq;
-DROP TABLE IF EXISTS public.route_translations;
 DROP TABLE IF EXISTS public.password_resets;
 DROP SEQUENCE IF EXISTS public.options_id_seq;
 DROP TABLE IF EXISTS public.options;
@@ -796,47 +790,16 @@ CREATE TABLE password_resets (
 
 
 --
--- Name: route_translations; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE route_translations (
-    id integer NOT NULL,
-    language_code character varying(2) NOT NULL,
-    route_id integer NOT NULL,
-    path character varying(255) NOT NULL,
-    is_active boolean DEFAULT false NOT NULL,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone
-);
-
-
---
--- Name: route_translations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE route_translations_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
-
-
---
--- Name: route_translations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE route_translations_id_seq OWNED BY route_translations.id;
-
-
---
 -- Name: routes; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE routes (
     id integer NOT NULL,
+    language_code character varying(2) NOT NULL,
+    path character varying(255) NOT NULL,
     routable_id integer,
     routable_type character varying(255),
+    is_active boolean DEFAULT false NOT NULL,
     created_at timestamp(0) without time zone,
     updated_at timestamp(0) without time zone
 );
@@ -1045,13 +1008,6 @@ ALTER TABLE ONLY options ALTER COLUMN id SET DEFAULT nextval('options_id_seq'::r
 
 
 --
--- Name: route_translations id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY route_translations ALTER COLUMN id SET DEFAULT nextval('route_translations_id_seq'::regclass);
-
-
---
 -- Name: routes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1077,43 +1033,43 @@ ALTER TABLE ONLY widgets ALTER COLUMN id SET DEFAULT nextval('widgets_id_seq'::r
 --
 
 COPY acl_permission_role (permission_id, role_id, created_at, updated_at) FROM stdin;
-1	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-2	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-3	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-4	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-5	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-6	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-7	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-8	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-9	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-10	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-11	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-12	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-13	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-14	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-15	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-16	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-17	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-18	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-19	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-20	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-21	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-22	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-23	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-24	1	2017-11-23 15:42:01	2017-11-23 15:42:01
-1	2	2017-11-23 15:42:01	2017-11-23 15:42:01
-2	2	2017-11-23 15:42:01	2017-11-23 15:42:01
-3	2	2017-11-23 15:42:01	2017-11-23 15:42:01
-4	2	2017-11-23 15:42:01	2017-11-23 15:42:01
-5	2	2017-11-23 15:42:01	2017-11-23 15:42:01
-6	2	2017-11-23 15:42:01	2017-11-23 15:42:01
-7	2	2017-11-23 15:42:01	2017-11-23 15:42:01
-8	2	2017-11-23 15:42:01	2017-11-23 15:42:01
-9	2	2017-11-23 15:42:01	2017-11-23 15:42:01
-14	2	2017-11-23 15:42:01	2017-11-23 15:42:01
-15	2	2017-11-23 15:42:01	2017-11-23 15:42:01
-16	2	2017-11-23 15:42:01	2017-11-23 15:42:01
-17	2	2017-11-23 15:42:01	2017-11-23 15:42:01
+1	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+2	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+3	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+4	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+5	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+6	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+7	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+8	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+9	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+10	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+11	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+12	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+13	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+14	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+15	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+16	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+17	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+18	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+19	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+20	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+21	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+22	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+23	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+24	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+1	2	2017-11-25 09:20:42	2017-11-25 09:20:42
+2	2	2017-11-25 09:20:42	2017-11-25 09:20:42
+3	2	2017-11-25 09:20:42	2017-11-25 09:20:42
+4	2	2017-11-25 09:20:42	2017-11-25 09:20:42
+5	2	2017-11-25 09:20:42	2017-11-25 09:20:42
+6	2	2017-11-25 09:20:42	2017-11-25 09:20:42
+7	2	2017-11-25 09:20:42	2017-11-25 09:20:42
+8	2	2017-11-25 09:20:42	2017-11-25 09:20:42
+9	2	2017-11-25 09:20:42	2017-11-25 09:20:42
+14	2	2017-11-25 09:20:42	2017-11-25 09:20:42
+15	2	2017-11-25 09:20:42	2017-11-25 09:20:42
+16	2	2017-11-25 09:20:42	2017-11-25 09:20:42
+17	2	2017-11-25 09:20:42	2017-11-25 09:20:42
 \.
 
 
@@ -1161,8 +1117,8 @@ SELECT pg_catalog.setval('acl_permissions_id_seq', 24, true);
 --
 
 COPY acl_roles (id, name, created_at, updated_at) FROM stdin;
-1	Admin	2017-11-23 15:42:01	2017-11-23 15:42:01
-2	Moderator	2017-11-23 15:42:01	2017-11-23 15:42:01
+1	Admin	2017-11-25 09:20:42	2017-11-25 09:20:42
+2	Moderator	2017-11-25 09:20:42	2017-11-25 09:20:42
 \.
 
 
@@ -1178,7 +1134,7 @@ SELECT pg_catalog.setval('acl_roles_id_seq', 2, true);
 --
 
 COPY acl_user_role (user_id, role_id, created_at, updated_at) FROM stdin;
-1	1	2017-11-23 15:42:01	2017-11-23 15:42:01
+1	1	2017-11-25 09:20:42	2017-11-25 09:20:42
 \.
 
 
@@ -1202,10 +1158,10 @@ SELECT pg_catalog.setval('block_translations_id_seq', 1, false);
 --
 
 COPY block_types (name, is_active, created_at, updated_at) FROM stdin;
-basic	t	2017-11-23 15:42:01	2017-11-23 15:42:01
-menu	t	2017-11-23 15:42:01	2017-11-23 15:42:01
-slider	t	2017-11-23 15:42:01	2017-11-23 15:42:01
-widget	t	2017-11-23 15:42:01	2017-11-23 15:42:01
+basic	t	2017-11-25 09:20:42	2017-11-25 09:20:42
+menu	t	2017-11-25 09:20:42	2017-11-25 09:20:42
+slider	t	2017-11-25 09:20:42	2017-11-25 09:20:42
+widget	t	2017-11-25 09:20:42	2017-11-25 09:20:42
 \.
 
 
@@ -1244,8 +1200,8 @@ SELECT pg_catalog.setval('content_translations_id_seq', 1, false);
 --
 
 COPY content_types (id, name, handler, created_at, updated_at) FROM stdin;
-1	content	Gzero\\Cms\\Handlers\\Content\\ContentHandler	2017-11-23 15:42:01	2017-11-23 15:42:01
-2	category	Gzero\\Cms\\Handlers\\Content\\CategoryHandler	2017-11-23 15:42:01	2017-11-23 15:42:01
+1	content	Gzero\\Cms\\Handlers\\Content\\ContentHandler	2017-11-25 09:20:42	2017-11-25 09:20:42
+2	category	Gzero\\Cms\\Handlers\\Content\\CategoryHandler	2017-11-25 09:20:42	2017-11-25 09:20:42
 \.
 
 
@@ -1306,10 +1262,10 @@ SELECT pg_catalog.setval('file_translations_id_seq', 1, false);
 --
 
 COPY file_types (name, extensions, is_active, created_at, updated_at) FROM stdin;
-image	\N	t	2017-11-23 15:42:01	2017-11-23 15:42:01
-document	\N	t	2017-11-23 15:42:01	2017-11-23 15:42:01
-video	\N	t	2017-11-23 15:42:01	2017-11-23 15:42:01
-music	\N	t	2017-11-23 15:42:01	2017-11-23 15:42:01
+image	\N	t	2017-11-25 09:20:42	2017-11-25 09:20:42
+document	\N	t	2017-11-25 09:20:42	2017-11-25 09:20:42
+video	\N	t	2017-11-25 09:20:42	2017-11-25 09:20:42
+music	\N	t	2017-11-25 09:20:42	2017-11-25 09:20:42
 \.
 
 
@@ -1333,10 +1289,10 @@ SELECT pg_catalog.setval('files_id_seq', 1, false);
 --
 
 COPY languages (code, i18n, is_enabled, is_default, created_at, updated_at) FROM stdin;
-pl	pl_PL	t	f	2017-11-23 15:42:00	2017-11-23 15:42:00
-de	de_DE	f	f	2017-11-23 15:42:00	2017-11-23 15:42:00
-fr	fr_FR	f	f	2017-11-23 15:42:00	2017-11-23 15:42:00
-en	en_US	t	t	2017-11-23 15:42:00	2017-11-23 15:42:00
+pl	pl_PL	t	f	2017-11-25 09:20:42	2017-11-25 09:20:42
+de	de_DE	f	f	2017-11-25 09:20:42	2017-11-25 09:20:42
+fr	fr_FR	f	f	2017-11-25 09:20:42	2017-11-25 09:20:42
+en	en_US	t	t	2017-11-25 09:20:42	2017-11-25 09:20:42
 \.
 
 
@@ -1394,8 +1350,8 @@ COPY oauth_auth_codes (id, user_id, client_id, scopes, revoked, expires_at) FROM
 --
 
 COPY oauth_clients (id, user_id, name, secret, redirect, personal_access_client, password_client, revoked, created_at, updated_at) FROM stdin;
-1	\N	Password Grant Client	J4aIzATGrcioQ1MNh9QsbYSrTtRLeYoUdUgZkyb9	http://localhost	f	t	f	2017-11-23 15:42:01	2017-11-23 15:42:01
-2	\N	Personal Access Client	uMwAMhR94Po3lAcpvYidKXy6iREbOxUX1xkJHLSJ	http://localhost	t	f	f	2017-11-23 15:42:01	2017-11-23 15:42:01
+1	\N	Password Grant Client	I646DxxLyhbNMLFnEVeJlhxqDIAhUFQFSxWUltb9	http://localhost	f	t	f	2017-11-25 09:20:42	2017-11-25 09:20:42
+2	\N	Personal Access Client	8VZVtKjS24DXLeuoIfspnMkiUNH6aIQlgvBgopeP	http://localhost	t	f	f	2017-11-25 09:20:42	2017-11-25 09:20:42
 \.
 
 
@@ -1411,7 +1367,7 @@ SELECT pg_catalog.setval('oauth_clients_id_seq', 2, true);
 --
 
 COPY oauth_personal_access_clients (id, client_id, created_at, updated_at) FROM stdin;
-1	2	2017-11-23 15:42:01	2017-11-23 15:42:01
+1	2	2017-11-25 09:20:42	2017-11-25 09:20:42
 \.
 
 
@@ -1435,8 +1391,8 @@ COPY oauth_refresh_tokens (id, access_token_id, revoked, expires_at) FROM stdin;
 --
 
 COPY option_categories (key, created_at, updated_at) FROM stdin;
-general	2017-11-23 15:42:01	2017-11-23 15:42:01
-seo	2017-11-23 15:42:01	2017-11-23 15:42:01
+general	2017-11-25 09:20:42	2017-11-25 09:20:42
+seo	2017-11-25 09:20:42	2017-11-25 09:20:42
 \.
 
 
@@ -1445,12 +1401,12 @@ seo	2017-11-23 15:42:01	2017-11-23 15:42:01
 --
 
 COPY options (id, key, category_key, value, created_at, updated_at) FROM stdin;
-1	site_name	general	{"pl":"GZERO-CMS","de":"GZERO-CMS","fr":"GZERO-CMS","en":"GZERO-CMS"}	2017-11-23 15:42:01	2017-11-23 15:42:01
-2	site_desc	general	{"pl":"GZERO-CMS Content management system.","de":"GZERO-CMS Content management system.","fr":"GZERO-CMS Content management system.","en":"GZERO-CMS Content management system."}	2017-11-23 15:42:01	2017-11-23 15:42:01
-3	default_page_size	general	{"pl":10,"de":10,"fr":10,"en":10}	2017-11-23 15:42:01	2017-11-23 15:42:01
-4	cookies_policy_url	general	{"pl":null,"de":null,"fr":null,"en":null}	2017-11-23 15:42:01	2017-11-23 15:42:01
-5	desc_length	seo	{"pl":160,"de":160,"fr":160,"en":160}	2017-11-23 15:42:01	2017-11-23 15:42:01
-7	google_tag_manager_id	seo	{"pl":null,"de":null,"fr":null,"en":null}	2017-11-23 15:42:01	2017-11-23 15:42:01
+1	site_name	general	{"pl":"GZERO-CMS","de":"GZERO-CMS","fr":"GZERO-CMS","en":"GZERO-CMS"}	2017-11-25 09:20:42	2017-11-25 09:20:42
+2	site_desc	general	{"pl":"GZERO-CMS Content management system.","de":"GZERO-CMS Content management system.","fr":"GZERO-CMS Content management system.","en":"GZERO-CMS Content management system."}	2017-11-25 09:20:42	2017-11-25 09:20:42
+3	default_page_size	general	{"pl":10,"de":10,"fr":10,"en":10}	2017-11-25 09:20:42	2017-11-25 09:20:42
+4	cookies_policy_url	general	{"pl":null,"de":null,"fr":null,"en":null}	2017-11-25 09:20:42	2017-11-25 09:20:42
+5	desc_length	seo	{"pl":160,"de":160,"fr":160,"en":160}	2017-11-25 09:20:42	2017-11-25 09:20:42
+7	google_tag_manager_id	seo	{"pl":null,"de":null,"fr":null,"en":null}	2017-11-25 09:20:42	2017-11-25 09:20:42
 \.
 
 
@@ -1470,25 +1426,10 @@ COPY password_resets (email, token, created_at) FROM stdin;
 
 
 --
--- Data for Name: route_translations; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY route_translations (id, language_code, route_id, path, is_active, created_at, updated_at) FROM stdin;
-\.
-
-
---
--- Name: route_translations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('route_translations_id_seq', 1, false);
-
-
---
 -- Data for Name: routes; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY routes (id, routable_id, routable_type, created_at, updated_at) FROM stdin;
+COPY routes (id, language_code, path, routable_id, routable_type, is_active, created_at, updated_at) FROM stdin;
 \.
 
 
@@ -1512,7 +1453,7 @@ COPY uploadables (file_id, uploadable_id, uploadable_type, weight, created_at, u
 --
 
 COPY users (id, email, password, name, first_name, last_name, is_admin, remember_token, created_at, updated_at) FROM stdin;
-1	admin@gzero.pl	$2y$10$0YXILAbz80ZAV3Z5EcBfEuCnq6K.BV4gaoL4njqFiwo3voiwmYhBC	Admin	John	Doe	t	\N	2017-11-23 15:42:00	2017-11-23 15:42:00
+1	admin@gzero.pl	$2y$10$GegRDGb9OwTZThq3/0IDIO/xWfO9/vmP0bz47kxdqEn/C7QWRkU0i	Admin	John	Doe	t	\N	2017-11-25 09:20:42	2017-11-25 09:20:42
 \.
 
 
@@ -1739,27 +1680,11 @@ ALTER TABLE ONLY options
 
 
 --
--- Name: route_translations route_translations_language_code_path_unique; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: routes routes_language_code_path_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY route_translations
-    ADD CONSTRAINT route_translations_language_code_path_unique UNIQUE (language_code, path);
-
-
---
--- Name: route_translations route_translations_language_code_route_id_unique; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY route_translations
-    ADD CONSTRAINT route_translations_language_code_route_id_unique UNIQUE (language_code, route_id);
-
-
---
--- Name: route_translations route_translations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY route_translations
-    ADD CONSTRAINT route_translations_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY routes
+    ADD CONSTRAINT routes_language_code_path_unique UNIQUE (language_code, path);
 
 
 --
@@ -1895,10 +1820,10 @@ CREATE INDEX password_resets_email_index ON password_resets USING btree (email);
 
 
 --
--- Name: route_translations_path_index; Type: INDEX; Schema: public; Owner: -
+-- Name: routes_path_index; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX route_translations_path_index ON route_translations USING btree (path);
+CREATE INDEX routes_path_index ON routes USING btree (path);
 
 
 --
@@ -2069,19 +1994,11 @@ ALTER TABLE ONLY options
 
 
 --
--- Name: route_translations route_translations_language_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: routes routes_language_code_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY route_translations
-    ADD CONSTRAINT route_translations_language_code_foreign FOREIGN KEY (language_code) REFERENCES languages(code) ON DELETE CASCADE;
-
-
---
--- Name: route_translations route_translations_route_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY route_translations
-    ADD CONSTRAINT route_translations_route_id_foreign FOREIGN KEY (route_id) REFERENCES routes(id) ON DELETE CASCADE;
+ALTER TABLE ONLY routes
+    ADD CONSTRAINT routes_language_code_foreign FOREIGN KEY (language_code) REFERENCES languages(code) ON DELETE CASCADE;
 
 
 --
