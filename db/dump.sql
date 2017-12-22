@@ -263,6 +263,7 @@ CREATE TABLE block_translations (
     id integer NOT NULL,
     language_code character varying(2) NOT NULL,
     block_id integer NOT NULL,
+    author_id integer,
     title character varying(255) NOT NULL,
     body text,
     custom_fields text,
@@ -1088,16 +1089,16 @@ COPY acl_permissions (id, name, category, is_core, created_at, updated_at) FROM 
 8	block-update	block	f	\N	\N
 9	block-delete	block	f	\N	\N
 10	user-create	user	f	\N	\N
-    11	user-read	user	f	\N	\N
-    12	user-update	user	f	\N	\N
+11	user-read	user	f	\N	\N
+12	user-update	user	f	\N	\N
 13	user-delete	user	f	\N	\N
 14	file-create	file	f	\N	\N
 15	file-read	file	f	\N	\N
 16	file-update	file	f	\N	\N
 17	file-delete	file	f	\N	\N
 18	role-create	role	f	\N	\N
-    19	role-read	role	f	\N	\N
-    20	role-update	role	f	\N	\N
+19	role-read	role	f	\N	\N
+20	role-update	role	f	\N	\N
 21	role-delete	role	f	\N	\N
 22	options-read	options	f	\N	\N
 23	options-update-general	options	f	\N	\N
@@ -1142,7 +1143,7 @@ COPY acl_user_role (user_id, role_id, created_at, updated_at) FROM stdin;
 -- Data for Name: block_translations; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY block_translations (id, language_code, block_id, title, body, custom_fields, is_active, created_at, updated_at) FROM stdin;
+COPY block_translations (id, language_code, block_id, author_id, title, body, custom_fields, is_active, created_at, updated_at) FROM stdin;
 \.
 
 
