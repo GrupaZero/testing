@@ -30,7 +30,7 @@ ALTER TABLE IF EXISTS ONLY public.contents DROP CONSTRAINT IF EXISTS contents_au
 ALTER TABLE IF EXISTS ONLY public.content_translations DROP CONSTRAINT IF EXISTS content_translations_language_code_foreign;
 ALTER TABLE IF EXISTS ONLY public.content_translations DROP CONSTRAINT IF EXISTS content_translations_content_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.content_translations DROP CONSTRAINT IF EXISTS content_translations_author_id_foreign;
-ALTER TABLE IF EXISTS ONLY public.blocks DROP CONSTRAINT IF EXISTS blocks_type_foreign;
+ALTER TABLE IF EXISTS ONLY public.blocks DROP CONSTRAINT IF EXISTS blocks_type_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.blocks DROP CONSTRAINT IF EXISTS blocks_author_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.block_translations DROP CONSTRAINT IF EXISTS block_translations_language_code_foreign;
 ALTER TABLE IF EXISTS ONLY public.block_translations DROP CONSTRAINT IF EXISTS block_translations_block_id_foreign;
@@ -47,7 +47,7 @@ DROP INDEX IF EXISTS public.oauth_personal_access_clients_client_id_index;
 DROP INDEX IF EXISTS public.oauth_clients_user_id_index;
 DROP INDEX IF EXISTS public.oauth_access_tokens_user_id_index;
 DROP INDEX IF EXISTS public.contents_path_level_index;
-DROP INDEX IF EXISTS public.blocks_blockable_id_blockable_type_index;
+DROP INDEX IF EXISTS public.blocks_type_id_blockable_type_index;
 DROP INDEX IF EXISTS public.acl_user_role_user_id_index;
 DROP INDEX IF EXISTS public.acl_user_role_role_id_index;
 DROP INDEX IF EXISTS public.acl_permission_role_role_id_index;
@@ -79,6 +79,7 @@ ALTER TABLE IF EXISTS ONLY public.content_types DROP CONSTRAINT IF EXISTS conten
 ALTER TABLE IF EXISTS ONLY public.content_translations DROP CONSTRAINT IF EXISTS content_translations_pkey;
 ALTER TABLE IF EXISTS ONLY public.blocks DROP CONSTRAINT IF EXISTS blocks_pkey;
 ALTER TABLE IF EXISTS ONLY public.block_types DROP CONSTRAINT IF EXISTS block_types_pkey;
+ALTER TABLE IF EXISTS ONLY public.block_types DROP CONSTRAINT IF EXISTS block_types_name_unique;
 ALTER TABLE IF EXISTS ONLY public.block_translations DROP CONSTRAINT IF EXISTS block_translations_pkey;
 ALTER TABLE IF EXISTS ONLY public.acl_roles DROP CONSTRAINT IF EXISTS acl_roles_pkey;
 ALTER TABLE IF EXISTS ONLY public.acl_roles DROP CONSTRAINT IF EXISTS acl_roles_name_unique;
@@ -98,6 +99,7 @@ ALTER TABLE IF EXISTS public.contents ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.content_types ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.content_translations ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.blocks ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.block_types ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.block_translations ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.acl_roles ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.acl_permissions ALTER COLUMN id DROP DEFAULT;
@@ -137,6 +139,7 @@ DROP SEQUENCE IF EXISTS public.content_translations_id_seq;
 DROP TABLE IF EXISTS public.content_translations;
 DROP SEQUENCE IF EXISTS public.blocks_id_seq;
 DROP TABLE IF EXISTS public.blocks;
+DROP SEQUENCE IF EXISTS public.block_types_id_seq;
 DROP TABLE IF EXISTS public.block_types;
 DROP SEQUENCE IF EXISTS public.block_translations_id_seq;
 DROP TABLE IF EXISTS public.block_translations;
@@ -297,6 +300,7 @@ ALTER SEQUENCE block_translations_id_seq OWNED BY block_translations.id;
 --
 
 CREATE TABLE block_types (
+    id integer NOT NULL,
     name character varying(255) NOT NULL,
     is_active boolean DEFAULT false NOT NULL,
     created_at timestamp(0) without time zone,
@@ -305,15 +309,33 @@ CREATE TABLE block_types (
 
 
 --
+-- Name: block_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE block_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: block_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE block_types_id_seq OWNED BY block_types.id;
+
+
+--
 -- Name: blocks; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE blocks (
     id integer NOT NULL,
-    type character varying(255) NOT NULL,
+    type_id integer,
     region character varying(255),
     theme character varying(255),
-    blockable_id integer,
     blockable_type character varying(255),
     author_id integer,
     filter text,
@@ -932,6 +954,13 @@ ALTER TABLE ONLY block_translations ALTER COLUMN id SET DEFAULT nextval('block_t
 
 
 --
+-- Name: block_types id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY block_types ALTER COLUMN id SET DEFAULT nextval('block_types_id_seq'::regclass);
+
+
+--
 -- Name: blocks id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1158,19 +1187,26 @@ SELECT pg_catalog.setval('block_translations_id_seq', 1, false);
 -- Data for Name: block_types; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY block_types (name, is_active, created_at, updated_at) FROM stdin;
-basic	t	2017-11-25 09:20:42	2017-11-25 09:20:42
-menu	t	2017-11-25 09:20:42	2017-11-25 09:20:42
-slider	t	2017-11-25 09:20:42	2017-11-25 09:20:42
-widget	t	2017-11-25 09:20:42	2017-11-25 09:20:42
+COPY block_types (id, name, is_active, created_at, updated_at) FROM stdin;
+1	basic	t	2017-12-22 12:04:23	2017-12-22 12:04:23
+2	menu	t	2017-12-22 12:04:23	2017-12-22 12:04:23
+3	slider	t	2017-12-22 12:04:23	2017-12-22 12:04:23
+4	widget	t	2017-12-22 12:04:23	2017-12-22 12:04:23
 \.
+
+
+--
+-- Name: block_types_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('block_types_id_seq', 4, true);
 
 
 --
 -- Data for Name: blocks; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY blocks (id, type, region, theme, blockable_id, blockable_type, author_id, filter, options, weight, is_active, is_cacheable, created_at, updated_at, deleted_at) FROM stdin;
+COPY blocks (id, type_id, region, theme, blockable_type, author_id, filter, options, weight, is_active, is_cacheable, created_at, updated_at, deleted_at) FROM stdin;
 \.
 
 
@@ -1454,7 +1490,7 @@ COPY uploadables (file_id, uploadable_id, uploadable_type, weight, created_at, u
 --
 
 COPY users (id, email, password, name, first_name, last_name, is_admin, remember_token, created_at, updated_at) FROM stdin;
-1	admin@gzero.pl	$2y$10$GegRDGb9OwTZThq3/0IDIO/xWfO9/vmP0bz47kxdqEn/C7QWRkU0i	Admin	John	Doe	t	\N	2017-11-25 09:20:42	2017-11-25 09:20:42
+1	admin@gzero.pl	$2y$10$3e.6sEhcgoHZz3rhonvXeubl2PbMsWc/nDj4ICo85x6KkbCQGZW8y	Admin	John	Doe	t	\N	2017-12-22 12:04:23	2017-12-22 12:04:23
 \.
 
 
@@ -1521,11 +1557,19 @@ ALTER TABLE ONLY block_translations
 
 
 --
+-- Name: block_types block_types_name_unique; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY block_types
+    ADD CONSTRAINT block_types_name_unique UNIQUE (name);
+
+
+--
 -- Name: block_types block_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY block_types
-    ADD CONSTRAINT block_types_pkey PRIMARY KEY (name);
+    ADD CONSTRAINT block_types_pkey PRIMARY KEY (id);
 
 
 --
@@ -1765,10 +1809,10 @@ CREATE INDEX acl_user_role_user_id_index ON acl_user_role USING btree (user_id);
 
 
 --
--- Name: blocks_blockable_id_blockable_type_index; Type: INDEX; Schema: public; Owner: -
+-- Name: blocks_type_id_blockable_type_index; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX blocks_blockable_id_blockable_type_index ON blocks USING btree (blockable_id, blockable_type);
+CREATE INDEX blocks_type_id_blockable_type_index ON blocks USING btree (type_id, blockable_type);
 
 
 --
@@ -1891,11 +1935,11 @@ ALTER TABLE ONLY blocks
 
 
 --
--- Name: blocks blocks_type_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: blocks blocks_type_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY blocks
-    ADD CONSTRAINT blocks_type_foreign FOREIGN KEY (type) REFERENCES block_types(name) ON DELETE CASCADE;
+    ADD CONSTRAINT blocks_type_id_foreign FOREIGN KEY (type_id) REFERENCES block_types(id) ON DELETE SET NULL;
 
 
 --
