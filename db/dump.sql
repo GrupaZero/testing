@@ -302,7 +302,6 @@ ALTER SEQUENCE block_translations_id_seq OWNED BY block_translations.id;
 CREATE TABLE block_types (
     id integer NOT NULL,
     name character varying(255) NOT NULL,
-    is_active boolean DEFAULT false NOT NULL,
     created_at timestamp(0) without time zone,
     updated_at timestamp(0) without time zone
 );
@@ -1187,11 +1186,11 @@ SELECT pg_catalog.setval('block_translations_id_seq', 1, false);
 -- Data for Name: block_types; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY block_types (id, name, is_active, created_at, updated_at) FROM stdin;
-1	basic	t	2017-12-22 12:04:23	2017-12-22 12:04:23
-2	menu	t	2017-12-22 12:04:23	2017-12-22 12:04:23
-3	slider	t	2017-12-22 12:04:23	2017-12-22 12:04:23
-4	widget	t	2017-12-22 12:04:23	2017-12-22 12:04:23
+COPY block_types (id, name, created_at, updated_at) FROM stdin;
+1	basic	2017-12-23 08:42:29	2017-12-23 08:42:29
+2	menu	2017-12-23 08:42:29	2017-12-23 08:42:29
+3	slider	2017-12-23 08:42:29	2017-12-23 08:42:29
+4	widget	2017-12-23 08:42:29	2017-12-23 08:42:29
 \.
 
 
@@ -1939,7 +1938,7 @@ ALTER TABLE ONLY blocks
 --
 
 ALTER TABLE ONLY blocks
-    ADD CONSTRAINT blocks_type_id_foreign FOREIGN KEY (type_id) REFERENCES block_types(id) ON DELETE SET NULL;
+    ADD CONSTRAINT blocks_type_id_foreign FOREIGN KEY (type_id) REFERENCES block_types(id) ON DELETE CASCADE;
 
 
 --
@@ -1995,7 +1994,7 @@ ALTER TABLE ONLY contents
 --
 
 ALTER TABLE ONLY contents
-    ADD CONSTRAINT contents_type_id_foreign FOREIGN KEY (type_id) REFERENCES content_types(id) ON DELETE SET NULL;
+    ADD CONSTRAINT contents_type_id_foreign FOREIGN KEY (type_id) REFERENCES content_types(id) ON DELETE CASCADE;
 
 
 --
