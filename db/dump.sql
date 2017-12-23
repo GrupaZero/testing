@@ -1186,11 +1186,11 @@ SELECT pg_catalog.setval('block_translations_id_seq', 1, false);
 -- Data for Name: block_types; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY block_types (id, name, is_active, created_at, updated_at) FROM stdin;
-1	basic	t	2017-12-22 12:04:23	2017-12-22 12:04:23
-2	menu	t	2017-12-22 12:04:23	2017-12-22 12:04:23
-3	slider	t	2017-12-22 12:04:23	2017-12-22 12:04:23
-4	widget	t	2017-12-22 12:04:23	2017-12-22 12:04:23
+COPY block_types (id, name, created_at, updated_at) FROM stdin;
+1	basic	2017-12-23 08:42:29	2017-12-23 08:42:29
+2	menu	2017-12-23 08:42:29	2017-12-23 08:42:29
+3	slider	2017-12-23 08:42:29	2017-12-23 08:42:29
+4	widget	2017-12-23 08:42:29	2017-12-23 08:42:29
 \.
 
 
