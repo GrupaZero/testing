@@ -19,10 +19,11 @@ SET search_path = public, pg_catalog;
 ALTER TABLE IF EXISTS ONLY public.uploadables DROP CONSTRAINT IF EXISTS uploadables_file_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.routes DROP CONSTRAINT IF EXISTS routes_language_code_foreign;
 ALTER TABLE IF EXISTS ONLY public.options DROP CONSTRAINT IF EXISTS options_category_key_foreign;
-ALTER TABLE IF EXISTS ONLY public.files DROP CONSTRAINT IF EXISTS files_type_foreign;
-ALTER TABLE IF EXISTS ONLY public.files DROP CONSTRAINT IF EXISTS files_created_by_foreign;
+ALTER TABLE IF EXISTS ONLY public.files DROP CONSTRAINT IF EXISTS files_type_id_foreign;
+ALTER TABLE IF EXISTS ONLY public.files DROP CONSTRAINT IF EXISTS files_author_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_language_code_foreign;
 ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_file_id_foreign;
+ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_author_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.contents DROP CONSTRAINT IF EXISTS contents_type_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.contents DROP CONSTRAINT IF EXISTS contents_thumb_id_foreign;
 ALTER TABLE IF EXISTS ONLY public.contents DROP CONSTRAINT IF EXISTS contents_parent_id_foreign;
@@ -70,6 +71,7 @@ ALTER TABLE IF EXISTS ONLY public.migrations DROP CONSTRAINT IF EXISTS migration
 ALTER TABLE IF EXISTS ONLY public.languages DROP CONSTRAINT IF EXISTS languages_pkey;
 ALTER TABLE IF EXISTS ONLY public.files DROP CONSTRAINT IF EXISTS files_pkey;
 ALTER TABLE IF EXISTS ONLY public.file_types DROP CONSTRAINT IF EXISTS file_types_pkey;
+ALTER TABLE IF EXISTS ONLY public.file_types DROP CONSTRAINT IF EXISTS file_types_name_unique;
 ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_pkey;
 ALTER TABLE IF EXISTS ONLY public.file_translations DROP CONSTRAINT IF EXISTS file_translations_file_id_language_code_unique;
 ALTER TABLE IF EXISTS ONLY public.failed_jobs DROP CONSTRAINT IF EXISTS failed_jobs_pkey;
@@ -93,6 +95,7 @@ ALTER TABLE IF EXISTS public.oauth_personal_access_clients ALTER COLUMN id DROP 
 ALTER TABLE IF EXISTS public.oauth_clients ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.migrations ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.files ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE IF EXISTS public.file_types ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.file_translations ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.failed_jobs ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.contents ALTER COLUMN id DROP DEFAULT;
@@ -126,6 +129,7 @@ DROP TABLE IF EXISTS public.migrations;
 DROP TABLE IF EXISTS public.languages;
 DROP SEQUENCE IF EXISTS public.files_id_seq;
 DROP TABLE IF EXISTS public.files;
+DROP SEQUENCE IF EXISTS public.file_types_id_seq;
 DROP TABLE IF EXISTS public.file_types;
 DROP SEQUENCE IF EXISTS public.file_translations_id_seq;
 DROP TABLE IF EXISTS public.file_translations;
@@ -302,6 +306,7 @@ ALTER SEQUENCE block_translations_id_seq OWNED BY block_translations.id;
 CREATE TABLE block_types (
     id integer NOT NULL,
     name character varying(255) NOT NULL,
+    handler character varying(255) NOT NULL,
     created_at timestamp(0) without time zone,
     updated_at timestamp(0) without time zone
 );
@@ -524,6 +529,7 @@ CREATE TABLE file_translations (
     id integer NOT NULL,
     language_code character varying(2) NOT NULL,
     file_id integer NOT NULL,
+    author_id integer,
     title character varying(255),
     description text,
     created_at timestamp(0) without time zone,
@@ -555,12 +561,30 @@ ALTER SEQUENCE file_translations_id_seq OWNED BY file_translations.id;
 --
 
 CREATE TABLE file_types (
+    id integer NOT NULL,
     name character varying(255) NOT NULL,
-    extensions text,
-    is_active boolean DEFAULT false NOT NULL,
     created_at timestamp(0) without time zone,
     updated_at timestamp(0) without time zone
 );
+
+
+--
+-- Name: file_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE file_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: file_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE file_types_id_seq OWNED BY file_types.id;
 
 
 --
@@ -569,13 +593,13 @@ CREATE TABLE file_types (
 
 CREATE TABLE files (
     id integer NOT NULL,
-    type character varying(255) NOT NULL,
+    type_id integer,
     name character varying(255),
     extension character varying(255),
     size integer,
     mime_type character varying(255),
     info text,
-    created_by integer,
+    author_id integer,
     is_active boolean DEFAULT false NOT NULL,
     created_at timestamp(0) without time zone,
     updated_at timestamp(0) without time zone
@@ -1002,6 +1026,13 @@ ALTER TABLE ONLY file_translations ALTER COLUMN id SET DEFAULT nextval('file_tra
 
 
 --
+-- Name: file_types id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY file_types ALTER COLUMN id SET DEFAULT nextval('file_types_id_seq'::regclass);
+
+
+--
 -- Name: files id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1186,11 +1217,11 @@ SELECT pg_catalog.setval('block_translations_id_seq', 1, false);
 -- Data for Name: block_types; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY block_types (id, name, created_at, updated_at) FROM stdin;
-1	basic	2017-12-23 08:42:29	2017-12-23 08:42:29
-2	menu	2017-12-23 08:42:29	2017-12-23 08:42:29
-3	slider	2017-12-23 08:42:29	2017-12-23 08:42:29
-4	widget	2017-12-23 08:42:29	2017-12-23 08:42:29
+COPY block_types (id, name, handler, created_at, updated_at) FROM stdin;
+1	basic	Gzero\\Cms\\Handlers\\Block\\Basic	2017-12-23 11:57:20	2017-12-23 11:57:20
+2	menu	Gzero\\Cms\\Handlers\\Block\\Menu	2017-12-23 11:57:20	2017-12-23 11:57:20
+3	slider	Gzero\\Cms\\Handlers\\Block\\Slider	2017-12-23 11:57:20	2017-12-23 11:57:20
+4	widget	Gzero\\Cms\\Handlers\\Block\\Widget	2017-12-23 11:57:20	2017-12-23 11:57:20
 \.
 
 
@@ -1282,7 +1313,7 @@ SELECT pg_catalog.setval('failed_jobs_id_seq', 1, false);
 -- Data for Name: file_translations; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY file_translations (id, language_code, file_id, title, description, created_at, updated_at) FROM stdin;
+COPY file_translations (id, language_code, file_id, author_id, title, description, created_at, updated_at) FROM stdin;
 \.
 
 
@@ -1297,19 +1328,26 @@ SELECT pg_catalog.setval('file_translations_id_seq', 1, false);
 -- Data for Name: file_types; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY file_types (name, extensions, is_active, created_at, updated_at) FROM stdin;
-image	\N	t	2017-11-25 09:20:42	2017-11-25 09:20:42
-document	\N	t	2017-11-25 09:20:42	2017-11-25 09:20:42
-video	\N	t	2017-11-25 09:20:42	2017-11-25 09:20:42
-music	\N	t	2017-11-25 09:20:42	2017-11-25 09:20:42
+COPY file_types (id, name, created_at, updated_at) FROM stdin;
+1	image	2017-12-23 11:57:20	2017-12-23 11:57:20
+2	document	2017-12-23 11:57:20	2017-12-23 11:57:20
+3	video	2017-12-23 11:57:20	2017-12-23 11:57:20
+4	music	2017-12-23 11:57:20	2017-12-23 11:57:20
 \.
+
+
+--
+-- Name: file_types_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('file_types_id_seq', 4, true);
 
 
 --
 -- Data for Name: files; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY files (id, type, name, extension, size, mime_type, info, created_by, is_active, created_at, updated_at) FROM stdin;
+COPY files (id, type_id, name, extension, size, mime_type, info, author_id, is_active, created_at, updated_at) FROM stdin;
 \.
 
 
@@ -1403,7 +1441,7 @@ SELECT pg_catalog.setval('oauth_clients_id_seq', 2, true);
 --
 
 COPY oauth_personal_access_clients (id, client_id, created_at, updated_at) FROM stdin;
-1	2	2017-11-25 09:20:42	2017-11-25 09:20:42
+1	2	2017-12-23 11:57:20	2017-12-23 11:57:20
 \.
 
 
@@ -1636,11 +1674,19 @@ ALTER TABLE ONLY file_translations
 
 
 --
+-- Name: file_types file_types_name_unique; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY file_types
+    ADD CONSTRAINT file_types_name_unique UNIQUE (name);
+
+
+--
 -- Name: file_types file_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY file_types
-    ADD CONSTRAINT file_types_pkey PRIMARY KEY (name);
+    ADD CONSTRAINT file_types_pkey PRIMARY KEY (id);
 
 
 --
@@ -1998,6 +2044,14 @@ ALTER TABLE ONLY contents
 
 
 --
+-- Name: file_translations file_translations_author_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY file_translations
+    ADD CONSTRAINT file_translations_author_id_foreign FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE SET NULL;
+
+
+--
 -- Name: file_translations file_translations_file_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2014,19 +2068,19 @@ ALTER TABLE ONLY file_translations
 
 
 --
--- Name: files files_created_by_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: files files_author_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY files
-    ADD CONSTRAINT files_created_by_foreign FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL;
+    ADD CONSTRAINT files_author_id_foreign FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE SET NULL;
 
 
 --
--- Name: files files_type_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: files files_type_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY files
-    ADD CONSTRAINT files_type_foreign FOREIGN KEY (type) REFERENCES file_types(name) ON DELETE CASCADE;
+    ADD CONSTRAINT files_type_id_foreign FOREIGN KEY (type_id) REFERENCES file_types(id) ON DELETE SET NULL;
 
 
 --
