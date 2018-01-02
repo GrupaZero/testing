@@ -53,8 +53,6 @@ DROP INDEX IF EXISTS public.acl_user_role_user_id_index;
 DROP INDEX IF EXISTS public.acl_user_role_role_id_index;
 DROP INDEX IF EXISTS public.acl_permission_role_role_id_index;
 DROP INDEX IF EXISTS public.acl_permission_role_permission_id_index;
-ALTER TABLE IF EXISTS ONLY public.widgets DROP CONSTRAINT IF EXISTS widgets_pkey;
-ALTER TABLE IF EXISTS ONLY public.widgets DROP CONSTRAINT IF EXISTS widgets_name_unique;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pkey;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_name_unique;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_email_unique;
@@ -87,7 +85,6 @@ ALTER TABLE IF EXISTS ONLY public.acl_roles DROP CONSTRAINT IF EXISTS acl_roles_
 ALTER TABLE IF EXISTS ONLY public.acl_roles DROP CONSTRAINT IF EXISTS acl_roles_name_unique;
 ALTER TABLE IF EXISTS ONLY public.acl_permissions DROP CONSTRAINT IF EXISTS acl_permissions_pkey;
 ALTER TABLE IF EXISTS ONLY public.acl_permissions DROP CONSTRAINT IF EXISTS acl_permissions_name_unique;
-ALTER TABLE IF EXISTS public.widgets ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.users ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.routes ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.options ALTER COLUMN id DROP DEFAULT;
@@ -106,8 +103,6 @@ ALTER TABLE IF EXISTS public.block_types ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.block_translations ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.acl_roles ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE IF EXISTS public.acl_permissions ALTER COLUMN id DROP DEFAULT;
-DROP SEQUENCE IF EXISTS public.widgets_id_seq;
-DROP TABLE IF EXISTS public.widgets;
 DROP SEQUENCE IF EXISTS public.users_id_seq;
 DROP TABLE IF EXISTS public.users;
 DROP TABLE IF EXISTS public.uploadables;
@@ -205,11 +200,11 @@ CREATE TABLE acl_permissions (
 --
 
 CREATE SEQUENCE acl_permissions_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -236,11 +231,11 @@ CREATE TABLE acl_roles (
 --
 
 CREATE SEQUENCE acl_roles_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -285,11 +280,11 @@ CREATE TABLE block_translations (
 --
 
 CREATE SEQUENCE block_translations_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -358,11 +353,11 @@ CREATE TABLE blocks (
 --
 
 CREATE SEQUENCE blocks_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -397,11 +392,11 @@ CREATE TABLE content_translations (
 --
 
 CREATE SEQUENCE content_translations_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -429,11 +424,11 @@ CREATE TABLE content_types (
 --
 
 CREATE SEQUENCE content_types_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -474,11 +469,11 @@ CREATE TABLE contents (
 --
 
 CREATE SEQUENCE contents_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -498,7 +493,7 @@ CREATE TABLE failed_jobs (
     queue text NOT NULL,
     payload text NOT NULL,
     exception text NOT NULL,
-    failed_at timestamp(0) without time zone DEFAULT ('now'::text)::timestamp(0) with time zone NOT NULL
+    failed_at timestamp(0) without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -507,11 +502,11 @@ CREATE TABLE failed_jobs (
 --
 
 CREATE SEQUENCE failed_jobs_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -542,11 +537,11 @@ CREATE TABLE file_translations (
 --
 
 CREATE SEQUENCE file_translations_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -594,10 +589,10 @@ ALTER SEQUENCE file_types_id_seq OWNED BY file_types.id;
 CREATE TABLE files (
     id integer NOT NULL,
     type_id integer,
-    name character varying(255),
-    extension character varying(255),
-    size integer,
-    mime_type character varying(255),
+    name character varying(255) NOT NULL,
+    extension character varying(255) NOT NULL,
+    size integer NOT NULL,
+    mime_type character varying(255) NOT NULL,
     info text,
     author_id integer,
     is_active boolean DEFAULT false NOT NULL,
@@ -611,11 +606,11 @@ CREATE TABLE files (
 --
 
 CREATE SEQUENCE files_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -655,11 +650,11 @@ CREATE TABLE migrations (
 --
 
 CREATE SEQUENCE migrations_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -723,11 +718,11 @@ CREATE TABLE oauth_clients (
 --
 
 CREATE SEQUENCE oauth_clients_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -754,11 +749,11 @@ CREATE TABLE oauth_personal_access_clients (
 --
 
 CREATE SEQUENCE oauth_personal_access_clients_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -810,11 +805,11 @@ CREATE TABLE options (
 --
 
 CREATE SEQUENCE options_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -856,11 +851,11 @@ CREATE TABLE routes (
 --
 
 CREATE SEQUENCE routes_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -907,11 +902,11 @@ CREATE TABLE users (
 --
 
 CREATE SEQUENCE users_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -919,40 +914,6 @@ CACHE 1;
 --
 
 ALTER SEQUENCE users_id_seq OWNED BY users.id;
-
-
---
--- Name: widgets; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE widgets (
-    id integer NOT NULL,
-    name character varying(255) NOT NULL,
-    args text,
-    is_active boolean DEFAULT false NOT NULL,
-    is_cacheable boolean DEFAULT false NOT NULL,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone
-);
-
-
---
--- Name: widgets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE widgets_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
-
-
---
--- Name: widgets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE widgets_id_seq OWNED BY widgets.id;
 
 
 --
@@ -1082,54 +1043,47 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
--- Name: widgets id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY widgets ALTER COLUMN id SET DEFAULT nextval('widgets_id_seq'::regclass);
-
-
---
 -- Data for Name: acl_permission_role; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY acl_permission_role (permission_id, role_id, created_at, updated_at) FROM stdin;
-1	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-2	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-3	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-4	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-5	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-6	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-7	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-8	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-9	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-10	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-11	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-12	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-13	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-14	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-15	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-16	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-17	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-18	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-19	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-20	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-21	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-22	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-23	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-24	1	2017-11-25 09:20:42	2017-11-25 09:20:42
-1	2	2017-11-25 09:20:42	2017-11-25 09:20:42
-2	2	2017-11-25 09:20:42	2017-11-25 09:20:42
-3	2	2017-11-25 09:20:42	2017-11-25 09:20:42
-4	2	2017-11-25 09:20:42	2017-11-25 09:20:42
-5	2	2017-11-25 09:20:42	2017-11-25 09:20:42
-6	2	2017-11-25 09:20:42	2017-11-25 09:20:42
-7	2	2017-11-25 09:20:42	2017-11-25 09:20:42
-8	2	2017-11-25 09:20:42	2017-11-25 09:20:42
-9	2	2017-11-25 09:20:42	2017-11-25 09:20:42
-14	2	2017-11-25 09:20:42	2017-11-25 09:20:42
-15	2	2017-11-25 09:20:42	2017-11-25 09:20:42
-16	2	2017-11-25 09:20:42	2017-11-25 09:20:42
-17	2	2017-11-25 09:20:42	2017-11-25 09:20:42
+1	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+2	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+3	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+4	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+5	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+6	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+7	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+8	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+9	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+10	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+11	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+12	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+13	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+14	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+15	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+16	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+17	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+18	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+19	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+20	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+21	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+22	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+23	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+24	1	2018-01-02 15:55:30	2018-01-02 15:55:30
+1	2	2018-01-02 15:55:30	2018-01-02 15:55:30
+2	2	2018-01-02 15:55:30	2018-01-02 15:55:30
+3	2	2018-01-02 15:55:30	2018-01-02 15:55:30
+4	2	2018-01-02 15:55:30	2018-01-02 15:55:30
+5	2	2018-01-02 15:55:30	2018-01-02 15:55:30
+6	2	2018-01-02 15:55:30	2018-01-02 15:55:30
+7	2	2018-01-02 15:55:30	2018-01-02 15:55:30
+8	2	2018-01-02 15:55:30	2018-01-02 15:55:30
+9	2	2018-01-02 15:55:30	2018-01-02 15:55:30
+14	2	2018-01-02 15:55:30	2018-01-02 15:55:30
+15	2	2018-01-02 15:55:30	2018-01-02 15:55:30
+16	2	2018-01-02 15:55:30	2018-01-02 15:55:30
+17	2	2018-01-02 15:55:30	2018-01-02 15:55:30
 \.
 
 
@@ -1177,8 +1131,8 @@ SELECT pg_catalog.setval('acl_permissions_id_seq', 24, true);
 --
 
 COPY acl_roles (id, name, created_at, updated_at) FROM stdin;
-1	Admin	2017-11-25 09:20:42	2017-11-25 09:20:42
-2	Moderator	2017-11-25 09:20:42	2017-11-25 09:20:42
+1	Admin	2018-01-02 15:55:30	2018-01-02 15:55:30
+2	Moderator	2018-01-02 15:55:30	2018-01-02 15:55:30
 \.
 
 
@@ -1194,7 +1148,7 @@ SELECT pg_catalog.setval('acl_roles_id_seq', 2, true);
 --
 
 COPY acl_user_role (user_id, role_id, created_at, updated_at) FROM stdin;
-1	1	2017-11-25 09:20:42	2017-11-25 09:20:42
+1	1	2018-01-02 15:55:30	2018-01-02 15:55:30
 \.
 
 
@@ -1218,10 +1172,9 @@ SELECT pg_catalog.setval('block_translations_id_seq', 1, false);
 --
 
 COPY block_types (id, name, handler, created_at, updated_at) FROM stdin;
-1	basic	Gzero\\Cms\\Handlers\\Block\\Basic	2017-12-23 11:57:20	2017-12-23 11:57:20
-2	menu	Gzero\\Cms\\Handlers\\Block\\Menu	2017-12-23 11:57:20	2017-12-23 11:57:20
-3	slider	Gzero\\Cms\\Handlers\\Block\\Slider	2017-12-23 11:57:20	2017-12-23 11:57:20
-4	widget	Gzero\\Cms\\Handlers\\Block\\Widget	2017-12-23 11:57:20	2017-12-23 11:57:20
+1	basic	Gzero\\Cms\\Handlers\\Block\\Basic	2018-01-02 15:55:30	2018-01-02 15:55:30
+2	menu	Gzero\\Cms\\Handlers\\Block\\Menu	2018-01-02 15:55:30	2018-01-02 15:55:30
+3	slider	Gzero\\Cms\\Handlers\\Block\\Slider	2018-01-02 15:55:30	2018-01-02 15:55:30
 \.
 
 
@@ -1229,7 +1182,7 @@ COPY block_types (id, name, handler, created_at, updated_at) FROM stdin;
 -- Name: block_types_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('block_types_id_seq', 4, true);
+SELECT pg_catalog.setval('block_types_id_seq', 3, true);
 
 
 --
@@ -1267,8 +1220,8 @@ SELECT pg_catalog.setval('content_translations_id_seq', 1, false);
 --
 
 COPY content_types (id, name, handler, created_at, updated_at) FROM stdin;
-1	content	Gzero\\Cms\\Handlers\\Content\\ContentHandler	2017-11-25 09:20:42	2017-11-25 09:20:42
-2	category	Gzero\\Cms\\Handlers\\Content\\CategoryHandler	2017-11-25 09:20:42	2017-11-25 09:20:42
+1	content	Gzero\\Cms\\Handlers\\Content\\ContentHandler	2018-01-02 15:55:30	2018-01-02 15:55:30
+2	category	Gzero\\Cms\\Handlers\\Content\\CategoryHandler	2018-01-02 15:55:30	2018-01-02 15:55:30
 \.
 
 
@@ -1329,10 +1282,10 @@ SELECT pg_catalog.setval('file_translations_id_seq', 1, false);
 --
 
 COPY file_types (id, name, created_at, updated_at) FROM stdin;
-1	image	2017-12-23 11:57:20	2017-12-23 11:57:20
-2	document	2017-12-23 11:57:20	2017-12-23 11:57:20
-3	video	2017-12-23 11:57:20	2017-12-23 11:57:20
-4	music	2017-12-23 11:57:20	2017-12-23 11:57:20
+1	image	2018-01-02 15:55:30	2018-01-02 15:55:30
+2	document	2018-01-02 15:55:30	2018-01-02 15:55:30
+3	video	2018-01-02 15:55:30	2018-01-02 15:55:30
+4	music	2018-01-02 15:55:30	2018-01-02 15:55:30
 \.
 
 
@@ -1363,10 +1316,10 @@ SELECT pg_catalog.setval('files_id_seq', 1, false);
 --
 
 COPY languages (code, i18n, is_enabled, is_default, created_at, updated_at) FROM stdin;
-pl	pl_PL	t	f	2017-11-25 09:20:42	2017-11-25 09:20:42
-de	de_DE	f	f	2017-11-25 09:20:42	2017-11-25 09:20:42
-fr	fr_FR	f	f	2017-11-25 09:20:42	2017-11-25 09:20:42
-en	en_US	t	t	2017-11-25 09:20:42	2017-11-25 09:20:42
+pl	pl_PL	t	f	2018-01-02 15:55:29	2018-01-02 15:55:29
+de	de_DE	f	f	2018-01-02 15:55:29	2018-01-02 15:55:29
+fr	fr_FR	f	f	2018-01-02 15:55:29	2018-01-02 15:55:29
+en	en_US	t	t	2018-01-02 15:55:29	2018-01-02 15:55:30
 \.
 
 
@@ -1424,8 +1377,8 @@ COPY oauth_auth_codes (id, user_id, client_id, scopes, revoked, expires_at) FROM
 --
 
 COPY oauth_clients (id, user_id, name, secret, redirect, personal_access_client, password_client, revoked, created_at, updated_at) FROM stdin;
-1	\N	Password Grant Client	I646DxxLyhbNMLFnEVeJlhxqDIAhUFQFSxWUltb9	http://localhost	f	t	f	2017-11-25 09:20:42	2017-11-25 09:20:42
-2	\N	Personal Access Client	8VZVtKjS24DXLeuoIfspnMkiUNH6aIQlgvBgopeP	http://localhost	t	f	f	2017-11-25 09:20:42	2017-11-25 09:20:42
+1	\N	Password Grant Client	xq2EaekTlhZn38Gh4qDsL51EkANyjdmkOEuSsrjD	http://localhost	f	t	f	2018-01-02 15:55:30	2018-01-02 15:55:30
+2	\N	Personal Access Client	PMWHe4q8MAWJXiIwp0gLbBBznMetN2TOe3mcFek4	http://localhost	t	f	f	2018-01-02 15:55:30	2018-01-02 15:55:30
 \.
 
 
@@ -1441,7 +1394,7 @@ SELECT pg_catalog.setval('oauth_clients_id_seq', 2, true);
 --
 
 COPY oauth_personal_access_clients (id, client_id, created_at, updated_at) FROM stdin;
-1	2	2017-12-23 11:57:20	2017-12-23 11:57:20
+1	2	2018-01-02 15:55:30	2018-01-02 15:55:30
 \.
 
 
@@ -1465,8 +1418,8 @@ COPY oauth_refresh_tokens (id, access_token_id, revoked, expires_at) FROM stdin;
 --
 
 COPY option_categories (key, created_at, updated_at) FROM stdin;
-general	2017-11-25 09:20:42	2017-11-25 09:20:42
-seo	2017-11-25 09:20:42	2017-11-25 09:20:42
+general	2018-01-02 15:55:30	2018-01-02 15:55:30
+seo	2018-01-02 15:55:30	2018-01-02 15:55:30
 \.
 
 
@@ -1475,12 +1428,12 @@ seo	2017-11-25 09:20:42	2017-11-25 09:20:42
 --
 
 COPY options (id, key, category_key, value, created_at, updated_at) FROM stdin;
-1	site_name	general	{"pl":"GZERO-CMS","de":"GZERO-CMS","fr":"GZERO-CMS","en":"GZERO-CMS"}	2017-11-25 09:20:42	2017-11-25 09:20:42
-2	site_desc	general	{"pl":"GZERO-CMS Content management system.","de":"GZERO-CMS Content management system.","fr":"GZERO-CMS Content management system.","en":"GZERO-CMS Content management system."}	2017-11-25 09:20:42	2017-11-25 09:20:42
-3	default_page_size	general	{"pl":10,"de":10,"fr":10,"en":10}	2017-11-25 09:20:42	2017-11-25 09:20:42
-4	cookies_policy_url	general	{"pl":null,"de":null,"fr":null,"en":null}	2017-11-25 09:20:42	2017-11-25 09:20:42
-5	desc_length	seo	{"pl":160,"de":160,"fr":160,"en":160}	2017-11-25 09:20:42	2017-11-25 09:20:42
-7	google_tag_manager_id	seo	{"pl":null,"de":null,"fr":null,"en":null}	2017-11-25 09:20:42	2017-11-25 09:20:42
+1	site_name	general	{"pl":"GZERO-CMS","de":"GZERO-CMS","fr":"GZERO-CMS","en":"GZERO-CMS"}	2018-01-02 15:55:30	2018-01-02 15:55:30
+2	site_desc	general	{"pl":"GZERO-CMS Content management system.","de":"GZERO-CMS Content management system.","fr":"GZERO-CMS Content management system.","en":"GZERO-CMS Content management system."}	2018-01-02 15:55:30	2018-01-02 15:55:30
+3	default_page_size	general	{"pl":10,"de":10,"fr":10,"en":10}	2018-01-02 15:55:30	2018-01-02 15:55:30
+4	cookies_policy_url	general	{"pl":null,"de":null,"fr":null,"en":null}	2018-01-02 15:55:30	2018-01-02 15:55:30
+5	desc_length	seo	{"pl":160,"de":160,"fr":160,"en":160}	2018-01-02 15:55:30	2018-01-02 15:55:30
+7	google_tag_manager_id	seo	{"pl":null,"de":null,"fr":null,"en":null}	2018-01-02 15:55:30	2018-01-02 15:55:30
 \.
 
 
@@ -1527,7 +1480,7 @@ COPY uploadables (file_id, uploadable_id, uploadable_type, weight, created_at, u
 --
 
 COPY users (id, email, password, name, first_name, last_name, is_admin, remember_token, created_at, updated_at) FROM stdin;
-1	admin@gzero.pl	$2y$10$3e.6sEhcgoHZz3rhonvXeubl2PbMsWc/nDj4ICo85x6KkbCQGZW8y	Admin	John	Doe	t	\N	2017-12-22 12:04:23	2017-12-22 12:04:23
+1	admin@gzero.pl	$2y$10$CwKDSgDqI8oQzq5blDsVbOlksEid7a1KaOZJQV0bpaPBw3UB0xV2G	Admin	John	Doe	t	\N	2018-01-02 15:55:30	2018-01-02 15:55:30
 \.
 
 
@@ -1536,21 +1489,6 @@ COPY users (id, email, password, name, first_name, last_name, is_admin, remember
 --
 
 SELECT pg_catalog.setval('users_id_seq', 1, true);
-
-
---
--- Data for Name: widgets; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY widgets (id, name, args, is_active, is_cacheable, created_at, updated_at) FROM stdin;
-\.
-
-
---
--- Name: widgets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('widgets_id_seq', 1, false);
 
 
 --
@@ -1807,22 +1745,6 @@ ALTER TABLE ONLY users
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
-
---
--- Name: widgets widgets_name_unique; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY widgets
-    ADD CONSTRAINT widgets_name_unique UNIQUE (name);
-
-
---
--- Name: widgets widgets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY widgets
-    ADD CONSTRAINT widgets_pkey PRIMARY KEY (id);
 
 
 --
