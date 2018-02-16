@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.6
--- Dumped by pg_dump version 9.6.6
+-- Dumped from database version 9.6.7
+-- Dumped by pg_dump version 9.6.7
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1050,43 +1050,43 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 --
 
 COPY acl_permission_role (permission_id, role_id, created_at, updated_at) FROM stdin;
-1	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-2	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-3	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-4	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-5	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-6	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-7	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-8	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-9	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-10	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-11	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-12	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-13	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-14	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-15	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-16	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-17	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-18	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-19	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-20	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-21	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-22	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-23	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-24	1	2018-02-03 10:07:25	2018-02-03 10:07:25
-1	2	2018-02-03 10:07:25	2018-02-03 10:07:25
-2	2	2018-02-03 10:07:25	2018-02-03 10:07:25
-3	2	2018-02-03 10:07:25	2018-02-03 10:07:25
-4	2	2018-02-03 10:07:25	2018-02-03 10:07:25
-5	2	2018-02-03 10:07:25	2018-02-03 10:07:25
-6	2	2018-02-03 10:07:25	2018-02-03 10:07:25
-7	2	2018-02-03 10:07:25	2018-02-03 10:07:25
-8	2	2018-02-03 10:07:25	2018-02-03 10:07:25
-9	2	2018-02-03 10:07:25	2018-02-03 10:07:25
-14	2	2018-02-03 10:07:25	2018-02-03 10:07:25
-15	2	2018-02-03 10:07:25	2018-02-03 10:07:25
-16	2	2018-02-03 10:07:25	2018-02-03 10:07:25
-17	2	2018-02-03 10:07:25	2018-02-03 10:07:25
+1	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+2	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+3	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+4	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+5	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+6	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+7	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+8	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+9	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+10	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+11	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+12	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+13	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+14	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+15	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+16	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+17	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+18	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+19	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+20	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+21	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+22	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+23	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+24	1	2018-02-16 16:43:15	2018-02-16 16:43:15
+1	2	2018-02-16 16:43:15	2018-02-16 16:43:15
+2	2	2018-02-16 16:43:15	2018-02-16 16:43:15
+3	2	2018-02-16 16:43:15	2018-02-16 16:43:15
+4	2	2018-02-16 16:43:15	2018-02-16 16:43:15
+5	2	2018-02-16 16:43:15	2018-02-16 16:43:15
+6	2	2018-02-16 16:43:15	2018-02-16 16:43:15
+7	2	2018-02-16 16:43:15	2018-02-16 16:43:15
+8	2	2018-02-16 16:43:15	2018-02-16 16:43:15
+9	2	2018-02-16 16:43:15	2018-02-16 16:43:15
+14	2	2018-02-16 16:43:15	2018-02-16 16:43:15
+15	2	2018-02-16 16:43:15	2018-02-16 16:43:15
+16	2	2018-02-16 16:43:15	2018-02-16 16:43:15
+17	2	2018-02-16 16:43:15	2018-02-16 16:43:15
 \.
 
 
@@ -1134,8 +1134,8 @@ SELECT pg_catalog.setval('acl_permissions_id_seq', 24, true);
 --
 
 COPY acl_roles (id, name, created_at, updated_at) FROM stdin;
-1	Admin	2018-02-03 10:07:25	2018-02-03 10:07:25
-2	Moderator	2018-02-03 10:07:25	2018-02-03 10:07:25
+1	Admin	2018-02-16 16:43:15	2018-02-16 16:43:15
+2	Moderator	2018-02-16 16:43:15	2018-02-16 16:43:15
 \.
 
 
@@ -1151,7 +1151,7 @@ SELECT pg_catalog.setval('acl_roles_id_seq', 2, true);
 --
 
 COPY acl_user_role (user_id, role_id, created_at, updated_at) FROM stdin;
-1	1	2018-02-03 10:07:25	2018-02-03 10:07:25
+1	1	2018-02-16 16:43:15	2018-02-16 16:43:15
 \.
 
 
@@ -1175,9 +1175,9 @@ SELECT pg_catalog.setval('block_translations_id_seq', 1, false);
 --
 
 COPY block_types (id, name, handler, created_at, updated_at) FROM stdin;
-1	basic	Gzero\\Cms\\Handlers\\Block\\Basic	2018-02-03 10:07:25	2018-02-03 10:07:25
-2	menu	Gzero\\Cms\\Handlers\\Block\\Menu	2018-02-03 10:07:25	2018-02-03 10:07:25
-3	slider	Gzero\\Cms\\Handlers\\Block\\Slider	2018-02-03 10:07:25	2018-02-03 10:07:25
+1	basic	Gzero\\Cms\\Handlers\\Block\\Basic	2018-02-16 16:43:15	2018-02-16 16:43:15
+2	menu	Gzero\\Cms\\Handlers\\Block\\Menu	2018-02-16 16:43:15	2018-02-16 16:43:15
+3	slider	Gzero\\Cms\\Handlers\\Block\\Slider	2018-02-16 16:43:15	2018-02-16 16:43:15
 \.
 
 
@@ -1223,8 +1223,8 @@ SELECT pg_catalog.setval('content_translations_id_seq', 1, false);
 --
 
 COPY content_types (id, name, handler, created_at, updated_at) FROM stdin;
-1	content	Gzero\\Cms\\Handlers\\Content\\ContentHandler	2018-02-03 10:07:24	2018-02-03 10:07:24
-2	category	Gzero\\Cms\\Handlers\\Content\\CategoryHandler	2018-02-03 10:07:24	2018-02-03 10:07:24
+1	content	Gzero\\Cms\\Handlers\\Content\\ContentHandler	2018-02-16 16:43:15	2018-02-16 16:43:15
+2	category	Gzero\\Cms\\Handlers\\Content\\CategoryHandler	2018-02-16 16:43:15	2018-02-16 16:43:15
 \.
 
 
@@ -1285,10 +1285,10 @@ SELECT pg_catalog.setval('file_translations_id_seq', 1, false);
 --
 
 COPY file_types (id, name, created_at, updated_at) FROM stdin;
-1	image	2018-02-03 10:07:25	2018-02-03 10:07:25
-2	document	2018-02-03 10:07:25	2018-02-03 10:07:25
-3	video	2018-02-03 10:07:25	2018-02-03 10:07:25
-4	music	2018-02-03 10:07:25	2018-02-03 10:07:25
+1	image	2018-02-16 16:43:15	2018-02-16 16:43:15
+2	document	2018-02-16 16:43:15	2018-02-16 16:43:15
+3	video	2018-02-16 16:43:16	2018-02-16 16:43:16
+4	music	2018-02-16 16:43:16	2018-02-16 16:43:16
 \.
 
 
@@ -1319,10 +1319,10 @@ SELECT pg_catalog.setval('files_id_seq', 1, false);
 --
 
 COPY languages (code, i18n, is_enabled, is_default, created_at, updated_at) FROM stdin;
-pl	pl_PL	t	f	2018-02-03 10:07:24	2018-02-03 10:07:24
-de	de_DE	f	f	2018-02-03 10:07:24	2018-02-03 10:07:24
-fr	fr_FR	f	f	2018-02-03 10:07:24	2018-02-03 10:07:24
-en	en_US	t	t	2018-02-03 10:07:24	2018-02-03 10:07:24
+pl	pl_PL	t	f	2018-02-16 16:43:15	2018-02-16 16:43:15
+de	de_DE	f	f	2018-02-16 16:43:15	2018-02-16 16:43:15
+fr	fr_FR	f	f	2018-02-16 16:43:15	2018-02-16 16:43:15
+en	en_US	t	t	2018-02-16 16:43:15	2018-02-16 16:43:15
 \.
 
 
@@ -1381,8 +1381,8 @@ COPY oauth_auth_codes (id, user_id, client_id, scopes, revoked, expires_at) FROM
 --
 
 COPY oauth_clients (id, user_id, name, secret, redirect, personal_access_client, password_client, revoked, created_at, updated_at) FROM stdin;
-1	\N	Password Grant Client	VRQSHYbB4i2JOiMHUJapWxd6cvkyv7hefadLeYDy	http://localhost	f	t	f	2018-02-03 10:07:25	2018-02-03 10:07:25
-2	\N	Personal Access Client	JinOFBfHSo0SFirlUtB4cx8HWU1qRDPYmI687E38	http://localhost	t	f	f	2018-02-03 10:07:25	2018-02-03 10:07:25
+1	\N	Password Grant Client	8n2mDv2dTyDZuOEewoSIG9JRKnMveIZBPNplVriu	http://localhost	f	t	f	2018-02-16 16:43:16	2018-02-16 16:43:16
+2	\N	Personal Access Client	V4pwRc01PjIdh1oAm4H17qXdwyqzsf8QnutNDSqi	http://localhost	t	f	f	2018-02-16 16:43:16	2018-02-16 16:43:16
 \.
 
 
@@ -1398,7 +1398,7 @@ SELECT pg_catalog.setval('oauth_clients_id_seq', 2, true);
 --
 
 COPY oauth_personal_access_clients (id, client_id, created_at, updated_at) FROM stdin;
-1	2	2018-02-03 10:07:25	2018-02-03 10:07:25
+1	2	2018-02-16 16:43:16	2018-02-16 16:43:16
 \.
 
 
@@ -1422,8 +1422,8 @@ COPY oauth_refresh_tokens (id, access_token_id, revoked, expires_at) FROM stdin;
 --
 
 COPY option_categories (key, created_at, updated_at) FROM stdin;
-general	2018-02-03 10:07:24	2018-02-03 10:07:24
-seo	2018-02-03 10:07:24	2018-02-03 10:07:24
+general	2018-02-16 16:43:15	2018-02-16 16:43:15
+seo	2018-02-16 16:43:15	2018-02-16 16:43:15
 \.
 
 
@@ -1432,12 +1432,12 @@ seo	2018-02-03 10:07:24	2018-02-03 10:07:24
 --
 
 COPY options (id, key, category_key, value, created_at, updated_at) FROM stdin;
-1	site_name	general	{"pl":"GZERO-CMS","de":"GZERO-CMS","fr":"GZERO-CMS","en":"GZERO-CMS"}	2018-02-03 10:07:24	2018-02-03 10:07:24
-2	site_desc	general	{"pl":"GZERO-CMS Content management system.","de":"GZERO-CMS Content management system.","fr":"GZERO-CMS Content management system.","en":"GZERO-CMS Content management system."}	2018-02-03 10:07:24	2018-02-03 10:07:24
-3	default_page_size	general	{"pl":10,"de":10,"fr":10,"en":10}	2018-02-03 10:07:24	2018-02-03 10:07:24
-4	cookies_policy_url	general	{"pl":null,"de":null,"fr":null,"en":null}	2018-02-03 10:07:24	2018-02-03 10:07:24
-5	desc_length	seo	{"pl":160,"de":160,"fr":160,"en":160}	2018-02-03 10:07:24	2018-02-03 10:07:24
-7	google_tag_manager_id	seo	{"pl":null,"de":null,"fr":null,"en":null}	2018-02-03 10:07:25	2018-02-03 10:07:25
+1	site_name	general	{"pl":"GZERO-CMS","de":"GZERO-CMS","fr":"GZERO-CMS","en":"GZERO-CMS"}	2018-02-16 16:43:15	2018-02-16 16:43:15
+2	site_desc	general	{"pl":"GZERO-CMS Content management system.","de":"GZERO-CMS Content management system.","fr":"GZERO-CMS Content management system.","en":"GZERO-CMS Content management system."}	2018-02-16 16:43:15	2018-02-16 16:43:15
+3	default_page_size	general	{"pl":10,"de":10,"fr":10,"en":10}	2018-02-16 16:43:15	2018-02-16 16:43:15
+4	cookies_policy_url	general	{"pl":null,"de":null,"fr":null,"en":null}	2018-02-16 16:43:15	2018-02-16 16:43:15
+5	desc_length	seo	{"pl":160,"de":160,"fr":160,"en":160}	2018-02-16 16:43:15	2018-02-16 16:43:15
+7	google_tag_manager_id	seo	{"pl":null,"de":null,"fr":null,"en":null}	2018-02-16 16:43:16	2018-02-16 16:43:16
 \.
 
 
@@ -1484,7 +1484,7 @@ COPY uploadables (file_id, uploadable_id, uploadable_type, weight, created_at, u
 --
 
 COPY users (id, email, password, name, first_name, last_name, is_admin, remember_token, created_at, updated_at, language_code, timezone) FROM stdin;
-1	admin@gzero.pl	$2y$10$VbOBqEGPGwWHNblyxnYqFemXf/dQoTqldh7LBH.qQmzWLQ2E8dVwy	Admin	John	Doe	t	\N	2018-02-03 10:07:24	2018-02-03 10:07:24	\N	\N
+1	admin@gzero.pl	$2y$10$h78BFx0nQOnMGI0cg0KnfeOCXJDEpn94H0by5dpb/IdpmBkUyeLwa	Admin	John	Doe	t	\N	2018-02-16 16:43:15	2018-02-16 16:43:15	\N	\N
 \.
 
 
@@ -2038,11 +2038,11 @@ ALTER TABLE ONLY uploadables
 --
 
 ALTER TABLE ONLY users
-    ADD CONSTRAINT users_language_code_foreign FOREIGN KEY (language_code) REFERENCES languages(code);
+    ADD CONSTRAINT users_language_code_foreign FOREIGN KEY (language_code) REFERENCES languages(code) ON DELETE SET NULL;
 
 
 --
--- Name: public; Type: ACL; Schema: -; Owner: -
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: -
 --
 
 GRANT ALL ON SCHEMA public TO PUBLIC;
